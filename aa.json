@@ -1,0 +1,18 @@
+{
+  "type": {
+    "address": "b:6"
+  },
+  "protocol": [
+    "68",
+    {"len": "b"},
+    {"c": "b"},
+    {"address": "address"},
+    "68",
+    {"count": "b"},
+    {"$count": "count", "value": [{"address": "address"}]},
+    {
+      "black": [{"$case": {"c": 1}, "value": [{"address": "address"}]}]
+    },
+    "68"
+  ]
+}
