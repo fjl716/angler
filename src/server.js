@@ -1,10 +1,15 @@
 import tab from './tables';
-import angler,{tables,event} from './angler';
+import angler,{tables,event,filter} from './angler';
+import permissions from './angler/permissions';
 import sysevents from './angler/sysevents';
 import watcher from './angler/watcher';
-
+import crossroads from 'crossroads';
 
 const init = async ()=> {
+
+  //增加过滤器
+  filter.addModel(permissions);
+
   //增加消息
   event.addModel(sysevents);
   event.addModel(watcher);
@@ -26,34 +31,44 @@ const init = async ()=> {
   });
 
   //msg, path, func, isOut
-  event.send({
-      'host': 'receive1',
-      'link': '586319da479cb80379b5a065',
-      'path': []
-    },
-    {
-      'event': 'watch.user',
-      data: {
-        '_id': '5878709c898ab51c40040d95'
-      }
-    },
-    false
-  );
-
-  event.send({
-      'host': 'receive1',
-      'link': '586319da479cb80379b5a065',
-      'path': []
-    }, {
-      'event': 'update.user',
-      data: {
-        '_id': '5878709c898ab51c40040d95',
-        'name': '23456',
-        'agent': 24
-      }
-    },
-    false
-  );
+  event.arrive({
+    host: 'receive1',
+    link: '586319da479cb80379b5a065',
+    event: 'insert.user',
+    data: {
+      '_id': '5878709c898ab51c40040d95',
+      'name': '23456',
+      'agent': 24
+    }
+  });
+  // event.send({
+  //     'host': 'receive1',
+  //     'link': '586319da479cb80379b5a065',
+  //     'path': []
+  //   },
+  //   {
+  //     'event': 'watch.user',
+  //     data: {
+  //       '_id': '5878709c898ab51c40040d95'
+  //     }
+  //   },
+  //   false
+  // );
+  //
+  // event.send({
+  //     'host': 'receive1',
+  //     'link': '586319da479cb80379b5a065',
+  //     'path': []
+  //   }, {
+  //     'event': 'update.user',
+  //     data: {
+  //       '_id': '5878709c898ab51c40040d95',
+  //       'name': '23456',
+  //       'agent': 24
+  //     }
+  //   },
+  //   false
+  // );
   //5878709c898ab51c40040d96
 
   //console.log(await common.tables.user.insert({'name':'asdf'}));

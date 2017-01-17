@@ -3,7 +3,7 @@ const event = new Emitter();
 import stompit from 'stompit';
 let client = null;
 import util from 'util';
-
+import filter from './filter';
 event.index = 1;
 
 const connectMq = (connect)=> {
@@ -29,7 +29,7 @@ const connectMq = (connect)=> {
           }
           console.log('received message: ' + body);
           let msg = JSON.parse(body);
-          event.emit(msg.event, msg);
+          event.arrive(msg);
           client.ack(message);
           //client.disconnect();
         });
@@ -39,6 +39,16 @@ const connectMq = (connect)=> {
   });
 };
 
+event.arrive = async (msg)=> {
+  const tmp = {
+    result: true,
+    code:1
+  };
+  await filter.parse(msg.event, [tmp,msg]);
+  if (tmp.result) {
+    event.emit(msg.event, msg);
+  }
+};
 
 event.addArray = (array) => {
   array.map(item => {

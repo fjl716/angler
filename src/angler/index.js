@@ -1,8 +1,10 @@
-import session from './session';
-import tables from './tables';
-import Table from './table';
-import DataBase from './db';
+import session from './session'
+import tables from './tables'
+import Table from './table'
+import DataBase from './db'
 import event from './event'
+import filter from './filter'
+import request from './request'
 
 const dbs = {};
 
@@ -24,6 +26,8 @@ export {
   dbs,
   event,
   Table,
+  filter,
+  request,
 }
 
 export default common
