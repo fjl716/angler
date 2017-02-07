@@ -1,5 +1,27 @@
 import stompit from 'stompit';
 
+class ActiveMQ {
+  handleArrive(msg){
+    console.log(msg);
+  }
+  constructor(connect,host){
+
+  }
+  onDataArrive(arrive) {
+    this.handleArrive = arrive;
+  }
+  send(msg) {
+    const client = this.clientMap[msg.link];
+    if (client) {
+      const sendObj = {
+        event: msg.event,
+        data: msg.data
+      };
+      client.sendText(JSON.stringify(sendObj));
+    }
+  }
+}
+export default ActiveMQ;
 // let sendHeaders = {
 //   'destination': `/queue/${msg.host}`,
 //   'content-type': 'text/plain'
@@ -37,14 +59,3 @@ import stompit from 'stompit';
 //     });
 //   });
 // };
-
-export default {
-  connect(){
-
-  },
-  send(){
-    let frame = client.send(sendHeaders);
-    frame.write(JSON.stringify(msg));
-    frame.end();
-  }
-}

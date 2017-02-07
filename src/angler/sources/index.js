@@ -1,19 +1,19 @@
-import activemq from './activemq'
+import ActiveMQ from './activemq'
 import WebSocket from './websocket'
 
-let source = undefined;
-
 export {
-  activemq,
+  ActiveMQ,
   WebSocket
 }
 
 export default {
-  setSource(sour, event){
-    source = sour;
-    source.onDataArrive((msg) => {
-      event.emit(msg.event, event.defaultMsg, msg);
-    });
-    event.source = source;
-  },
+  linkSource(source1, source2){
+    source1.handleArrive = (msg) => {
+      source2.send(msg);
+    };
+
+    source2.handleArrive = (msg) => {
+      source1.send(msg);
+    };
+  }
 }

@@ -29,7 +29,7 @@ const init = async ()=> {
   });
 
   //配置消息来源
-  sources.setSource(new WebSocket(8080),event);
+  event.bindSource(new WebSocket(8080));
 
   //msg, path, func, isOut
   // event.arrive({

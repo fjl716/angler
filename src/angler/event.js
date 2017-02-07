@@ -35,13 +35,6 @@ event.addModel = (model,namespace)=> {
     event.on(eventName, (...params) => {
       const oldMsg = params[0];
       const newMsg = params[1];
-      for (let name in oldMsg) {
-        if (name != 'event' &&
-          name != 'data' &&
-          name != 'path'
-        )
-          newMsg[name] = oldMsg[name];
-      }
       newMsg.path = oldMsg.path.slice();
       if (newMsg.path.indexOf(code) == -1) {
         newMsg.path.push(code);
@@ -52,7 +45,21 @@ event.addModel = (model,namespace)=> {
   }
 };
 
+event.bindSource = (source)=> {
+  source.onDataArrive((msg) => {
+    event.emit(msg.event, event.defaultMsg, msg);
+  });
+  event.source = source;
+};
+
 event.send = (oldMsg,newMsg, isOut)=> {
+  for (let name in oldMsg) {
+    if (name != 'event' &&
+      name != 'data' &&
+      name != 'path'
+    )
+      newMsg[name] = oldMsg[name];
+  }
   if (isOut && event.source){
     event.source.send(newMsg);
   }

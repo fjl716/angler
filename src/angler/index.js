@@ -6,6 +6,8 @@ import event from './event'
 import filter from './filter'
 import request from './request'
 import sources from './sources';
+import remoting from './remoting';
+
 const dbs = {};
 
 Date.prototype.toJSON = function() {
@@ -28,6 +30,7 @@ export {
   filter,
   request,
   sources,
+  remoting,
 }
 
 export default common
