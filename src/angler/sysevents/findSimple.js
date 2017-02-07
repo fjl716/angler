@@ -1,6 +1,6 @@
 
 export default {
-  event: 'findSimple.{table}',
+  event: '{table}.findSimple',
   invoke: function (msg) {
   }
 };

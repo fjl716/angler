@@ -1,7 +1,7 @@
 import {tables,event} from '../../angler';
 
 export default {
-  event: 'change.{table}',
+  event: '{table}.change',
   invoke: function (msg, table) {
     const simple = tables[table].simple(msg.data);
     tables[table].useTables.map(item => {

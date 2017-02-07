@@ -1,9 +1,11 @@
 import tab from './tables';
-import angler,{tables,event,filter} from './angler';
+import angler,{tables,event,filter,sources} from './angler';
+import {WebSocket} from './angler/sources';
+
 import permissions from './angler/permissions';
 import sysevents from './angler/sysevents';
 import watcher from './angler/watcher';
-import crossroads from 'crossroads';
+
 
 const init = async ()=> {
 
@@ -23,24 +25,23 @@ const init = async ()=> {
       default: 'mongodb://localhost:27017/test',
       session: 'mongodb://localhost:27017/session',
       watcher: 'mongodb://localhost:27017/watcher',
-    },
-    mqConf: {
-      'host': 'localhost',
-      'port': 61613,
     }
   });
 
+  //配置消息来源
+  sources.setSource(new WebSocket(8080),event);
+
   //msg, path, func, isOut
-  event.arrive({
-    host: 'receive1',
-    link: '586319da479cb80379b5a065',
-    event: 'insert.user',
-    data: {
-      '_id': '5878709c898ab51c40040d95',
-      'name': '23456',
-      'agent': 24
-    }
-  });
+  // event.arrive({
+  //   host: 'receive1',
+  //   link: '586319da479cb80379b5a065',
+  //   event: 'insert.user',
+  //   data: {
+  //     '_id': '5878709c898ab51c40040d95',
+  //     'name': '23456',
+  //     'agent': 24
+  //   }
+  // });
   // event.send({
   //     'host': 'receive1',
   //     'link': '586319da479cb80379b5a065',
@@ -75,3 +76,5 @@ const init = async ()=> {
 };
 
 let result = init();
+
+

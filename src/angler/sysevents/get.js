@@ -1,7 +1,7 @@
 import {tables,event} from '../../angler';
 
 export default {
-  event: 'get.{table}',
+  event: '{table}.get',
   invoke: async function (msg, table) {
     if (tables[table]) {
       let obj = await tables[table].findOne(msg.data);

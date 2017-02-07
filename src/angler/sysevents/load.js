@@ -1,7 +1,7 @@
 import {tables} from '../../angler';
 
 export default {
-  event: 'load.{table}',
+  event: '{table}.load',
   invoke: async function (msg,table) {
     //console.log(msg,table);
   }

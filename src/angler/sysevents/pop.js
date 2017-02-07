@@ -1,7 +1,7 @@
 const event = /findSimple.([a-z]*)$/;
 
 export default {
-  event: 'pop.{table}.{array}',
+  event: '{table}.{array}.pop',
   invoke: function (msg,table,array) {
     console.log(table,array)
   }

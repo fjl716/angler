@@ -5,20 +5,19 @@ import DataBase from './db'
 import event from './event'
 import filter from './filter'
 import request from './request'
-
+import sources from './sources';
 const dbs = {};
 
 Date.prototype.toJSON = function() {
   return `D:${this.getTime()}`;
 };
 
-const common = async function ({dbConf, mqConf}){
+const common = async function ({dbConf}){
   for (let name in dbConf) {
     let database = await DataBase.connection(dbConf[name]);
     dbs[name] = new DataBase(database);
   }
   tables.link(dbs);
-  await event.init(mqConf);
 };
 export {
   session,
@@ -28,6 +27,7 @@ export {
   Table,
   filter,
   request,
+  sources,
 }
 
 export default common

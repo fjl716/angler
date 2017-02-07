@@ -1,5 +1,5 @@
 export default {
-  event: 'pushSimple.{table}.{array}',
+  event: '{table}.{array}.pushSimple',
   invoke: function (msg) {
 
   }
