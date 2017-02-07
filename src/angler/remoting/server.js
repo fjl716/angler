@@ -30,8 +30,12 @@ export {
 };
 
 const map = {};
+const objectList = {};
 
 export default {
+  getObjects:()=>{
+    return objectList;
+  },
   createProxy: (obj) => {
     map[obj.id] = obj;
     let functions = {};
@@ -42,10 +46,12 @@ export default {
     }
     let object = {};
     Object.assign(object, obj);
-    return {
+    const result = {
       object,
       functions
     };
+    objectList[obj.id] = result;
+    return result;
   },
   callProxy: (proxyObj) => {
     console.log(proxyObj);

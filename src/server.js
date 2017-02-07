@@ -5,7 +5,7 @@ import {WebSocket} from './angler/sources';
 import permissions from './angler/permissions';
 import sysevents from './angler/sysevents';
 import watcher from './angler/watcher';
-
+import remoting from './angler/remoting';
 
 const init = async ()=> {
 
@@ -15,6 +15,7 @@ const init = async ()=> {
   //增加消息
   event.addModel(sysevents);
   event.addModel(watcher);
+  event.addModel(remoting);
 
   //增加表
   tables.addModel(tab);
