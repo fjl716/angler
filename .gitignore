@@ -49,3 +49,11 @@ jspm_packages
 .yarn-integrity
 
 
+/build
+.idea/angler.iml
+.idea/jsLibraryMappings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/vcs.xml
+
