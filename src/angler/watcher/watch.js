@@ -1,7 +1,7 @@
 import {tables,event,dbs} from '../../angler';
 import {Json2Bson} from '../../angler/db';
 export default {
-  event: 'watch.{table}',
+  event: '{table}.watch',
   invoke: async function (msg, table) {
     if (tables[table]) {
       let obj = await tables[table].findOne(msg.data);

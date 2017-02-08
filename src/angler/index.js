@@ -13,13 +13,6 @@ Date.prototype.toJSON = function() {
   return `D:${this.getTime()}`;
 };
 
-const common = async function ({dbConf}){
-  for (let name in dbConf) {
-    let database = await DataBase.connection(dbConf[name]);
-    dbs[name] = new DataBase(database);
-  }
-  tables.link(dbs);
-};
 export {
   session,
   tables,
@@ -31,5 +24,17 @@ export {
   sources,
 }
 
-export default common
+export default {
+  addFilter: filter.addModel,
+  addEvent: event.addModel,
+  addTable: tables.addModel,
+  initDB: async function (dbConf) {
+    for (let name in dbConf) {
+      let database = await DataBase.connection(dbConf[name]);
+      dbs[name] = new DataBase(database);
+    }
+    tables.link(dbs);
+  },
+  bindEventSource:event.bindSource
+}
 

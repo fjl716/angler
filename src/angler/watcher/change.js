@@ -2,7 +2,7 @@ import {tables,dbs,event} from '../../angler';
 import {Json2Bson} from '../../angler/db';
 
 export default {
-  event: 'change.{table}',
+  event: '{table}.change',
   invoke: async function (msg, table) {
     if (tables[table]) {
       let watcher = await dbs.watcher.findOne(

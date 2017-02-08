@@ -7,6 +7,8 @@ import get from './get';
 import invoke from './invoke';
 
 export default {
-  get,
-  invoke
+  remoting:{
+    get,
+    invoke
+  }
 }

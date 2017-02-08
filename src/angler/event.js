@@ -27,21 +27,38 @@ event.defaultMsg = {
   path : []
 };
 
-event.addModel = (model,namespace)=> {
-  for (let name in model) {
-    let item = model[name];
-    let eventName = item.event ? item.event : `${namespace}.${name}`;
-    let code = event.index++;
-    event.on(eventName, (...params) => {
-      const oldMsg = params[0];
-      const newMsg = params[1];
-      newMsg.path = oldMsg.path.slice();
-      if (newMsg.path.indexOf(code) == -1) {
-        newMsg.path.push(code);
-        params.splice(0, 1);
-        item.invoke(...params);
+event.addModel = (model)=> {
+  for (let namespace in model) {
+    let item = model[namespace];
+    if (item.event) {
+      let code = event.index++;
+      event.on(item.event, (...params) => {
+        const oldMsg = params[0];
+        const newMsg = params[1];
+        newMsg.path = oldMsg.path.slice();
+        if (newMsg.path.indexOf(code) == -1) {
+          newMsg.path.push(code);
+          params.splice(0, 1);
+          item.invoke(...params);
+        }
+      });
+    } else {
+      for (let name in item) {
+        let eventName = item.event ? item.event : `${namespace}.${name}`;
+        let code = event.index++;
+        console.log(eventName);
+        event.on(eventName, (...params) => {
+          const oldMsg = params[0];
+          const newMsg = params[1];
+          newMsg.path = oldMsg.path.slice();
+          if (newMsg.path.indexOf(code) == -1) {
+            newMsg.path.push(code);
+            params.splice(0, 1);
+            item[name].invoke(...params);
+          }
+        });
       }
-    });
+    }
   }
 };
 

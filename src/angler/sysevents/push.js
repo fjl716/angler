@@ -1,6 +1,6 @@
 
 export default {
-  event: '{table}.{array}.push',
+  event: '{table}.{array}_push',
   invoke: function (msg) {
 
   }

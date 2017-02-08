@@ -1,5 +1,5 @@
 import tab from './tables';
-import angler,{tables,event,filter} from './angler';
+import angler from './angler';
 import {WebSocket} from './angler/sources';
 
 import permissions from './angler/permissions';
@@ -10,26 +10,24 @@ import remoting,{server} from './angler/remoting';
 const init = async ()=> {
 
   //增加过滤器
-  filter.addModel(permissions);
+  angler.addFilter(permissions);
 
   //增加消息
-  event.addModel(sysevents);
-  event.addModel(watcher);
-  event.addModel(remoting,'remoting');
-
+  angler.addEvent(sysevents);
+  angler.addEvent(watcher);
+  angler.addEvent(remoting);
 
   //增加表
-  tables.addModel(tab);
+  angler.addTable(tab);
 
   //初始化外部资源
-  await angler({
-    dbConf: {
-      default: 'mongodb://localhost:27017/test',
-      session: 'mongodb://localhost:27017/session',
-      watcher: 'mongodb://localhost:27017/watcher',
-    }
+  angler.initDB({
+    default: 'mongodb://localhost:27017/test',
+    session: 'mongodb://localhost:27017/session',
+    watcher: 'mongodb://localhost:27017/watcher',
   });
-
+  //绑定消息数据源
+  angler.bindEventSource(new WebSocket(8080));
 
   class testRemoting extends server.MarshalByRefObject {
     sum(a, b, c) {
@@ -39,11 +37,8 @@ const init = async ()=> {
 
   //创建代理
   server.createProxy(new testRemoting());
-
-  //console.log(JSON.stringify(server.getObjects()));
-
   //配置消息来源
-  event.bindSource(new WebSocket(8080));
+  //event.bindSource();
 
   //msg, path, func, isOut
   // event.arrive({
