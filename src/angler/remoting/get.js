@@ -6,7 +6,7 @@ export default {
       msg,
       {
         event: `remoting.set`,
-        data: server.objectList()
+        data: server.getObjects()
       },
       true
     );

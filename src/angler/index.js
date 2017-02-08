@@ -6,7 +6,6 @@ import event from './event'
 import filter from './filter'
 import request from './request'
 import sources from './sources';
-import remoting from './remoting';
 
 const dbs = {};
 
@@ -30,7 +29,6 @@ export {
   filter,
   request,
   sources,
-  remoting,
 }
 
 export default common

@@ -12,8 +12,10 @@ class WebSocket {
       self.clientMap[conn.link] = conn;
       conn.on('text', function (str) {
         const msg = JSON.parse(str);
-        Object.assign(msg, {link: conn.link});
-        self.handleArrive(msg);
+        if (msg.event){
+          Object.assign(msg, {link: conn.link});
+          self.handleArrive(msg);
+        }
       });
       conn.on('close', function (code, reason) {
         delete self.clientMap[conn.link];
@@ -21,8 +23,8 @@ class WebSocket {
           event: 'close',
           link: conn.link,
         });
-        console.log(self.clientMap);
-      })
+      });
+      conn.on("error", (err) => {})
     }).listen(port);
   }
 

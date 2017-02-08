@@ -1,12 +1,12 @@
 import tab from './tables';
-import angler,{tables,event,filter,sources} from './angler';
+import angler,{tables,event,filter} from './angler';
 import {WebSocket} from './angler/sources';
 
 import permissions from './angler/permissions';
 import sysevents from './angler/sysevents';
 import watcher from './angler/watcher';
-import remoting from './angler/remoting';
 
+import remoting,{server} from './angler/remoting';
 const init = async ()=> {
 
   //增加过滤器
@@ -15,7 +15,8 @@ const init = async ()=> {
   //增加消息
   event.addModel(sysevents);
   event.addModel(watcher);
-  event.addModel(remoting);
+  event.addModel(remoting,'remoting');
+
 
   //增加表
   tables.addModel(tab);
@@ -28,6 +29,18 @@ const init = async ()=> {
       watcher: 'mongodb://localhost:27017/watcher',
     }
   });
+
+
+  class testRemoting extends server.MarshalByRefObject {
+    sum(a, b, c) {
+      return a + b + c;
+    }
+  }
+
+  //创建代理
+  server.createProxy(new testRemoting());
+
+  //console.log(JSON.stringify(server.getObjects()));
 
   //配置消息来源
   event.bindSource(new WebSocket(8080));

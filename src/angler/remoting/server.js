@@ -4,7 +4,7 @@ const base = Object.getPrototypeOf({});
 
 class MarshalByRefObject {
   constructor() {
-    this.id = `${Math.random()}`;
+    this.id = `${Math.random()}`.substr(2);
   }
 }
 
@@ -25,14 +25,11 @@ function reflectFunction(obj,type,result) {
   }
 }
 
-export {
-  MarshalByRefObject
-};
-
 const map = {};
 const objectList = {};
 
 export default {
+  MarshalByRefObject,
   getObjects:()=>{
     return objectList;
   },
