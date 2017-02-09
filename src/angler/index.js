@@ -13,8 +13,6 @@ export{
 class Angler {
   constructor() {
     this.events = new Event(this);
-    this.tables = {};
-    this.dbs = {};
   }
 
   filter(model) {
@@ -25,8 +23,12 @@ class Angler {
     this.events.addModel(model);
   }
 
-  source(model){
+  source(model) {
     this.events.bindSource(model);
+  }
+
+  send(...params) {
+    this.event.send(...params);
   }
 }
 
