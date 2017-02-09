@@ -1,11 +1,3 @@
-import ActiveMQ from './activemq'
-import WebSocket from './websocket'
-
-export {
-  ActiveMQ,
-  WebSocket
-}
-
 export default {
   linkSource(source1, source2){
     source1.handleArrive = (msg) => {

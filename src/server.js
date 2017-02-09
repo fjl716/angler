@@ -1,5 +1,5 @@
 import Angler from './angler';
-import {WebSocket} from './angler/sources';
+import WebSocket from './angler/sources/websocket';
 
 import permissions from './angler/permissions';
 import dbs from './angler/dbs';
