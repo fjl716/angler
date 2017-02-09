@@ -5,7 +5,7 @@ const dbs={
   tables:{}
 };
 Object.assign(dbs, {
-  async initMongoDB(dbConf,...models) {
+  async mongoDB(dbConf, ...models) {
     for (let name in dbConf) {
       dbs[name] = new MongoDataBase(dbConf[name]);
     }

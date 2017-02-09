@@ -12,21 +12,21 @@ export{
 
 class Angler {
   constructor() {
-    this.event = new Event(this);
+    this.events = new Event(this);
     this.tables = {};
     this.dbs = {};
   }
 
-  addFilter(model) {
+  filter(model) {
 
   }
 
-  addEvent(model) {
-    this.event.addModel(model);
+  event(model) {
+    this.events.addModel(model);
   }
 
-  bindSource(model){
-    this.event.bindSource(model);
+  source(model){
+    this.events.bindSource(model);
   }
 }
 

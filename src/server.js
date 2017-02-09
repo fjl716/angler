@@ -8,25 +8,25 @@ import remoting,{server} from './angler/remoting';
 
 const init = async ()=> {
   //初始化外部资源
-  dbs.initMongoDB({
-    default: 'mongodb://localhost:27017/test',
-    session: 'mongodb://localhost:27017/session',
-    watcher: 'mongodb://localhost:27017/watcher',
-  },
+  dbs.mongoDB({
+      default: 'mongodb://localhost:27017/test',
+      session: 'mongodb://localhost:27017/session',
+      watcher: 'mongodb://localhost:27017/watcher',
+    },
     require('./tables')
   );
 
   const angler = new Angler();
   //增加过滤器
-  angler.addFilter(permissions);
+  angler.filter(permissions);
 
   //增加消息
-  angler.addEvent(require('./angler/sysevents'));
-  angler.addEvent(require('./angler/watcher'));
-  angler.addEvent(remoting);
+  angler.event(require('./angler/sysevents'));
+  angler.event(require('./angler/watcher'));
+  angler.event(remoting);
 
   //绑定消息数据源
-  angler.bindSource(new WebSocket(8080));
+  angler.source(new WebSocket(8080));
 
   class testRemoting extends server.MarshalByRefObject {
     sum(a, b, c) {
