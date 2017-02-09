@@ -1,6 +1,6 @@
 import util from 'util';
 
-import {ObjectID,Json2Bson} from './db';
+import {ObjectID,Json2Bson} from './mongo';
 
 class Table {
   static newId = () => new ObjectID();

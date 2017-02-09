@@ -25,7 +25,7 @@ const Json2Bson = (obj)=> {
   return obj;
 };
 
-class DataBase {
+class MongoDataBase {
   static connection = (url) => {
     return new Promise((resolve, reject) => {
       mongodb.MongoClient.connect(url, (err, database) => {
@@ -76,4 +76,4 @@ export {
   Json2Bson,
 }
 
-export default DataBase;
+export default MongoDataBase;

@@ -22,7 +22,7 @@ const init = async ()=> {
   angler.addTable(tables);
 
   //初始化外部资源
-  angler.initDB({
+  angler.initMongoDB({
     default: 'mongodb://localhost:27017/test',
     session: 'mongodb://localhost:27017/session',
     watcher: 'mongodb://localhost:27017/watcher',

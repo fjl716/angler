@@ -1,5 +1,5 @@
 import Table from './table'
-import DataBase from './db'
+import MongoDataBase from './mongo'
 import Event from './event'
 import util from 'util'
 
@@ -39,10 +39,10 @@ class Angler {
     this.event.bindSource(model);
   }
 
-  async initDB(dbConf) {
+  async initMongoDB(dbConf) {
     for (let name in dbConf) {
-      let database = await DataBase.connection(dbConf[name]);
-      this.dbs[name] = new DataBase(database);
+      let database = await MongoDataBase.connection(dbConf[name]);
+      this.dbs[name] = new MongoDataBase(database);
     }
     for (let name in this.tables) {
       //关联数据库
