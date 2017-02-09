@@ -1,42 +1,14 @@
 import mongodb from 'mongodb'
-import util from 'util'
-
 const {ObjectID} = mongodb;
+import Table from './table';
+import {Json2Bson} from './helper';
 
-const Json2Bson = (obj)=> {
-  for (let name in obj) {
-    let value = obj[name];
-    if (util.isString(value)) {
-      if (/^[0-9 a-f]{24}$/.test(value)) {
-        obj[name] = new ObjectID(value);
-      } else if (/^D:([0-9]*)$/.test(value)) {
-        obj[name] = new Date(parseInt(/^D:([0-9]*)$/.exec(value)[1]));
-      }
-    } else if (util.isArray(value)) {
-      value.map(item => {
-        if (util.isObject(item)) {
-          Json2Bson(item);
-        }
-      })
-    } else if (util.isObject(value)) {
-      Json2Bson(value)
-    }
-  }
-  return obj;
-};
 
 class MongoDataBase {
-  static connection = (url) => {
-    return new Promise((resolve, reject) => {
-      mongodb.MongoClient.connect(url, (err, database) => {
-        if (err) reject(error);
-        resolve(database)
-      });
+  constructor(url) {
+    mongodb.MongoClient.connect(url, (err, database) => {
+      this.database = database
     });
-  };
-
-  constructor(database) {
-    this.database = database;
   }
 
   async insert(collection, newObj) {
@@ -74,6 +46,7 @@ class MongoDataBase {
 export {
   ObjectID,
   Json2Bson,
+  Table
 }
 
 export default MongoDataBase;

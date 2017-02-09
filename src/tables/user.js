@@ -1,4 +1,4 @@
-import Table from '../angler/table'
+import Table from '../angler/mongo/table'
 export default {
   init: {
     _id: Table.newId,

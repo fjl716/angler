@@ -5,9 +5,20 @@ import {WebSocket} from './angler/sources';
 import permissions from './angler/permissions';
 import sysevents from './angler/sysevents';
 import watcher from './angler/watcher';
+import dbs from './angler/dbs';
 
 import remoting,{server} from './angler/remoting';
 const init = async ()=> {
+  //初始化外部资源
+  dbs.initMongoDB({
+    default: 'mongodb://localhost:27017/test',
+    session: 'mongodb://localhost:27017/session',
+    watcher: 'mongodb://localhost:27017/watcher',
+  },
+    require('./tables')
+  );
+
+  //request('./tables')
 
   const angler = new Angler();
   //增加过滤器
@@ -18,15 +29,6 @@ const init = async ()=> {
   angler.addEvent(watcher);
   angler.addEvent(remoting);
 
-  //增加表
-  angler.addTable(tables);
-
-  //初始化外部资源
-  angler.initMongoDB({
-    default: 'mongodb://localhost:27017/test',
-    session: 'mongodb://localhost:27017/session',
-    watcher: 'mongodb://localhost:27017/watcher',
-  });
   //绑定消息数据源
   angler.bindSource(new WebSocket(8080));
 

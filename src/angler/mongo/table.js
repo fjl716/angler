@@ -1,7 +1,7 @@
 import util from 'util';
-
-import {ObjectID,Json2Bson} from './mongo';
-
+import mongodb from 'mongodb'
+const {ObjectID} = mongodb;
+import {Json2Bson} from './helper';
 class Table {
   static newId = () => new ObjectID();
 
@@ -59,11 +59,11 @@ class Table {
         '$set': newObj
       };
     }
-    return this.db.update(this.name,Json2Bson(query),Json2Bson(newObj));
+    return this.db.update(this.name,query,newObj);
   }
 
   findOne(query) {
-    return this.db.findOne(this.name, Json2Bson(query));
+    return this.db.findOne(this.name, query);
   }
 
   delete(){

@@ -1,7 +1,7 @@
 import group from './group'
 import user from './user'
 
-export default {
+export {
   group,
   user,
 }
