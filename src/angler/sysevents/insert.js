@@ -1,11 +1,9 @@
-import {tables,event} from '../../angler';
-
 export default {
   event: '{table}.insert',
-  invoke: async function (msg,table) {
-    if (tables[table]){
-      let obj = await tables[table].insert(msg.data);
-      event.send(
+  invoke: async function (angler,msg,table) {
+    if (angler.tables[table]){
+      let obj = await angler.tables[table].insert(msg.data);
+      angler.event.send(
         msg,
         {
           event:`${table}.add`,

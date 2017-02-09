@@ -51,7 +51,6 @@ export default {
     return result;
   },
   callProxy: (proxyObj) => {
-    console.log(proxyObj);
     const obj = map[proxyObj.id];
     return {
       callId:proxyObj.callId,

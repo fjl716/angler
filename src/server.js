@@ -1,5 +1,5 @@
-import tab from './tables';
-import angler from './angler';
+import tables from './tables';
+import Angler from './angler';
 import {WebSocket} from './angler/sources';
 
 import permissions from './angler/permissions';
@@ -9,6 +9,7 @@ import watcher from './angler/watcher';
 import remoting,{server} from './angler/remoting';
 const init = async ()=> {
 
+  const angler = new Angler();
   //增加过滤器
   angler.addFilter(permissions);
 
@@ -18,7 +19,7 @@ const init = async ()=> {
   angler.addEvent(remoting);
 
   //增加表
-  angler.addTable(tab);
+  angler.addTable(tables);
 
   //初始化外部资源
   angler.initDB({
@@ -27,7 +28,7 @@ const init = async ()=> {
     watcher: 'mongodb://localhost:27017/watcher',
   });
   //绑定消息数据源
-  angler.bindEventSource(new WebSocket(8080));
+  angler.bindSource(new WebSocket(8080));
 
   class testRemoting extends server.MarshalByRefObject {
     sum(a, b, c) {
