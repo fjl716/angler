@@ -58,7 +58,7 @@ class DataBase {
     return await this.database.collection(collection).findOne(query);
   }
 
-  delete(msg) {
+  'delete'(msg) {
     // if (!db) {
     //   mongodb.MongoClient.connect(mongodb_url, function (err, database) {
     //     if (err) throw err;
