@@ -1,13 +1,11 @@
-import tables from './tables';
 import Angler from './angler';
 import {WebSocket} from './angler/sources';
 
 import permissions from './angler/permissions';
-import sysevents from './angler/sysevents';
-import watcher from './angler/watcher';
 import dbs from './angler/dbs';
 
 import remoting,{server} from './angler/remoting';
+
 const init = async ()=> {
   //初始化外部资源
   dbs.initMongoDB({
@@ -18,15 +16,13 @@ const init = async ()=> {
     require('./tables')
   );
 
-  //request('./tables')
-
   const angler = new Angler();
   //增加过滤器
   angler.addFilter(permissions);
 
   //增加消息
-  angler.addEvent(sysevents);
-  angler.addEvent(watcher);
+  angler.addEvent(require('./angler/sysevents'));
+  angler.addEvent(require('./angler/watcher'));
   angler.addEvent(remoting);
 
   //绑定消息数据源

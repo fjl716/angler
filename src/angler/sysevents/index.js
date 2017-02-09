@@ -14,7 +14,7 @@ import push from './push'
 import pushSimple from './pushSimple'
 import update from './update'
 
-export default {
+export {
   add,
   change,
   close,
