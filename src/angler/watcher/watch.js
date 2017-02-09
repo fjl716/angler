@@ -1,17 +1,15 @@
-import {tables,event,dbs} from '../../angler';
-import {Json2Bson} from '../../angler/db';
 export default {
   event: '{table}.watch',
-  invoke: async function (msg, table) {
-    if (tables[table]) {
-      let obj = await tables[table].findOne(msg.data);
-      let watcher = await dbs.watcher.findOne(
+  invoke: async function (angler, msg, table) {
+    if (angler.tables[table]) {
+      let obj = await angler.tables[table].findOne(msg.data);
+      let watcher = await angler.dbs.watcher.findOne(
         table, {
           _id: obj._id
         }
       );
       if (!watcher) {
-        dbs.watcher.insert(
+        angler.dbs.watcher.insert(
           table,
           Json2Bson({
             _id: obj._id,
@@ -22,21 +20,20 @@ export default {
           }))
       } else {
         if (-1 == watcher.consumer.findIndex(item => item._id == msg.link)) {
-          dbs.watcher.update(table, Json2Bson({
+          angler.dbs.watcher.update(table, {
               _id: obj._id
-            }),
-            Json2Bson({
+            },
+            {
               '$push': {
                 'consumer': {
                   '_id': msg.link,
                   'host': msg.host
                 }
               }
-            })
-          );
+            });
         }
       }
-      event.send(
+      angler.event.send(
         msg,
         {
           event: `load.${table}`,

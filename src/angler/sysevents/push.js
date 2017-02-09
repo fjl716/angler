@@ -1,7 +1,7 @@
 
 export default {
   event: '{table}.{array}_push',
-  invoke: function (msg) {
+  invoke: function (angler,msg) {
 
   }
 };

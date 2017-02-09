@@ -1,8 +1,6 @@
-import {tables,mg} from '../../angler';
-
 export default {
   event: '{table}.add',
-  invoke: async function (msg,table) {
+  invoke: async function (angler,msg,table) {
     //console.log(msg,table)
   }
 };

@@ -1,6 +1,6 @@
 
 export default {
   event: '{table}.delete',
-  invoke: function (msg,table) {
+  invoke: function (angler,msg,table) {
   }
 };

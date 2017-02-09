@@ -1,16 +1,14 @@
-import {tables,event} from '../../angler';
-
 export default {
   event: '{table}.change',
-  invoke: function (msg, table) {
-    const simple = tables[table].simple(msg.data);
-    tables[table].useTables.map(item => {
+  invoke: function (angler,msg, table) {
+    const simple = angler.tables[table].simple(msg.data);
+    angler.tables[table].useTables.map(item => {
       let {name, field} = item;
       let query = {};
       query[`${field}._id`] = simple._id;
       let update = {};
       update[`${field}.$`] = simple;
-      tables[name].update(
+      angler.tables[name].update(
         query,
         {
           '$set': update

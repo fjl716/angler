@@ -49,6 +49,8 @@ class DataBase {
   }
 
   async update(collection, query, newObj) {
+    query = Json2Bson(query);
+    newObj = Json2Bson(newObj);
     await this.database.collection(collection).updateOne(
       query,
       newObj

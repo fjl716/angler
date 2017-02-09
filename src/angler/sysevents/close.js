@@ -1,7 +1,7 @@
 
 export default {
   event: 'close',
-  invoke: function (msg) {
+  invoke: function (angler,msg) {
     //cache.remove(msg);
   }
 };
