@@ -30,13 +30,16 @@ const init = async ()=> {
   webserver.source(new WebSocket(8080));
 
   class testRemoting extends MarshalByRefObject {
+    constructor(__ID__){
+      super(__ID__)
+    }
     sum(a, b, c) {
       return a + b + c;
     }
   }
 
   //添加为服务对象
-  let test = new testRemoting();
+  let test = new testRemoting('1');
   mainboard.addObject(test);
 
   //配置消息来源

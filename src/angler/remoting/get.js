@@ -6,7 +6,7 @@ export default {
       msg,
       {
         event: `remoting.set`,
-        data: mainboard.objects
+        data: mainboard.getObjects(msg.data)
       },
       true
     );

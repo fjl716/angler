@@ -1,6 +1,6 @@
 class MarshalByRefObject {
-  constructor() {
-    this.__ID__ = `${Math.random()}`.substr(2);
+  constructor(__ID__) {
+    this.__ID__ = __ID__;
   }
 
   simple() {

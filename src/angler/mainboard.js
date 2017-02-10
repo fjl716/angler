@@ -2,7 +2,13 @@ const objectList = {};
 const objects = {};
 
 export default {
-  objects,
+  getObjects(...ids){
+    let result = [];
+    ids.map(id=>{
+      result.push(objects[id])
+    });
+    return result;
+  },
   addObject: (...items) => {
     items.map(item=>{
       objectList[item.__ID__] = item;
