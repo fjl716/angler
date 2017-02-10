@@ -27,7 +27,7 @@ class Event {
         });
       } else {
         for (let name in item) {
-          let eventName = item.event ? item.event : `${namespace}.${name}`;
+          let eventName = item[name].event ? item[name].event : `${namespace}.${name}`;
           let code = this.index++;
           this.event.on(eventName, (...params) => {
             const oldMsg = params[1];

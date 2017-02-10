@@ -1,60 +1,35 @@
-import util from 'util';
-
-const base = Object.getPrototypeOf({});
-
 class MarshalByRefObject {
   constructor() {
-    this.id = `${Math.random()}`.substr(2);
+    this.__ID__ = `${Math.random()}`.substr(2);
   }
-}
 
-function reflectFunction(obj,type,result) {
-  for (let name of Object.getOwnPropertyNames(type)) {
-    let method = obj[name];
-    if (name != 'constructor' && util.isFunction(method)) {
-      let args = method.toString().match(/function\s.*?\(([^)]*)\)/)[1];
-      let params = args.split(",").map(function (arg) {
-        // 去空格和内联注释
-        return arg.replace(/\/\*.*\*\//, "").trim();
-      }).filter(function (arg) {
-        // 确保没有undefineds
-        return arg;
-      });
-      result[name] = params;
+  simple() {
+    return {
+      __ID__: this.__ID__,
+      TYPE: this.constructor.name
     }
   }
 }
 
-const map = {};
 const objectList = {};
+const simpleList = {};
 
 export default {
   MarshalByRefObject,
-  getObjects:()=>{
-    return objectList;
+  getObjects:()=> {
+    return simpleList;
   },
-  createProxy: (obj) => {
-    map[obj.id] = obj;
-    let functions = {};
-    let type = Object.getPrototypeOf(obj);
-    while (type != base) {
-      reflectFunction(obj, type, functions);
-      type = Object.getPrototypeOf(type);
-    }
-    let object = {};
-    Object.assign(object, obj);
-    const result = {
-      object,
-      functions
-    };
-    objectList[obj.id] = result;
-    return result;
+  addObject: (...items) => {
+    items.map(item=>{
+      objectList[item.__ID__] = item;
+      simpleList[item.__ID__] = item.simple();
+    });
   },
-  callProxy: (proxyObj) => {
-    const obj = map[proxyObj.id];
+  apply: (proxyObj) => {
+    const obj = objectList[proxyObj.__ID__];
     return {
-      callId:proxyObj.callId,
-      data:obj[proxyObj.func].apply(obj,proxyObj.params)
+      __CALL_ID__:proxyObj.__CALL_ID__,
+      data:obj[proxyObj.method].apply(obj,proxyObj.params)
     };
   }
 };

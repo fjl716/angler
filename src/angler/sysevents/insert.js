@@ -5,7 +5,7 @@ export default {
   invoke: async function (angler,msg,table) {
     if (dbs.tables[table]){
       let obj = await dbs.tables[table].insert(msg.data);
-      angler.event.send(
+      angler.send(
         msg,
         {
           event:`${table}.add`,

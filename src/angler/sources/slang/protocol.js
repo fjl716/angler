@@ -6,6 +6,7 @@ import PConst from './const'
 import PCount from './count'
 import PArray from './array'
 import PCase from './case';
+import Slang from './angler/sources/slang';
 
 const default_types = {
   b: (name) => new PByte(name),

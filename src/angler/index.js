@@ -28,7 +28,7 @@ class Angler {
   }
 
   send(...params) {
-    this.event.send(...params);
+    this.events.send(...params);
   }
 }
 

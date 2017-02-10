@@ -33,7 +33,7 @@ export default {
             });
         }
       }
-      angler.event.send(
+      angler.send(
         msg,
         {
           event: `load.${table}`,

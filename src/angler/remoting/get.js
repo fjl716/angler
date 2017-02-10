@@ -1,7 +1,8 @@
 import server from './server';
 export default {
-  invoke: async function (angler,msg) {
-    angler.event.send(
+  event: 'remoting',
+  invoke: async function (angler, msg) {
+    angler.send(
       msg,
       {
         event: `remoting.set`,
@@ -9,5 +10,8 @@ export default {
       },
       true
     );
+  },
+  add(){
+
   }
 };

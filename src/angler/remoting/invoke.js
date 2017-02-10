@@ -2,11 +2,11 @@ import server from './server';
 
 export default {
   invoke: async function (angler,msg) {
-    angler.event.send(
+    angler.send(
       msg,
       {
         event: `remoting.result`,
-        data: server.callProxy(msg.data)
+        data: server.apply(msg.data)
       },
       true
     );
