@@ -1,4 +1,4 @@
-import server from './server';
+import mainboard from '../mainboard';
 
 export default {
   invoke: async function (angler,msg) {
@@ -6,7 +6,7 @@ export default {
       msg,
       {
         event: `remoting.result`,
-        data: server.apply(msg.data)
+        data: mainboard.apply(msg.data)
       },
       true
     );

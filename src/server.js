@@ -1,7 +1,10 @@
 import Angler from './angler';
 import WebSocket from './angler/sources/websocket';
 import dbs from './angler/dbs';
-import remoting,{server} from './angler/remoting';
+import remoting from './angler/remoting';
+import MarshalByRefObject from './angler/remoting/MarshalByRefObject';
+import mainboard from './angler/mainboard';
+
 import util from 'util';
 
 const init = async ()=> {
@@ -26,7 +29,7 @@ const init = async ()=> {
   //绑定消息数据源
   webserver.source(new WebSocket(8080));
 
-  class testRemoting extends server.MarshalByRefObject {
+  class testRemoting extends MarshalByRefObject {
     sum(a, b, c) {
       return a + b + c;
     }
@@ -34,7 +37,7 @@ const init = async ()=> {
 
   //添加为服务对象
   let test = new testRemoting();
-  server.addObject(test);
+  mainboard.addObject(test);
 
   //配置消息来源
   //event.bindSource();
