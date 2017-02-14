@@ -1,5 +1,5 @@
 import Angler from './angler';
-import WebSocket from './angler/sources/websocket/websocket';
+import WebSocket from './angler/sources/websocket';
 import JsonProtocol from './angler/sources/websocket/jsonprotocol';
 
 export function init() {
