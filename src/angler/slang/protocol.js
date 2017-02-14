@@ -1,12 +1,11 @@
 import util from 'util'
-import PByte from './byte';
-import PChar from './char';
-import PPackage from './package'
-import PConst from './const'
-import PCount from './count'
-import PArray from './array'
-import PCase from './case';
-import Slang from './angler/sources/slang';
+import PByte from './type/byte';
+import PChar from './type/char';
+import PPackage from './type/package'
+import PConst from './type/const'
+import PCount from './type/count'
+import PArray from './type/array'
+import PCase from './type/case';
 
 const default_types = {
   b: (name) => new PByte(name),

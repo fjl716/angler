@@ -1,8 +1,17 @@
 
 import Protocol from './protocol';
 import net from 'net'
-import Client from './client';
+import Client from './type/client';
 
+import Task from '../slang/task';
+import Drive from '../slang/drive';
+import Channel from '../slang/channel';
+
+export {
+  Task,
+  Drive,
+  Channel
+}
 
 class Slang {
   constructor({port,host,protocol}){
