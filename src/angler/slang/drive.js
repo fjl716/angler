@@ -1,12 +1,19 @@
 import {Queue} from './collection';
 import watcher from './watcher';
-class Drive {
-  constructor(channel) {
-    this.channel = channel;
-    this.drive = this;
+
+class Drive{
+  constructor(address) {
+    this.channel = null;
     this.queue = new Queue();
     this.current = null;
-    this.address = `${Math.random()}`.substr(2);
+    this.address = address;
+  }
+
+  online(channel){
+    this.channel = channel;
+    if (!this.current) {
+      this.start();
+    }
   }
 
   work(task) {

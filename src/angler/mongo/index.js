@@ -3,7 +3,6 @@ const {ObjectID} = mongodb;
 import Table from './table';
 import {Json2Bson} from './helper';
 
-
 class MongoDataBase {
   constructor(url) {
     mongodb.MongoClient.connect(url, (err, database) => {

@@ -1,4 +1,4 @@
-import Channel from '../channel'
+import Channel from '../../sources/channel'
 
 class Client extends Channel {
   constructor(socket, protocol) {

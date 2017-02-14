@@ -1,11 +1,13 @@
-import Task from './task';
-import Drive from './drive';
-import Channel from './channel';
+import Task from './task'
+import Drive from './drive'
+import Channel from '../sources/channel'
+import Protocol from './protocol'
 
 export {
   Task,
   Drive,
-  Channel
+  Channel,
+  Protocol
 }
 
 // class Slang {

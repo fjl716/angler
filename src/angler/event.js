@@ -2,7 +2,6 @@ import Emitter from 'pattern-emitter2';
 const defaultMsg = {
   path : []
 };
-
 class Event {
   constructor(angler) {
     this.event = new Emitter();
@@ -44,14 +43,7 @@ class Event {
     }
   };
 
-  bindSource(source) {
-    this.source = source;
-    this.source.onDataArrive((msg) => {
-      this.event.emit(msg.event,this.angler,defaultMsg,msg);
-    });
-  }
-
-  async arrive(msg) {
+  async arrive(packet) {
     // const tmp = {
     //   result: true,
     //   code:1
@@ -60,40 +52,8 @@ class Event {
     // if (tmp.result) {
     //   event.emit(msg.event, msg);
     // }
-    this.event.emit(msg.event, msg);
+    this.event.emit(packet.getKey(), this.angler,defaultMsg, packet);
   }
-
-  send(oldMsg, newMsg, isOut) {
-    for (let name in oldMsg) {
-      if (name != 'event' &&
-        name != 'data' &&
-        name != 'path'
-      )
-        newMsg[name] = oldMsg[name];
-    }
-    if (isOut && this.source) {
-      this.source.send(newMsg);
-    }
-    this.event.emit(newMsg.event,this.angler, oldMsg, newMsg);
-  };
 }
-
-//
-// event.addArray = (array) => {
-//   array.map(item => {
-//     event.on(item.event, item.invoke);
-//   })
-// };
-//
-// event.
-//
-// event.bindSource = (source)=> {
-//   source.onDataArrive((msg) => {
-//     event.emit(msg.event, event.defaultMsg, msg);
-//   });
-//   event.source = source;
-// };
-
-
 
 export default Event;

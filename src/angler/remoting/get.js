@@ -1,4 +1,4 @@
-import mainboard from '../mainboard';
+import remotingMap from './remotingMap';
 export default {
   event: 'remoting',
   invoke: async function (angler, msg) {
@@ -6,7 +6,7 @@ export default {
       msg,
       {
         event: `remoting.set`,
-        data: mainboard.getObjects(msg.data)
+        data: remotingMap.getObjects(msg.data)
       },
       true
     );
