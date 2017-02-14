@@ -15,7 +15,10 @@ export default {
     return [new JsonPacket(JSON.parse(data))];
   },
 
-  packet(equipment,data) {
-    return JSON.stringify(data);
+  packet(equipment, data) {
+    return JSON.stringify({
+      event: data.event,
+      data: data.data
+    });
   }
 };
