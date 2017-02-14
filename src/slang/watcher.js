@@ -1,4 +1,4 @@
-import {MultiQueue} from '../collection';
+import {MultiQueue} from './collection';
 const watcherQueue = new MultiQueue();
 const watcher = {
   add(task, span){

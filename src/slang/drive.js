@@ -1,4 +1,4 @@
-import {Queue} from '../collection';
+import {Queue} from './collection';
 import watcher from './watcher';
 class Drive {
   constructor(channel) {
