@@ -10,7 +10,7 @@
 ##Angler配置
 Angler说明：
 
-<code>
+<pre><code>
   const angler = new Angler({
     source: new WebSocket(8080),
     protocol: JsonProtocol
@@ -28,7 +28,7 @@ Angler说明：
   angler.start();
   return angler;
   
-</code>
+</code></pre>
 
 > filter 过滤器
 
