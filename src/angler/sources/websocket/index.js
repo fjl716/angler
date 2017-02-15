@@ -1,6 +1,7 @@
-import ws from 'nodejs-websocket';
-import Source from '../../source';
-import MainBoard from '../../mainboard';
+import ws from 'nodejs-websocket'
+import Source from '../../source'
+import MainBoard from '../../mainboard'
+import WebSocketChannel from './websocketchannel'
 
 class WebSocket extends Source {
   constructor(port) {
@@ -8,10 +9,13 @@ class WebSocket extends Source {
     this.port = port;
   }
 
-  start(){
+  start() {
     const protocol = this.protocol;
-    ws.createServer((channel) => {
-      MainBoard.add(protocol.equipment(channel,this));
+    ws.createServer((line) => {
+      const channel = new WebSocketChannel(line);
+      const equipment = protocol.equipment(this, channel);
+      channel.bind(equipment);
+      MainBoard.add(equipment);
     }).listen(this.port);
   }
 }
