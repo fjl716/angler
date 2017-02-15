@@ -1,10 +1,8 @@
 import Equipment from '../angler/equipment'
 
 class Meter extends Equipment {
-  constructor(object,source) {
-    super(object._id);
-    this.meterNO = object.meterNO;
-    this.source = source;
+  constructor(source, channel) {
+    super(`${Math.random()}`.substr(2), source, channel);
   }
 }
 

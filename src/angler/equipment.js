@@ -44,18 +44,6 @@ class Equipment {
     }
   }
 
-  // arrive(pack) {
-  //   if (this.current) {
-  //     const result = this.current.arrive(pack);
-  //     if (result) {
-  //       const {pack, span} =result;
-  //       console.log(this.channel);
-  //       this.channel.send(pack);
-  //       watcher.add(this.current, span);
-  //     }
-  //   }
-  // }
-
   send(packet) {
     this.source.out(this, packet);
   }
