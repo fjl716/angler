@@ -16,7 +16,7 @@ class Tcp extends Source {
       const equipment = protocol.equipment(this, channel);
       channel.bind(equipment);
       MainBoard.add(equipment);
-    }).listen(port);
+    }).listen(this.port);
   }
 }
 
