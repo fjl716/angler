@@ -36,7 +36,11 @@ class Angler {
     MainBoard.add(equipment);
   }
 
-  send({equipment,previous, packet},isOut) {
+  send(original,block,isOut) {
+    const equipment = block.equipment?block.equipment:original.equipment;
+    const previous = original.packet;
+    const packet = block.packet;
+
     for (let name in previous) {
       if (name != 'event' &&
         name != 'data' &&
