@@ -1,11 +1,8 @@
-import Equipment,{Close} from '../../equipment'
+import Equipment from '../../equipment'
 
 class Browser extends Equipment {
   constructor(source, channel) {
-    super(`${Math.random()}`.substr(2), source);
-
-    this.channel = channel;
-
+    super(`${Math.random()}`.substr(2), source, channel);
   }
 }
 
