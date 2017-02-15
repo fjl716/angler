@@ -1,6 +1,7 @@
 import net from 'net'
 import Source from '../../source';
 import MainBoard from '../../mainboard';
+import TcpChannel from './tcpchannel';
 
 class Tcp extends Source {
   constructor(port) {
@@ -11,7 +12,10 @@ class Tcp extends Source {
   start(){
     const protocol = this.protocol;
     net.createServer((socket) => {
-      MainBoard.add(protocol.equipment(socket,this));
+      const channel = new TcpChannel(socket);
+      const equipment = protocol.equipment(this, channel);
+      channel.bind(equipment);
+      MainBoard.add(equipment);
     }).listen(port);
   }
 }

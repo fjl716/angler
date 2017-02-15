@@ -1,6 +1,6 @@
 import Channel from '../../channel'
 
-class Client extends Channel {
+class TcpChannel extends Channel {
   constructor(socket, protocol) {
     super(protocol);
     this.socket = socket;
@@ -23,4 +23,4 @@ class Client extends Channel {
     this.socket.write(this.protocol.pack(json));
   }
 }
-export default Client;
+export default TcpChannel;
