@@ -19,8 +19,8 @@ class TcpChannel extends Channel {
     });
   }
 
-  send(json) {
-    this.socket.write(this.protocol.pack(json));
+  out(data) {
+    this.socket.write(data);
   }
 }
 export default TcpChannel;
