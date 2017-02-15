@@ -4,8 +4,6 @@ export default {
   event: 'user.login',
   invoke: async function (params) {
     const {angler, packet} = params;
-
-    console.log(packet);
     if (dbs.tables['user']) {
       let obj = await dbs.tables['user'].findOneSimple({
         user: packet.data.user,
