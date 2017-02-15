@@ -70,7 +70,7 @@ drive.work(new ReadTask({name:'task2'}));
 
 
 const test = new Angler();
-test.event(require('./events/meter'));
+test.event(require('./websocket/events/meter'));
 const slang = new Slang({
   port: 8888,
   host: 'localhost',
