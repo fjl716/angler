@@ -1,6 +1,6 @@
-import Angler from './angler';
-import WebSocket from './angler/sources/websocket';
-import JsonProtocol from './angler/sources/websocket/jsonprotocol';
+import Angler from '../angler';
+import WebSocket from '../angler/sources/websocket';
+import JsonProtocol from '../angler/sources/websocket/jsonprotocol';
 
 export function init() {
   const angler = new Angler({
@@ -9,11 +9,11 @@ export function init() {
   });
 
   //增加过滤器
-  angler.filter(require('./angler/filters/permissions'));
+  angler.filter(require('../angler/filters/permissions/index'));
 
   //增加消息
-  angler.event(require('./angler/events/mongo'));
-  angler.event(require('./angler/events/watcher'));
+  angler.event(require('../angler/events/mongo/index'));
+  angler.event(require('../angler/events/watcher/index'));
   //angler.event(remoting);
 
   angler.start();
