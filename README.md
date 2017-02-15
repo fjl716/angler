@@ -31,28 +31,18 @@ Angler说明：
   angler.event(require('../angler/events/mongo/index'));
   angler.event(require('../angler/events/watcher/index'));
   angler.event(require('./events/user/index'));
-  //angler.event(remoting);
+  angler.event(remoting);
 
+  //开始运行
   angler.start();
-  return angler;
-  
 </code></pre>
 
 > filter 过滤器
 
-功能描述：
-filter.addModel(permissions);
-
-
-> tables 表配置
-
-
+过滤器用于对消息的过滤，符合规则的消息可被event处理器执行。
 
 > event 事件说明
 
+事件处理器，用于事件处理
 
-
-
-
-> 使用功能说明：
-
+#Event
