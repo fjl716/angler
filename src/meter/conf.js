@@ -1,5 +1,5 @@
 import {Task,Drive} from '../angler/slang'
-import net from '../angler/slang'
+import net from '../angler/sources/net'
 import Slang from '../angler/slang'
 
 export function init() {

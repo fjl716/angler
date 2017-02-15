@@ -1,13 +1,19 @@
-import Client from './client';
 import net from 'net'
+import Source from '../../source';
+import MainBoard from '../../mainboard';
 
-export default {
-  listen: (port, protocol) => {
+class Tcp extends Source {
+  constructor(port) {
+    super();
+    this.port = port;
+  }
+
+  start(){
+    const protocol = this.protocol;
     net.createServer((socket) => {
-      // 我们获得一个连接 - 该连接自动关联一个socket对象
-      // console.log('CONNECTED: ' +
-      //   socket.remoteAddress + ':' + socket.remotePort);
-      new Client(socket, protocol);
+      MainBoard.add(protocol.equipment(socket,this));
     }).listen(port);
   }
 }
+
+export default Tcp
