@@ -2,7 +2,6 @@ import Event from './event'
 import {Close} from './equipment'
 import MainBoard from './mainboard'
 
-
 class Angler {
   constructor({source, protocol}) {
     this.events = new Event(this);
@@ -23,18 +22,8 @@ class Angler {
     this.events.addModel(model);
   }
 
-  arrive(equipment, data) {
-    if (data == Close) {
-
-    } else {
-      const packets = this.protocol.parse(data);
-      if (packets) {
-        packets.map(packet => {
-          packet.__ID__ = equipment.__ID__;
-          this.events.arrive(packet);
-        })
-      }
-    }
+  arrive(equipment, packet) {
+    this.events.arrive(packet);
   }
 
   send(oldMsg, newMsg, isOut) {

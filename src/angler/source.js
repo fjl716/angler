@@ -6,8 +6,8 @@ class Source {
     this.protocol = protocol;
   }
 
-  arrive(equipment, data) {
-    this.angler.arrive(equipment, data);
+  arrive(equipment, packet) {
+    this.angler.arrive(equipment, packet);
   }
 
   out(equipment, packet) {

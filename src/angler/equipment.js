@@ -35,7 +35,13 @@ class Equipment {
   }
 
   arrive(data) {
-    this.source.arrive(this, data);
+    const packets = this.source.protocol.parse(data);
+    if (packets) {
+      packets.map(packet => {
+        packet.__ID__ = this.__ID__;
+        this.source.arrive(this,packet);
+      })
+    }
   }
 
   // arrive(pack) {
