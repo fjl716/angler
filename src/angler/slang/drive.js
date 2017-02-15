@@ -1,5 +1,5 @@
 import {Queue} from './collection';
-import watcher from './watcher';
+import watcher from '../watcher';
 
 class Drive{
   constructor(address) {

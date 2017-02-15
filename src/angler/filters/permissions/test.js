@@ -1,4 +1,4 @@
-import {tables,event} from '../../angler';
+import {tables,event} from '../../../angler';
 
 export default {
   event: 'insert.{table}',

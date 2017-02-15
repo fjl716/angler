@@ -1,4 +1,4 @@
-import dbs from '../dbs';
+import dbs from '../../dbs';
 
 export default {
   event: '{table}.insert',

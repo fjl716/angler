@@ -9,11 +9,11 @@ export function init() {
   });
 
   //增加过滤器
-  angler.filter(require('./angler/permissions'));
+  angler.filter(require('./angler/filters/permissions'));
 
   //增加消息
-  angler.event(require('./angler/sysevents'));
-  angler.event(require('./angler/watcher'));
+  angler.event(require('./angler/events/mongo'));
+  angler.event(require('./angler/events/watcher'));
   //angler.event(remoting);
 
   angler.start();

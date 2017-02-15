@@ -1,4 +1,4 @@
-import MongoDataBase,{Table} from './mongo'
+import MongoDataBase,{Table} from './database/mongo'
 import util from 'util'
 
 const dbs={
