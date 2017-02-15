@@ -1,9 +1,9 @@
-import {Task,Drive,Channel} from './angler/slang'
-import net from './angler/slang/net'
-import {Protocol} from './angler/slang'
+import {Task,Drive} from '../angler/slang'
+import net from '../angler/slang'
+import Slang from '../angler/slang'
 
-function init() {
-  net.listen(7000, new Protocol({
+export function init() {
+  net.listen(7000, new Slang({
     types: {
       address: 'c:6'                      //定义地址类型为6个字节,类型名为address
     },
@@ -27,8 +27,4 @@ function init() {
       '68',                               //常量0x16
     ]
   }))
-}
-
-export{
-  init
 }

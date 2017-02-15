@@ -1,6 +1,5 @@
 import Task from '../task'
 import Drive from './drive'
-import Protocol from './protocol'
 import util from 'util'
 import PByte from './type/byte';
 import PChar from './type/char';
@@ -13,7 +12,6 @@ import PCase from './type/case';
 export {
   Task,
   Drive,
-  Protocol
 }
 
 const default_types = {
