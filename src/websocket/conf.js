@@ -14,6 +14,7 @@ export function init() {
   //增加消息
   angler.event(require('../angler/events/mongo/index'));
   angler.event(require('../angler/events/watcher/index'));
+  angler.event(require('./events/user/index'));
   //angler.event(remoting);
 
   angler.start();

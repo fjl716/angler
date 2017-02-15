@@ -66,6 +66,11 @@ class Table {
     return this.db.findOne(this.name, query);
   }
 
+  async findOneSimple(query) {
+    let obj = await this.db.findOne(this.name, query);
+    return this.simple(obj);
+  }
+
   delete(){
 
   }

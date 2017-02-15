@@ -5,6 +5,6 @@ export default {
     arr:[],
   },
   simple:[
-    '_id','name','age'
+    '_id','user','age'
   ]
 }
