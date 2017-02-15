@@ -4,7 +4,7 @@ import JsonProtocol from './angler/sources/websocket/jsonprotocol';
 
 export function init() {
   const angler = new Angler({
-    source: new WebSocket(8080),
+    source: new WebSocket(8080,JsonProtocol),
     protocol: JsonProtocol
   });
 
@@ -16,6 +16,7 @@ export function init() {
   angler.event(require('./angler/watcher'));
   //angler.event(remoting);
 
+  angler.start();
   return angler;
 }
 

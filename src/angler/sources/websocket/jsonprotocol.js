@@ -1,5 +1,5 @@
 import Packet from '../../packet'
-
+import Browser from './browser';
 class JsonPacket extends Packet{
   constructor(data){
     super(data)
@@ -20,5 +20,9 @@ export default {
       event: data.event,
       data: data.data
     });
+  },
+
+  equipment(channel, source){
+    return new Browser(channel, source)
   }
 };

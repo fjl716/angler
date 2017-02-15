@@ -4,15 +4,17 @@ import MainBoard from './mainboard'
 class Angler {
   constructor({source, protocol}) {
     this.events = new Event(this);
-
-    source.bind(this);
     this.source = source;
-
     this.protocol = protocol;
+    source.bind(this, protocol);
   }
 
   filter(model) {
 
+  }
+
+  start(){
+    this.source.start();
   }
 
   event(model) {
