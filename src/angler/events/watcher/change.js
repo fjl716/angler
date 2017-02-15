@@ -1,6 +1,6 @@
 export default {
   event: '{table}.change',
-  invoke: async function (angler,msg, table) {
+  invoke: async function (angler, equipment,msg, table) {
     if (angler.tables[table]) {
       let watcher = await angler.dbs.watcher.findOne(
         table, {

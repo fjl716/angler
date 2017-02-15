@@ -1,10 +1,7 @@
 const equipments={};
 
 export default {
-  add(equipment, oldid) {
-    if (oldid) {
-      delete equipments[oldid];
-    }
+  add(equipment) {
     equipments[equipment.__ID__] = equipment;
   },
   get(id){

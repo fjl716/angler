@@ -15,11 +15,15 @@ export default {
     return [new JsonPacket(JSON.parse(data))];
   },
 
-  packet(equipment, data) {
+  serialize(equipment, data) {
     return JSON.stringify({
       event: data.event,
       data: data.data
     });
+  },
+
+  packet(equipment, data){
+    return new JsonPacket(data);
   },
 
   equipment(channel, source){

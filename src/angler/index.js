@@ -14,7 +14,7 @@ class Angler {
 
   }
 
-  start(){
+  start() {
     this.source.start();
   }
 
@@ -23,10 +23,17 @@ class Angler {
   }
 
   arrive(equipment, packet) {
-    this.events.arrive(packet);
+    this.events.arrive(equipment,packet);
   }
 
-  send(oldMsg, newMsg, isOut) {
+  change(oldId,newId) {
+    const equipment = MainBoard.get(oldId);
+    MainBoard.remove(equipment);
+    equipment.__ID__ = newId;
+    MainBoard.add(equipment);
+  }
+
+  send(equipment,oldMsg, newMsg, isOut) {
     for (let name in oldMsg) {
       if (name != 'event' &&
         name != 'data' &&
@@ -39,14 +46,16 @@ class Angler {
       if (equipment) {
         equipment.send(newMsg);
       }
-      //this.source.send(newMsg);
     }
-    //this.event.emit(newMsg.event,this.angler, oldMsg, newMsg);
+    this.arrive(
+      equipment,
+      this.protocol.packet(equipment,newMsg)
+    );
   }
 
   out(equipment, packet) {
-    const data = this.protocol.packet(equipment, packet);
-    if (data){
+    const data = this.protocol.serialize(equipment, packet);
+    if (data) {
       equipment.out(data);
     }
   }

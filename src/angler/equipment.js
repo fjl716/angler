@@ -28,7 +28,6 @@ class Equipment {
     if (this.queue.size() > 0) {
       this.current = this.queue.dequeue();
       const {pack, span} = this.current.first();
-      console.log(this.channel);
       this.channel.send(pack);
       watcher.add(this.current, span);
     }

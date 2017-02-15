@@ -1,6 +1,6 @@
 export default {
   event: '{table}.watch',
-  invoke: async function (angler, msg, table) {
+  invoke: async function (angler, equipment, msg, table) {
     if (angler.tables[table]) {
       let obj = await angler.tables[table].findOne(msg.data);
       let watcher = await angler.dbs.watcher.findOne(
@@ -34,6 +34,7 @@ export default {
         }
       }
       angler.send(
+        equipment,
         msg,
         {
           event: `load.${table}`,

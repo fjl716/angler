@@ -15,8 +15,8 @@ class Event {
       if (item.event) {
         let code = this.index++;
         this.event.on(item.event, (...params) => {
-          const oldMsg = params[1];
-          const newMsg = params[2];
+          const oldMsg = params[2];
+          const newMsg = params[3];
           newMsg.path = oldMsg.path.slice();
           if (newMsg.path.indexOf(code) == -1) {
             newMsg.path.push(code);
@@ -29,8 +29,8 @@ class Event {
           let eventName = item[name].event ? item[name].event : `${namespace}.${name}`;
           let code = this.index++;
           this.event.on(eventName, (...params) => {
-            const oldMsg = params[1];
-            const newMsg = params[2];
+            const oldMsg = params[2];
+            const newMsg = params[3];
             newMsg.path = oldMsg.path.slice();
             if (newMsg.path.indexOf(code) == -1) {
               newMsg.path.push(code);
@@ -43,7 +43,7 @@ class Event {
     }
   };
 
-  async arrive(packet) {
+  async arrive(equipment, packet) {
     // const tmp = {
     //   result: true,
     //   code:1
@@ -52,7 +52,7 @@ class Event {
     // if (tmp.result) {
     //   event.emit(msg.event, msg);
     // }
-    this.event.emit(packet.getKey(), this.angler,defaultMsg, packet);
+    this.event.emit(packet.getKey(), this.angler, equipment, defaultMsg, packet);
   }
 }
 

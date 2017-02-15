@@ -1,6 +1,6 @@
 
 export default {
   event: '{table}.getSimple',
-  invoke: function (msg) {
+  invoke: function (msg, equipment) {
   }
 };

@@ -1,6 +1,6 @@
 
 export default {
   event: '{table}.findSimple',
-  invoke: function (angler,msg) {
+  invoke: function (angler, equipment,msg) {
   }
 };

@@ -1,6 +1,6 @@
 export default {
   event: '{table}.change',
-  invoke: function (angler,msg, table) {
+  invoke: function (angler, equipment,msg, table) {
     const simple = angler.tables[table].simple(msg.data);
     angler.tables[table].useTables.map(item => {
       let {name, field} = item;

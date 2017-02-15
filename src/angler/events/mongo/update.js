@@ -1,6 +1,6 @@
 export default {
   event: '{table}.update',
-  invoke: async function (angler,msg,table) {
+  invoke: async function (angler, equipment,msg,table) {
     if (angler.tables[table]){
       let obj = await angler.tables[table].update(msg.data);
       event.send(
