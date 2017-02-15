@@ -24,7 +24,7 @@ export function init() {
         '$case': {c: 1},                   //分支条件为，满足变量c==1
         data: [{'address': 'address'}]
       }, //满足条件后的结构为address
-      '68',                               //常量0x16
+      '16',                               //常量0x16
     ]
   }))
 }
