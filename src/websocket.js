@@ -4,7 +4,7 @@ import JsonProtocol from './angler/sources/websocket/jsonprotocol';
 
 export function init() {
   const angler = new Angler({
-    source: new WebSocket(8080,JsonProtocol),
+    source: new WebSocket(8080),
     protocol: JsonProtocol
   });
 
