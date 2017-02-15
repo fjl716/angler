@@ -9,7 +9,7 @@ export function init() {
   });
 
   //增加过滤器
-  angler.filter(require('../angler/filters/permissions/index'));
+  //angler.filter(require('../angler/filters/permissions/index'));
 
   //增加消息
   angler.event(require('../angler/events/mongo/index'));

@@ -1,17 +1,17 @@
 import MainBoard from './mainboard'
 
 class Source {
-  bind(angler,protocol) {
+  bind({angler,protocol}) {
     this.angler = angler;
     this.protocol = protocol;
   }
 
-  arrive(equipment, packet) {
-    this.angler.arrive(equipment, packet);
+  arrive(params) {
+    this.angler.arrive(params);
   }
 
-  out(equipment, packet) {
-    this.angler.out(equipment, packet);
+  send(params) {
+    this.angler.out(params);
   }
 
   close(equipment){

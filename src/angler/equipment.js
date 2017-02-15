@@ -38,13 +38,19 @@ class Equipment {
     if (packets) {
       packets.map(packet => {
         packet.__ID__ = this.__ID__;
-        this.source.arrive(this,packet);
+        this.source.arrive({
+          equipment: this,
+          packet
+        });
       })
     }
   }
 
   send(packet) {
-    this.source.out(this, packet);
+    this.source.send({
+      equipment: this,
+      packet
+    });
   }
 
   out(data) {

@@ -1,5 +1,5 @@
 class Channel{
-  bind(equipment){
+  bind({equipment}){
     this.equipment = equipment;
   }
 

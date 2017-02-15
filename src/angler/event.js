@@ -14,28 +14,28 @@ class Event {
       let item = model[namespace];
       if (item.event) {
         let code = this.index++;
-        this.event.on(item.event, (...params) => {
-          const oldMsg = params[2];
-          const newMsg = params[3];
-          newMsg.path = oldMsg.path.slice();
-          if (newMsg.path.indexOf(code) == -1) {
-            newMsg.path.push(code);
-            params.splice(1, 1);
-            item.invoke(...params);
+        this.event.on(item.event, (obj,...params) => {
+          const previous = obj.previous ? obj.previous : defaultMsg;
+          const packet = obj.packet;
+
+          packet.path = previous.path.slice();
+
+          if (packet.path.indexOf(code) == -1) {
+            packet.path.push(code);
+            item.invoke(obj,...params);
           }
         });
       } else {
         for (let name in item) {
           let eventName = item[name].event ? item[name].event : `${namespace}.${name}`;
           let code = this.index++;
-          this.event.on(eventName, (...params) => {
-            const oldMsg = params[2];
-            const newMsg = params[3];
-            newMsg.path = oldMsg.path.slice();
-            if (newMsg.path.indexOf(code) == -1) {
-              newMsg.path.push(code);
-              params.splice(1, 1);
-              item[name].invoke(...params);
+          this.event.on(eventName, (obj,...params) => {
+            const previous = obj.previous ? obj.previous : defaultMsg;
+            const packet = obj.packet;
+            packet.path = previous.path.slice();
+            if (packet.path.indexOf(code) == -1) {
+              packet.path.push(code);
+              item.invoke(obj,...params);
             }
           });
         }
@@ -43,7 +43,7 @@ class Event {
     }
   };
 
-  async arrive(equipment, packet) {
+  async arrive({equipment, packet}) {
     // const tmp = {
     //   result: true,
     //   code:1
@@ -52,7 +52,11 @@ class Event {
     // if (tmp.result) {
     //   event.emit(msg.event, msg);
     // }
-    this.event.emit(packet.getKey(), this.angler, equipment, defaultMsg, packet);
+    this.event.emit(packet.getKey(), {
+      angler: this.angler,
+      equipment,
+      packet
+    });
   }
 }
 

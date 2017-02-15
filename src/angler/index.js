@@ -7,7 +7,10 @@ class Angler {
     this.events = new Event(this);
     this.source = source;
     this.protocol = protocol;
-    source.bind(this, protocol);
+    source.bind({
+      angler: this,
+      protocol
+    });
   }
 
   filter(model) {
@@ -22,39 +25,39 @@ class Angler {
     this.events.addModel(model);
   }
 
-  arrive(equipment, packet) {
-    this.events.arrive(equipment,packet);
+  arrive(params) {
+    this.events.arrive(params);
   }
 
-  change(oldId,newId) {
+  change(oldId, newId) {
     const equipment = MainBoard.get(oldId);
     MainBoard.remove(equipment);
     equipment.__ID__ = newId;
     MainBoard.add(equipment);
   }
 
-  send(equipment,oldMsg, newMsg, isOut) {
-    for (let name in oldMsg) {
+  send({previous, packet, isOut}) {
+    for (let name in previous) {
       if (name != 'event' &&
         name != 'data' &&
         name != 'path'
       )
-        newMsg[name] = oldMsg[name];
+        packet[name] = previous[name];
     }
     if (isOut) {
-      const equipment = MainBoard.get(newMsg.__ID__);
+      const equipment = MainBoard.get(packet.__ID__);
       if (equipment) {
-        equipment.send(newMsg);
+        equipment.send(packet);
       }
     }
-    this.arrive(
-      equipment,
-      this.protocol.packet(equipment,newMsg)
-    );
+    // this.arrive({
+    //   equipment,
+    //   packet: this.protocol.packet(equipment, packet)
+    // });
   }
 
-  out(equipment, packet) {
-    const data = this.protocol.serialize(equipment, packet);
+  out({equipment, packet}) {
+    const data = this.protocol.serialize({equipment, packet});
     if (data) {
       equipment.out(data);
     }
