@@ -1,7 +1,7 @@
 import data from './data'
 
 export default {
-  meter:{
+  test:{
     data
   }
 }

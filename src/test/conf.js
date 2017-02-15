@@ -32,14 +32,7 @@ export function init() {
     })
   });
 
-  //增加过滤器
-  //angler.filter(require('../angler/filters/permissions/index'));
-
-  //增加消息
-  // angler.event(require('../angler/events/mongo/index'));
-  // angler.event(require('../angler/events/watcher/index'));
-  // angler.event(require('./events/user/index'));
-  //angler.event(remoting);
+  angler.event(require('./events'));
 
   angler.start();
   return angler;
