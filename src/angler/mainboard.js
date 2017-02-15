@@ -9,5 +9,8 @@ export default {
   },
   get(id){
     return equipments[id];
+  },
+  remove(equipment){
+    delete equipments[equipment.__ID__]
   }
 }

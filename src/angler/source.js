@@ -1,3 +1,5 @@
+import MainBoard from './mainboard'
+
 class Source {
   bind(angler,protocol) {
     this.angler = angler;
@@ -10,6 +12,10 @@ class Source {
 
   out(equipment, packet) {
     this.angler.out(equipment, packet);
+  }
+
+  close(equipment){
+    MainBoard.remove(equipment);
   }
 }
 
