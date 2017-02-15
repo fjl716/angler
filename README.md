@@ -4,6 +4,32 @@
 
 使用Angler进行消息队列获取消息后的数据的处理
 
+
+##数据库配置
+
+##Angler配置
+Angler说明：
+
+<code>
+  const angler = new Angler({
+    source: new WebSocket(8080),
+    protocol: JsonProtocol
+  });
+
+  //增加过滤器
+  angler.filter(require('../angler/filters/permissions/index'));
+
+  //增加消息
+  angler.event(require('../angler/events/mongo/index'));
+  angler.event(require('../angler/events/watcher/index'));
+  angler.event(require('./events/user/index'));
+  //angler.event(remoting);
+
+  angler.start();
+  return angler;
+  
+</code>
+
 > filter 过滤器
 
 功能描述：
