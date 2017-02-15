@@ -6,7 +6,15 @@
 
 
 ##数据库配置
-
+<pre><code>
+  dbs.mongoDB({
+      default: 'mongodb://localhost:27017/test',
+      session: 'mongodb://localhost:27017/session',
+      watcher: 'mongodb://localhost:27017/watcher',
+    },
+    require('./tables')
+  );
+</code></pre>
 ##Angler配置
 Angler说明：
 
