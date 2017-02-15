@@ -11,9 +11,8 @@ export default {
           packet: {
             event: `${table}.add`,
             data: obj
-          },
-          isOut: true
-        }
+          }
+        }, true
       );
     }
   }

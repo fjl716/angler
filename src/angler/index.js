@@ -36,7 +36,7 @@ class Angler {
     MainBoard.add(equipment);
   }
 
-  send({previous, packet, isOut}) {
+  send({equipment,previous, packet},isOut) {
     for (let name in previous) {
       if (name != 'event' &&
         name != 'data' &&
@@ -50,10 +50,10 @@ class Angler {
         equipment.send(packet);
       }
     }
-    // this.arrive({
-    //   equipment,
-    //   packet: this.protocol.packet(equipment, packet)
-    // });
+    this.arrive({
+      equipment,
+      packet: this.protocol.packet(equipment, packet)
+    });
   }
 
   out({equipment, packet}) {

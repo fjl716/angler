@@ -17,9 +17,9 @@ export default {
           packet: {
             event: `user.loginComplete`,
             data: obj
-          },
-          isOut: true
-        });
+          }},
+          true
+        );
       } else {
 
       }
