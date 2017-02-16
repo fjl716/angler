@@ -12,7 +12,7 @@ class TestTask extends Task {
   first() {
     return {
       event: 'user.read',
-      data: '123'
+      data: this.step
     }
   }
 
