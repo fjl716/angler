@@ -3,11 +3,11 @@ export default class {
   constructor({span,retryCount,callback}) {
     this.span = span;
     this.retryCount = retryCount;
+    this.callback = callback;
     this.result = [];
     this.step = 1;
     this.retry = 0;
     this.__TIME_LABEL = `${Math.random()}`.substr(2);
-    this.callback = callback;
   }
 
   first() {
