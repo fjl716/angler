@@ -1,41 +1,35 @@
-import Task from '../../angler/task'
+import Task from '../../angler/task';
 
 class TestTask extends Task {
-  constructor(obj) {
-    super(obj)
+  constructor(callback) {
+    super({
+      span: 3,
+      retryCount: 3,
+      callback
+    });
   }
 
   first() {
-    this.index = 1;
     return {
-      packet: {
-        key: 'read',
-        data: '123'
-      },
-      span: 1
+      event: 'user.read',
+      data: '123'
     }
   }
 
-  arrive(pack) {
-    if (this.index >= 3) {
+  arrive(packet) {
+    if (packet.event != 'user.data') {
+      return;
+    }
+    this.result.push(packet);
+    if (this.step >= 3) {
       return this.complete();
     }
-    if (pack.key == 'read') {
-      this.index++;
-      return this.next({
-        packet: {
-          key: 'read',
-          data: '123'
-        },
-        span: 1
-      });
-    }
-  }
-
-  timeout() {
-    console.log(`time out ${this.name}`);
-    return this.complete();
+    return this.next({
+      event: 'user.read',
+      data: '123'
+    })
   }
 }
 
 export default TestTask;
+

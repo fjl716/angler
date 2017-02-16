@@ -1,30 +1,44 @@
 export default class {
 
-  constructor(obj) {
-    Object.assign(this,obj);
+  constructor({span,retryCount}) {
+    this.span = span;
+    this.retryCount = retryCount;
+    this.result = [];
+    this.step = 1;
+    this.retry = 0;
     this.__TIME_LABEL = `${Math.random()}`.substr(2);
   }
 
-  first(){
+  first() {
 
   }
 
-  arrive(){
+  arrive(packet) {
 
   }
 
-  timeout(){
-
+  timeout() {
+    if (this.retryCount) {
+      if (this.retry > this.retryCount) {
+        this.complete();
+        return;
+      }
+      console.log(this.last);
+      this.equipment.taskSend(this, this.last);
+      this.retry++;
+      return this.last;
+    }
   }
 
-  complete(obj) {
+  complete() {
+    this.callback(this.result);
     this.next();
-    if (this.drive)
-      this.drive.start();
-    return obj;
+    if (this.equipment)
+      this.equipment.run();
   }
 
   next(obj) {
+    this.step++;
     this.__TIME_LABEL = `${Math.random()}`.substr(2);
     return obj;
   }

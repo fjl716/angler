@@ -11,7 +11,7 @@ class Equipment {
 
   online(channel){
     if (!this.current) {
-      this.start();
+      this.run();
     }
   }
 
@@ -19,22 +19,44 @@ class Equipment {
     task.equipment = this;
     this.queue.enqueue(task);
     if (!this.current) {
-      this.start();
+      this.run();
     }
   }
 
-  start() {
-    this.current = null;
+  run() {
     if (this.queue.size() > 0) {
       this.current = this.queue.dequeue();
-      const {pack, span} = this.current.first();
-      this.channel.send(pack);
-      watcher.add(this.current, span);
+      this.taskSend(this.current,this.current.first());
     }
   }
 
-  arrive(data) {
-    const packets = this.source.protocol.parse(data);
+  taskArrive(packet) {
+    const task = this.current;
+    if (task) {
+      this.taskSend(this.current,task.arrive(packet));
+    }
+  }
+
+  taskSend(task,data) {
+    this.current.last = null;
+    if (data) {
+      const packet = data.packet ? data.packet : data;
+      const span = data.span ? data.span : task.span;
+      this.current.last = {
+        packet,
+        span
+      };
+      console.log(packet);
+      console.log(span);
+      this.send(packet);
+      if (span) {
+        watcher.add(this.current, span);
+      }
+    }
+  }
+
+  arrive(packet) {
+    const packets = this.source.protocol.parse(packet);
     if (packets) {
       packets.map(packet => {
         packet.__ID__ = this.__ID__;

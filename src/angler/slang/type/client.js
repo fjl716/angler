@@ -18,6 +18,6 @@ export default class {
   }
 
   send(json) {
-    this.socket.write(this.protocol.pack(json));
+    this.socket.write(this.protocol.packet(json));
   }
 }

@@ -1,14 +1,24 @@
 class MultiQueue {
   constructor() {
-    this.items = [[], [], []];
+    this.items = [[]];
     this.index = 0;
   }
 
   enqueue(item, space) {
-    while (space > this.items.length + this.index) {
-      this.items.push([]);
+    if (space > this.items.length - 1) {
+
+      let nItems = [];
+      let i = 0;
+      for (; i < this.items.length; i++) {
+        nItems.push(this.items[(this.index + i) % this.items.length]);
+      }
+      for (; i < space + 1; i++) {
+        nItems.push([]);
+      }
+      this.items = nItems;
+      this.index = 0;
     }
-    this.items[space + this.index - 1].push(item);
+    this.items[(space + this.index - 1) % this.items.length].push(item);
   }
 
   dequeue() {

@@ -9,35 +9,32 @@ class Event {
     this.index = 1;
   }
 
+  addEvent(item, eventName, code) {
+    this.event.on(eventName, (obj, ...params) => {
+      const previous = obj.previous ? obj.previous : defaultMsg;
+      const packet = obj.packet;
+
+      packet.path = previous.path.slice();
+
+      if (packet.path.indexOf(code) == -1) {
+        packet.path.push(code);
+        item.invoke(obj, ...params);
+      }
+    });
+  }
+
   addModel = (model) => {
     for (let namespace in model) {
       let item = model[namespace];
       if (item.event) {
+        let eventName = item.event;
         let code = this.index++;
-        this.event.on(item.event, (obj,...params) => {
-          const previous = obj.previous ? obj.previous : defaultMsg;
-          const packet = obj.packet;
-
-          packet.path = previous.path.slice();
-
-          if (packet.path.indexOf(code) == -1) {
-            packet.path.push(code);
-            item.invoke(obj,...params);
-          }
-        });
+        this.addEvent(item, eventName, code);
       } else {
         for (let name in item) {
           let eventName = item[name].event ? item[name].event : `${namespace}.${name}`;
           let code = this.index++;
-          this.event.on(eventName, (obj,...params) => {
-            const previous = obj.previous ? obj.previous : defaultMsg;
-            const packet = obj.packet;
-            packet.path = previous.path.slice();
-            if (packet.path.indexOf(code) == -1) {
-              packet.path.push(code);
-              item.invoke(obj,...params);
-            }
-          });
+          this.addEvent(item, eventName, code);
         }
       }
     }

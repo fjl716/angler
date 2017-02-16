@@ -8,7 +8,7 @@ class ReadTask extends Task {
   first() {
     this.index = 1;
     return {
-      pack: {
+      packet: {
         key: 'read',
         data: '123'
       },
@@ -16,14 +16,14 @@ class ReadTask extends Task {
     }
   }
 
-  arrive(pack) {
+  arrive(packet) {
     if (this.index >= 3) {
       return this.complete();
     }
-    if (pack.key == 'read') {
+    if (packet.key == 'read') {
       this.index++;
       return this.next({
-        pack: {
+        packet: {
           key: 'read',
           data: '123'
         },

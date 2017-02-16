@@ -72,7 +72,7 @@ export default class {
 
   parse(buffer) {
     const result = {
-      pack: []
+      packet: []
     };
     let index = 0;
     let pack = new PPackage();
@@ -91,7 +91,7 @@ export default class {
         }
       }
     if (i >= this.items.length) {
-      result.pack(pack);
+      result.packet(pack);
     }
 
     // console.log(pack.influx());

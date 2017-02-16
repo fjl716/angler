@@ -4,15 +4,15 @@ const watcher = {
   add(task, span){
     watcherQueue.enqueue({
       task,
-      __TIME_LABEL:task.__TIME_LABEL
-    },span);
+      __TIME_LABEL: task.__TIME_LABEL
+    }, span);
   },
   timeout(){
     let list = watcherQueue.dequeue();
-    list.map(item=>{
+    list.map(item => {
       const {task, __TIME_LABEL} = item;
       if (task.__TIME_LABEL == __TIME_LABEL) {
-        task.timeout();
+        task.equipment.taskSend(task.timeout());
       }
     });
   }
