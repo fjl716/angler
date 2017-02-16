@@ -16,7 +16,7 @@ class Equipment {
   }
 
   work(task) {
-    task.drive = this;
+    task.equipment = this;
     this.queue.enqueue(task);
     if (!this.current) {
       this.start();
