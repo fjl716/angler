@@ -46,8 +46,6 @@ class Equipment {
         packet,
         span
       };
-      console.log(packet);
-      console.log(span);
       this.send(packet);
       if (span) {
         watcher.add(this.current, span);

@@ -4,6 +4,8 @@ export default {
   invoke: async function (params) {
     const {equipment} = params;
 
-    equipment.work(new TestTask());
+    equipment.work(new TestTask((result)=>{
+      console.log(result);
+    }));
   }
 }

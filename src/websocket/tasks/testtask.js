@@ -21,12 +21,12 @@ class TestTask extends Task {
       return;
     }
     this.result.push(packet);
-    if (this.step >= 3) {
+    if (this.step >= 2) {
       return this.complete();
     }
     return this.next({
       event: 'user.read',
-      data: '123'
+      data: this.step
     })
   }
 }
