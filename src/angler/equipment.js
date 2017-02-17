@@ -29,32 +29,39 @@ class Equipment {
     this.current = null;
     if (this.queue.size() > 0) {
       this.current = this.queue.dequeue();
-      this.taskSend(this.current,this.current.first());
+      this.sendTask();
     }
   }
 
   taskArrive(packet) {
     const task = this.current;
     if (task) {
-      this.taskSend(this.current,task.arrive(packet));
+      task.arrive(packet);
+      this.sendTask();
     }
   }
 
-  taskSend(task,data) {
+  sendTask() {
     if (!this.current)
       return;
-    this.current.last = null;
-    if (data) {
+    const data = this.current.packet();
+    if (!data) {
+      this.current.complete();
+    } else {
       const packet = data.packet ? data.packet : data;
-      const span = data.span ? data.span : task.span;
+      const span = data.span ? data.span : this.current.span;
       this.current.last = {
         packet,
         span
       };
-      this.send(packet);
-      if (span) {
-        watcher.add(this.current, span);
-      }
+      this.sendTaskPacket(this.current.last);
+    }
+  }
+
+  sendTaskPacket({packet,span}){
+    this.send(packet);
+    if (span) {
+      watcher.add(this.current, span);
     }
   }
 

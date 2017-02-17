@@ -12,7 +12,7 @@ const watcher = {
     list.map(item => {
       const {task, __TIME_LABEL} = item;
       if (task.__TIME_LABEL == __TIME_LABEL) {
-        task.equipment.taskSend(task.timeout());
+        task.timeout();
       }
     });
   }

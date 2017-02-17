@@ -10,7 +10,10 @@ class TestTask extends Task {
     this.id = id;
   }
 
-  first() {
+  packet(){
+    if (this.step >= 3) {
+      return;
+    }
     return {
       event: 'user.read',
       data: {
@@ -20,22 +23,13 @@ class TestTask extends Task {
     };
   }
 
-  arrive(packet) {
+  arrive(packet){
     if (packet.event != 'user.data') {
       return;
     }
     this.result.push(packet);
-    if (this.step >= 2) {
-      return this.complete();
-    }
-    return this.next({
-      event: 'user.read',
-      data: {
-        id: this.id,
-        step: this.step
-      }
-    })
+    this.next();
   }
 }
 
-export default TestTask;
+export default TestTask
