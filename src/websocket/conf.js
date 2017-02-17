@@ -14,7 +14,8 @@ export function init() {
   angler.event(require('../angler/events/mongo/index'));
   angler.event(require('../angler/events/watcher/index'));
   angler.event(require('./events/user/index'));
-  //angler.event(remoting);
+
+  angler.event(require('../angler/events/watcher/index'));
 
   angler.start();
   return angler;

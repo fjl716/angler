@@ -1,4 +1,4 @@
-import remotingMap from './remotingMap';
+import proxys from '../../proxys';
 
 export default {
   invoke: async function (angler,msg) {
@@ -6,7 +6,7 @@ export default {
       msg,
       {
         event: `remoting.result`,
-        data: remotingMap.apply(msg.data)
+        data: proxys.apply(msg.data)
       },
       true
     );
