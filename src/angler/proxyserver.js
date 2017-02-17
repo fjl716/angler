@@ -1,4 +1,4 @@
-class MarshalByRefObject {
+class ProxyServer {
   constructor(__ID__) {
     this.__ID__ = __ID__;
   }
@@ -11,4 +11,4 @@ class MarshalByRefObject {
   }
 }
 
-export default MarshalByRefObject
+export default ProxyServer

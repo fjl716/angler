@@ -15,9 +15,10 @@ export default {
   },
   apply: (proxyObj) => {
     const obj = objects[proxyObj.__ID__];
+    const result = obj[proxyObj.method].apply(obj, proxyObj.params);
     return {
       __CALL_ID__: proxyObj.__CALL_ID__,
-      data: obj[proxyObj.method].apply(obj, proxyObj.params)
+      result: result
     };
   }
 };

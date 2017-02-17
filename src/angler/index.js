@@ -5,6 +5,9 @@ import Equipment,{Close} from './equipment'
 import Event from './event'
 import MainBoard from './mainboard'
 import Packet from './packet'
+import proxys from './proxys';
+import ProxyServer from './proxyserver'
+
 import Source from './source'
 import Task from './task'
 
@@ -18,9 +21,11 @@ export {
   Event,
   MainBoard,
   Packet,
+  ProxyServer,
   Source,
   Task,
   dbs,
+  proxys,
   watcher,
 }
 

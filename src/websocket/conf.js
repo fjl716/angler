@@ -1,5 +1,6 @@
-import Angler from '../angler';
+import Angler,{proxys} from '../angler';
 import WebSocket,{JsonProtocol} from '../angler/sources/websocket';
+import {TestServer} from './servers'
 
 export function init() {
   const angler = new Angler({
@@ -7,12 +8,19 @@ export function init() {
     protocol: JsonProtocol
   });
 
+  const test1 = new TestServer('1',1);
+  const test2 = new TestServer('2',2);
+
+  proxys.addObject(test1,test2);
+
   //增加过滤器
   //angler.filter(require('../angler/filters/permissions/index'));
 
   //增加消息
   angler.event(require('../angler/events/mongo/index'));
   angler.event(require('../angler/events/watcher/index'));
+  angler.event(require('../angler/events/remoting/index'));
+
   angler.event(require('./events/user/index'));
 
   angler.event(require('../angler/events/watcher/index'));

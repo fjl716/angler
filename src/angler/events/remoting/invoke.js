@@ -1,12 +1,16 @@
 import proxys from '../../proxys';
 
 export default {
-  invoke: async function (angler,msg) {
+  event:'remoting.invoke',
+  invoke: async function (params) {
+    const {angler,packet} = params;
     angler.send(
-      msg,
+      params,
       {
-        event: `remoting.result`,
-        data: proxys.apply(msg.data)
+        packet: {
+          event: `remoting.result`,
+          data: proxys.apply(packet.data)
+        }
       },
       true
     );
