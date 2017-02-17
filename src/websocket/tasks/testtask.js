@@ -1,18 +1,22 @@
 import {Task} from '../../angler';
 
 class TestTask extends Task {
-  constructor(callback) {
+  constructor(id, callback) {
     super({
       span: 3,
       retryCount: 3,
       callback
     });
+    this.id = id;
   }
 
   first() {
     return {
       event: 'user.read',
-      data: this.step
+      data: {
+        id: this.id,
+        step: this.step
+      }
     };
   }
 
@@ -26,7 +30,10 @@ class TestTask extends Task {
     }
     return this.next({
       event: 'user.read',
-      data: this.step
+      data: {
+        id: this.id,
+        step: this.step
+      }
     })
   }
 }
