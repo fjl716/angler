@@ -26,6 +26,7 @@ class Equipment {
   }
 
   run() {
+    this.current = null;
     if (this.queue.size() > 0) {
       this.current = this.queue.dequeue();
       this.taskSend(this.current,this.current.first());
@@ -40,6 +41,8 @@ class Equipment {
   }
 
   taskSend(task,data) {
+    if (!this.current)
+      return;
     this.current.last = null;
     if (data) {
       const packet = data.packet ? data.packet : data;

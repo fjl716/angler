@@ -31,8 +31,8 @@ export default class {
   }
 
   complete() {
-    this.callback(this.result);
     this.next();
+    this.callback(this.result);
     if (this.equipment)
       this.equipment.run();
   }
