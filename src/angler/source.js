@@ -15,7 +15,8 @@ class Source {
   }
 
   close(equipment){
-    MainBoard.remove(equipment);
+    equipment.channel = null;
+    // MainBoard.remove(equipment);
   }
 }
 

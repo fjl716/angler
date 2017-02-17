@@ -2,6 +2,7 @@ import mongodb from 'mongodb'
 const {ObjectID} = mongodb;
 import Table from './table';
 import {Json2Bson} from './helper';
+import util from 'util';
 
 class MongoDataBase {
   constructor(url) {
@@ -16,7 +17,19 @@ class MongoDataBase {
   }
 
   async findOne(collection, query) {
-    return await this.database.collection(collection).findOne(query);
+    const result = await this.database.collection(collection).findOne(query);
+    if (result){
+      for(let name in result){
+        if (result[name].constructor){
+          switch (result[name].constructor.name){
+            case 'ObjectID':
+              result[name] = result[name].toString();
+              break;
+          }
+        }
+      }
+    }
+    return result;
   }
 
   async update(collection, query, newObj) {

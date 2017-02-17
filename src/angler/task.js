@@ -31,7 +31,7 @@ export default class {
 
   timeout() {
     if (this.retryCount) {
-      console.log(`retryCount = ${this.retryCount} \t retry = ${this.retry}`);
+      // console.log(`retryCount = ${this.retryCount} \t retry = ${this.retry}`);
       if (this.retry >= this.retryCount) {
         this.complete();
         return;

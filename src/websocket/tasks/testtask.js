@@ -4,7 +4,7 @@ class TestTask extends Task {
   constructor(id, callback) {
     super({
       span: 3,
-      retryCount: 3,
+      retryCount: 2,
       callback
     });
     this.id = id;

@@ -28,6 +28,8 @@ class Angler {
   }
 
   change(equipment, newId) {
+    if (equipment.__ID__ == newId)
+      return equipment;
     MainBoard.remove(equipment);
     const find = MainBoard.get(newId);
     if (find) {
