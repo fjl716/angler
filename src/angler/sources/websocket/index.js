@@ -14,7 +14,7 @@ class WebSocket extends Source {
     ws.createServer((line) => {
       const channel = new WebSocketChannel(line);
       const equipment = protocol.equipment(this, channel);
-      channel.bind({equipment});
+      channel.link({equipment});
       MainBoard.add(equipment);
     }).listen(this.port);
   }

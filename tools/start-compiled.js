@@ -39,7 +39,7 @@ var start = function () {
 
           case 2:
             _context.next = 4;
-            return (0, _run2.default)(_copy2.default.bind(undefined, { watch: true }));
+            return (0, _run2.default)(_copy2.default.link(undefined, { watch: true }));
 
           case 4:
             _context.next = 6;

@@ -1,5 +1,5 @@
 class Channel{
-  bind({equipment}){
+  link({equipment}){
     this.equipment = equipment;
   }
 

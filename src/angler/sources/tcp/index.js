@@ -14,7 +14,7 @@ class Tcp extends Source {
     net.createServer((socket) => {
       const channel = new TcpChannel(socket);
       const equipment = protocol.equipment(this, channel);
-      channel.bind({equipment});
+      channel.link({equipment});
       MainBoard.add(equipment);
     }).listen(this.port);
   }

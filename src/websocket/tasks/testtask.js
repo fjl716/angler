@@ -13,7 +13,7 @@ class TestTask extends Task {
     return {
       event: 'user.read',
       data: this.step
-    }
+    };
   }
 
   arrive(packet) {
@@ -32,4 +32,3 @@ class TestTask extends Task {
 }
 
 export default TestTask;
-

@@ -7,7 +7,7 @@ class Angler {
     this.events = new Event(this);
     this.source = source;
     this.protocol = protocol;
-    source.bind({
+    source.link({
       angler: this,
       protocol
     });

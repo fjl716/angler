@@ -24,7 +24,6 @@ export default class {
         this.complete();
         return;
       }
-      console.log(this.last);
       this.equipment.taskSend(this, this.last);
       this.retry++;
       return this.last;

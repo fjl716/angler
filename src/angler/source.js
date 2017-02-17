@@ -1,7 +1,7 @@
 import MainBoard from './mainboard'
 
 class Source {
-  bind({angler,protocol}) {
+  link({angler,protocol}) {
     this.angler = angler;
     this.protocol = protocol;
   }
