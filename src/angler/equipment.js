@@ -19,6 +19,7 @@ class Equipment {
 
   offline(){
     this.channel = null;
+    this.current = null;
   }
 
   work(task) {
@@ -31,7 +32,7 @@ class Equipment {
 
   run() {
     this.current = null;
-    if (this.queue.size() > 0) {
+    if (this.channel && this.queue.size() > 0) {
       this.current = this.queue.dequeue();
       this.sendTask();
     }
