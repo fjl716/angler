@@ -27,11 +27,19 @@ class Angler {
     this.events.arrive(params);
   }
 
-  change(oldId, newId) {
-    const equipment = MainBoard.get(oldId);
+  change(equipment, newId) {
     MainBoard.remove(equipment);
+    const find = MainBoard.get(newId);
+    if (find) {
+      find.online({
+        source: equipment.source,
+        channel: equipment.channel
+      });
+      return find;
+    }
     equipment.__ID__ = newId;
     MainBoard.add(equipment);
+    return equipment;
   }
 
   send(original,block,isOut) {

@@ -1,6 +1,5 @@
 import Angler from '../angler';
-import WebSocket from '../angler/sources/websocket';
-import JsonProtocol from '../angler/sources/websocket/jsonprotocol';
+import WebSocket,{JsonProtocol} from '../angler/sources/websocket';
 
 export function init() {
   const angler = new Angler({

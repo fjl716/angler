@@ -9,7 +9,9 @@ class Equipment {
     this.channel = channel;
   }
 
-  online(channel){
+  online({source,channel}){
+    this.source = source;
+    this.channel = channel;
     if (!this.current) {
       this.run();
     }

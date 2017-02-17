@@ -1,4 +1,4 @@
-import Task from '../../angler/task';
+import {Task} from '../../angler';
 
 class TestTask extends Task {
   constructor(callback) {
