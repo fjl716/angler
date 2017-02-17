@@ -17,6 +17,10 @@ class Equipment {
     }
   }
 
+  offline(){
+    this.channel = null;
+  }
+
   work(task) {
     task.equipment = this;
     this.queue.enqueue(task);
@@ -86,7 +90,8 @@ class Equipment {
   }
 
   out(data) {
-    this.channel.out(data);
+    if (this.channel)
+      this.channel.out(data);
   }
 
   close() {

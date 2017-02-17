@@ -15,7 +15,8 @@ class Source {
   }
 
   close(equipment){
-    equipment.channel = null;
+    // equipment.channel = null;
+    equipment.offline();
     // MainBoard.remove(equipment);
   }
 }
