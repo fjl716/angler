@@ -9,9 +9,5 @@ export default {
       console.log(result);
     }));
 
-    equipment.work(new TestRetry(`${Math.random()}`.substr(2), (result) => {
-      console.log(result);
-    }));
-
   }
 }

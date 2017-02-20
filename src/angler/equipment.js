@@ -42,7 +42,7 @@ class Equipment {
     const task = this.current;
     if (task) {
       task.arrive(packet);
-      this.sendTask();
+      // this.sendTask();
     }
   }
 

@@ -27,7 +27,7 @@ class TaskTick extends Task{
     if (packet.event != 'task.data') {
       return;
     }
-    this.result.push(packet);
+    this.result.push(packet.data.data);
   }
 }
 

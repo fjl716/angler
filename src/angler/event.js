@@ -10,6 +10,7 @@ class Event {
   }
 
   addEvent(item, eventName, code) {
+    console.log(eventName);
     this.event.on(eventName, (obj, ...params) => {
       const previous = obj.previous ? obj.previous : defaultMsg;
       const packet = obj.packet;
