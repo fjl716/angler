@@ -5,7 +5,8 @@ import deleteZ from './delete'
 import find from './find'
 import findSimple from './findSimple'
 import get from './get'
-import getSimple from './getSimple'
+import getproperty from './getproperty'
+import getsimple from './getsimple'
 import insert from './insert'
 import load from './load'
 import pop from './pop'
@@ -20,7 +21,8 @@ export {
   find,
   findSimple,
   get,
-  getSimple,
+  getproperty,
+  getsimple,
   insert,
   load,
   pop,
