@@ -11,7 +11,7 @@ class TaskTick extends Task{
 
   packet(){
     this.next();
-    if (this.step >= 3) {
+    if (this.step > 3) {
       return;
     }
     return {

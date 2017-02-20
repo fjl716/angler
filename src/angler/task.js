@@ -1,17 +1,14 @@
 export default class {
 
   constructor({space, callback}) {
-    this.__TIME_LABEL = `${Math.random()}`.substr(2);
     this.space = space;
     this.callback = callback;
     this.result = [];
     this.step = 0;
-    this.retry = 0;
   }
 
   next() {
     this.step++;
-    this.__TIME_LABEL = `${Math.random()}`.substr(2);
   }
 
   complete() {

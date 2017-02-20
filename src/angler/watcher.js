@@ -2,19 +2,11 @@ import {MultiQueue} from './collection';
 const watcherQueue = new MultiQueue();
 const watcher = {
   add(task, space){
-    watcherQueue.enqueue({
-      task,
-      __TIME_LABEL: task.__TIME_LABEL
-    }, space);
+    watcherQueue.enqueue(task, space);
   },
   timeout(){
     let list = watcherQueue.dequeue();
-    list.map(item => {
-      const {task, __TIME_LABEL} = item;
-      if (task.__TIME_LABEL == __TIME_LABEL) {
-        task.timeout();
-      }
-    });
+    list.map(item => item.timeout());
   }
 };
 
