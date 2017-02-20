@@ -71,8 +71,8 @@ class Table {
     return this.simple(obj);
   }
 
-  delete(){
-
+  'delete'(query){
+    return this.db.delete(this.name,query);
   }
 
   find(){

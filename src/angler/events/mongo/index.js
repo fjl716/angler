@@ -1,5 +1,4 @@
 
-import add from './add'
 import change from './change'
 import close from './change'
 import deleteZ from './delete'
@@ -15,7 +14,6 @@ import pushSimple from './pushSimple'
 import update from './update'
 
 export {
-  add,
   change,
   close,
   deleteZ,
