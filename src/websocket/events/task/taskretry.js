@@ -15,7 +15,7 @@ class TestRetry extends RetryTask {
       return;
     }
     return {
-      event: 'retry.start',
+      event: 'tick.packet',
       data: {
         id: this.id,
         step: this.step
@@ -24,11 +24,12 @@ class TestRetry extends RetryTask {
   }
 
   arrive(packet){
-    if (packet.event != 'retry.start') {
+    if (packet.event != 'task.data') {
       return;
     }
-    this.result.push(packet);
+    this.result.push(packet.data.data);
     this.next();
+    this.equipment.sendTask();
   }
 }
 

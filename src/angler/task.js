@@ -33,8 +33,7 @@ export default class {
       this.complete();
       return;
     }
-    const packet = data.packet?data:{packet:data,space:this.space};
+    const packet = data.packet ? data : {packet: data, space: this.space};
     this.equipment.sendTaskPacket(packet);
-    this.retry++;
   }
 }
