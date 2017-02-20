@@ -30,14 +30,18 @@ class MongoDataBase {
     return result;
   }
 
-  async update(collection, query, newObj) {
+  async update(collection, query, options) {
     query = Json2Bson(query);
-    newObj = Json2Bson(newObj);
-    await this.database.collection(collection).updateOne(
-      query,
-      newObj
-    );
-    return await this.database.collection(collection).findOne(query);
+    options = Json2Bson(options);
+    const data = await this.database.collection(collection).findOne(query);
+    if (data) {
+      await this.database.collection(collection).updateOne(
+        query,
+        {'$set': options}
+      );
+      return await this.findOne(collection, {_id: data._id});
+    }
+    return null;
   }
 
   async 'delete'(collection, query) {

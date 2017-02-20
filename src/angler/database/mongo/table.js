@@ -48,18 +48,8 @@ class Table {
     return this.db.insert(this.name,this.init(obj));
   }
 
-  update(query,newObj) {
-    if (!newObj) {
-      newObj = query;
-      query = {
-        '_id': query._id
-      };
-      delete newObj._id;
-      newObj = {
-        '$set': newObj
-      };
-    }
-    return this.db.update(this.name,query,newObj);
+  update(query,options) {
+    return this.db.update(this.name,query,options);
   }
 
   findOne(query) {

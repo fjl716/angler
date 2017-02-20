@@ -1,15 +1,19 @@
+import dbs from '../../dbs';
+
 export default {
   event: '{table}.update',
-  invoke: async function (angler, equipment,msg,table) {
-    if (angler.tables[table]){
-      let obj = await angler.tables[table].update(msg.data);
-      event.send(
-        msg,
+  invoke: async function (params, table) {
+    const {angler, packet} = params;
+    if (dbs.tables[table]) {
+      let obj = await dbs.tables[table].update(packet.data.query,packet.data.options);
+      angler.send(
+        params,
         {
-          event:`change.${table}`,
-          data:obj
-        },
-        false
+          packet: {
+            event: `${table}.change`,
+            data: obj
+          }
+        }, true
       );
     }
   }
