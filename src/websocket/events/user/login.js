@@ -1,5 +1,4 @@
 import {dbs} from '../../../angler';
-import {TestTask} from '../../tasks';
 export default {
   event: 'user.login',
   invoke: async function (params) {

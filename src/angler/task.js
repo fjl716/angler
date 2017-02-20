@@ -29,11 +29,12 @@ export default class {
   }
 
   timeout() {
-    const packet = this.packet();
-    if (!packet) {
+    const data = this.packet();
+    if (!data) {
       this.complete();
       return;
     }
+    const packet = data.packet?data:{packet:data,space:this.space};
     this.equipment.sendTaskPacket(packet);
     this.retry++;
   }

@@ -1,5 +1,5 @@
 export default {
-  event: 'user.data',
+  event: 'task.data',
   invoke: async function (params) {
     const {equipment, packet} = params;
 

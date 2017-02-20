@@ -22,6 +22,7 @@ export function init() {
   angler.event(require('../angler/events/remoting/index'));
 
   angler.event(require('./events/user/index'));
+  angler.event(require('./events/task/index'));
 
   angler.event(require('../angler/events/watcher/index'));
 

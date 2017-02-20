@@ -1,6 +1,6 @@
-import {RetryTask} from '../../angler/tasks';
+import {RetryTask} from '../../../angler/tasks';
 
-class TestTask extends RetryTask {
+class TestRetry extends RetryTask {
   constructor(id, callback) {
     super({
       space: 3,
@@ -15,7 +15,7 @@ class TestTask extends RetryTask {
       return;
     }
     return {
-      event: 'user.read',
+      event: 'retry.start',
       data: {
         id: this.id,
         step: this.step
@@ -24,7 +24,7 @@ class TestTask extends RetryTask {
   }
 
   arrive(packet){
-    if (packet.event != 'user.data') {
+    if (packet.event != 'retry.start') {
       return;
     }
     this.result.push(packet);
@@ -32,4 +32,4 @@ class TestTask extends RetryTask {
   }
 }
 
-export default TestTask
+export default TestRetry

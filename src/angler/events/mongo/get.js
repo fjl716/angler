@@ -1,13 +1,19 @@
+import dbs from '../../dbs';
+
 export default {
   event: '{table}.get',
-  invoke: async function (angler, equipment,msg, table) {
-    if (angler.tables[table]) {
-      let obj = await angler.tables[table].findOne(msg.data);
-      event.send(msg, {
-          event: `load.${table}`,
-          data: obj
-        },
-        false
+  invoke: async function (params, table) {
+    const {angler, packet} = params;
+    if (dbs.tables[table]) {
+      let obj = await dbs.tables[table].findOne(packet.data);
+      angler.send(
+        params,
+        {
+          packet: {
+            event: `${table}.load`,
+            data: obj
+          }
+        }, true
       );
     }
   }
