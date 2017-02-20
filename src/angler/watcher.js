@@ -1,11 +1,11 @@
 import {MultiQueue} from './collection';
 const watcherQueue = new MultiQueue();
 const watcher = {
-  add(task, span){
+  add(task, space){
     watcherQueue.enqueue({
       task,
       __TIME_LABEL: task.__TIME_LABEL
-    }, span);
+    }, space);
   },
   timeout(){
     let list = watcherQueue.dequeue();

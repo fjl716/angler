@@ -1,9 +1,9 @@
-import {Task} from '../../angler';
+import {RetryTask} from '../../angler/tasks';
 
-class TestTask extends Task {
+class TestTask extends RetryTask {
   constructor(id, callback) {
     super({
-      span: 3,
+      space: 3,
       retryCount: 2,
       callback
     });

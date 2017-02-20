@@ -1,13 +1,12 @@
 export default class {
 
-  constructor({span, retryCount, callback}) {
-    this.span = span;
-    this.retryCount = retryCount;
+  constructor({space, callback}) {
+    this.__TIME_LABEL = `${Math.random()}`.substr(2);
+    this.space = space;
     this.callback = callback;
     this.result = [];
     this.step = 0;
     this.retry = 0;
-    this.__TIME_LABEL = `${Math.random()}`.substr(2);
   }
 
   next() {
@@ -30,14 +29,12 @@ export default class {
   }
 
   timeout() {
-    if (this.retryCount) {
-      // console.log(`retryCount = ${this.retryCount} \t retry = ${this.retry}`);
-      if (this.retry >= this.retryCount) {
-        this.complete();
-        return;
-      }
-      this.equipment.sendTaskPacket(this.last);
-      this.retry++;
+    const packet = this.packet();
+    if (!packet) {
+      this.complete();
+      return;
     }
+    this.equipment.sendTaskPacket(packet);
+    this.retry++;
   }
 }

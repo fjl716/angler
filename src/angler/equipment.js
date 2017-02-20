@@ -54,19 +54,19 @@ class Equipment {
       this.current.complete();
     } else {
       const packet = data.packet ? data.packet : data;
-      const span = data.span ? data.span : this.current.span;
+      const space = data.space ? data.space : this.current.space;
       this.current.last = {
         packet,
-        span
+        space
       };
       this.sendTaskPacket(this.current.last);
     }
   }
 
-  sendTaskPacket({packet,span}){
+  sendTaskPacket({packet,space}){
     this.send(packet);
-    if (span) {
-      watcher.add(this.current, span);
+    if (space) {
+      watcher.add(this.current, space);
     }
   }
 

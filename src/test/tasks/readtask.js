@@ -12,7 +12,7 @@ class ReadTask extends Task {
         key: 'read',
         data: '123'
       },
-      span: 1
+      space: 1
     }
   }
 
@@ -27,7 +27,7 @@ class ReadTask extends Task {
           key: 'read',
           data: '123'
         },
-        span: 1
+        space: 1
       });
     }
   }
