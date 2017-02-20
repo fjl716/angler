@@ -5,7 +5,10 @@ export default {
   invoke: async function (params, table) {
     const {angler, packet} = params;
     if (dbs.tables[table]) {
-      let obj = await dbs.tables[table].update(packet.data.query,packet.data.options);
+      let obj = await dbs.tables[table].update(
+        packet.data.query,
+        {'$set': packet.data.set}
+      );
       angler.send(
         params,
         {

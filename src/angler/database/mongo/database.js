@@ -37,7 +37,7 @@ class MongoDataBase {
     if (data) {
       await this.database.collection(collection).updateOne(
         query,
-        {'$set': options}
+        options
       );
       return await this.findOne(collection, {_id: data._id});
     }
