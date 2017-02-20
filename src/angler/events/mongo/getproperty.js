@@ -15,7 +15,7 @@ export default {
         params,
         {
           packet: {
-            event: `${table}.load`,
+            event: `${table}.loadproperty`,
             data: data
           }
         }, true
