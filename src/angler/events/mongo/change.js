@@ -1,19 +1,23 @@
+import dbs from '../../dbs';
+
 export default {
   event: '{table}.change',
-  invoke: function (angler, equipment,msg, table) {
-    // const simple = angler.tables[table].simple(msg.data);
-    // angler.tables[table].useTables.map(item => {
-    //   let {name, field} = item;
-    //   let query = {};
-    //   query[`${field}._id`] = simple._id;
-    //   let update = {};
-    //   update[`${field}.$`] = simple;
-    //   angler.tables[name].update(
-    //     query,
-    //     {
-    //       '$set': update
-    //     }
-    //   );
-    // });
+  invoke: async function (params, table) {
+    const {angler, packet} = params;
+    if (dbs.tables[table]) {
+      let obj = await dbs.tables[table].update(
+        packet.data.query,
+        {'$set': packet.data.set}
+      );
+      angler.send(
+        params,
+        {
+          packet: {
+            event: `${table}.change`,
+            data: obj
+          }
+        }, true
+      );
+    }
   }
 };
