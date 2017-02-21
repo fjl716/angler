@@ -9,20 +9,26 @@ export default {
     const id = {
       _id: packet.data._id
     };
-    dbs.tables[table].useTables.map(({name,field}) => {
+    dbs.tables[table].useTables.map(async ({name,field}) =>  {
       const queue = {};
       queue[field] = {
         $elemMatch: id
       };
       const pop = {};
       pop[field] = id;
-
-      console.log(queue,pop);
-
-      dbs.tables[name].update(
+      const obj = await dbs.tables[name].update(
         queue,
         { $pop:  pop  }
-      )
+      );
+      angler.send(
+        params,
+        {
+          packet: {
+            event: `${name}.change`,
+            data: obj
+          }
+        }, true
+      );
     });
   }
 };
