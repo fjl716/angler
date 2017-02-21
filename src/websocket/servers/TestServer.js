@@ -1,14 +1,19 @@
 import {ProxyServer} from '../../angler'
+import dbs from '../../angler/dbs'
 
-class TestServer extends ProxyServer{
-  constructor(__ID__,base){
+class TestServer extends ProxyServer {
+  constructor(__ID__, base) {
     super(__ID__);
     this.base = base;
   }
-   sum(a,b,c){
+
+  sum(a, b, c) {
     return a + b + c + this.base;
   }
 
+  async find(){
+    return dbs.tables['group'].findOne({});
+  }
 }
 
 export default TestServer
