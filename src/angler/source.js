@@ -1,7 +1,7 @@
 import MainBoard from './mainboard'
 
 class Source {
-  link({angler,protocol}) {
+  link({angler, protocol}) {
     this.angler = angler;
     this.protocol = protocol;
   }
@@ -14,9 +14,16 @@ class Source {
     this.angler.out(params);
   }
 
-  close(equipment){
-    // equipment.channel = null;
+  close(equipment) {
     equipment.offline();
+    this.angler.arrive({
+      equipment,
+      packet: this.protocol.packet(
+        equipment, {
+          event:'close'
+        })
+    });
+    // equipment.channel = null;
     // MainBoard.remove(equipment);
   }
 }

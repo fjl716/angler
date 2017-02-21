@@ -20,6 +20,7 @@ class Equipment {
   offline(){
     this.channel = null;
     this.current = null;
+
   }
 
   work(task) {

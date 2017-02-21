@@ -1,6 +1,6 @@
 
 import change from './change'
-import close from './change'
+import close from './close'
 import deleteZ from './delete'
 import find from './find'
 import findSimple from './findSimple'
