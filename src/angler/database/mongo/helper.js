@@ -1,4 +1,6 @@
 import util from 'util';
+import mongodb from 'mongodb'
+const {ObjectID} = mongodb;
 
 function Json2Bson(obj) {
   for (let name in obj) {

@@ -1,7 +1,7 @@
 import dbs from '../../dbs';
 
 export default {
-  event: '{table}.get->{property}',
+  event: '{table}.get>{property}',
   invoke: async function (params, table, property) {
     const {angler, packet} = params;
     if (dbs.tables[table]) {

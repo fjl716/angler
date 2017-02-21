@@ -1,8 +1,9 @@
 import dbs from '../../dbs';
 
 export default {
-  event: '{table}.push->{array}',
+  event: '{table}.push>{array}',
   invoke: async function (params, table, array) {
+    console.log(`${table}.push>${array}`);
     const {angler, packet} = params;
     if (dbs.tables[table]) {
       let push = {};
