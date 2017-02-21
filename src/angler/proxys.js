@@ -13,9 +13,9 @@ export default {
       objects[item.__ID__] = item;
     });
   },
-  apply: (proxyObj) => {
+  call: async function (proxyObj) {
     const obj = objects[proxyObj.__ID__];
-    const result = obj[proxyObj.method].apply(obj, proxyObj.params);
+    const result = await obj[proxyObj.method](...proxyObj.params);
     return {
       __CALL_ID__: proxyObj.__CALL_ID__,
       result: result

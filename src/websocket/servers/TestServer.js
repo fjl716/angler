@@ -5,9 +5,10 @@ class TestServer extends ProxyServer{
     super(__ID__);
     this.base = base;
   }
-  sum(a,b,c){
+   sum(a,b,c){
     return a + b + c + this.base;
   }
+
 }
 
 export default TestServer
