@@ -4,20 +4,25 @@ export default {
   event: '{table}.remove',
   invoke: async function (params, table) {
     const {angler, packet} = params;
-    // if (dbs.tables[table]) {
-    //   let obj = await dbs.tables[table].update(
-    //     packet.data.query,
-    //     {'$set': packet.data.set}
-    //   );
-    //   angler.send(
-    //     params,
-    //     {
-    //       packet: {
-    //         event: `${table}.change`,
-    //         data: obj
-    //       }
-    //     }, true
-    //   );
-    // }
+    if (!dbs.tables[table])
+      return;
+    const id = {
+      _id: packet.data._id
+    };
+    dbs.tables[table].useTables.map(({name,field}) => {
+      const queue = {};
+      queue[field] = {
+        $elemMatch: id
+      };
+      const pop = {};
+      pop[field] = id;
+
+      console.log(queue,pop);
+
+      dbs.tables[name].update(
+        queue,
+        { $pop:  pop  }
+      )
+    });
   }
 };

@@ -1,5 +1,5 @@
 
-// import change from './change'
+import change from './change'
 import close from './change'
 import deleteZ from './delete'
 import find from './find'
@@ -12,10 +12,11 @@ import load from './load'
 import pop from './pop'
 import push from './push'
 import pushSimple from './pushSimple'
+import remove from './remove'
 import update from './update'
 
 export {
-  // change,
+  change,
   close,
   deleteZ,
   find,
@@ -28,5 +29,6 @@ export {
   pop,
   push,
   pushSimple,
+  remove,
   update,
 };
