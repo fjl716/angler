@@ -9,6 +9,7 @@
     "request-json":"0.6.1",
     "mongodb":"2.2.19",
     "babel-polyfill": "6.6.1",
+    "influx":"*",
     "pattern-emitter2":"0.1.0",
     "babel-runtime": "6.6.1",
     "bluebird": "3.3.3",
