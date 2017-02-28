@@ -35,6 +35,7 @@ export function init() {
 
   container.event(require('./events'));
 
-  container.start();
-  return container;
+  return function () {
+    container.start();
+  };
 }

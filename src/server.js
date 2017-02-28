@@ -2,6 +2,8 @@ import Angler from './angler'
 
 const init = async ()=> {
 
+  //初始化express
+  Angler.load(require('./express'));
   //初始化微信
   Angler.load(require('./weixin'));
   //初始化数据库
@@ -10,7 +12,8 @@ const init = async ()=> {
   Angler.load(require('./websocket'));
   //初始化socket
   Angler.load(require('./socket'));
-
+  //开始执行
+  Angler.start();
 };
 
 let result = init();

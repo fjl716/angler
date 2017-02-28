@@ -2,12 +2,10 @@ import {Container,proxys} from '../angler';
 import WebSocket,{JsonProtocol} from '../angler/sources/websocket';
 import {TestServer} from './servers'
 
-export function init() {
-
-  let express = require('express')();
+export function init(system) {
 
   const container = new Container({
-    source: new WebSocket(express),
+    source: new WebSocket(system.express),
     protocol: JsonProtocol
   });
 
@@ -27,11 +25,9 @@ export function init() {
   container.event(require('./events/user/index'));
   container.event(require('./events/task/index'));
 
-  container.start();
-
-  express.listen(8080);
-
-  return container;
+  return function () {
+    container.start();
+  };
 }
 
 
