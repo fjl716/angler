@@ -8,7 +8,7 @@ import PConst from './type/const'
 import PCount from './type/count'
 import PArray from './type/array'
 import PCase from './type/case'
-import Packet from '../../packet'
+import Packet from '../packet'
 
 export {
   Task,

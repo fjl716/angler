@@ -10,6 +10,7 @@
     "mongodb":"2.2.19",
     "babel-polyfill": "6.6.1",
     "influx":"*",
+    "xml2js":"0.4.17",
     "pattern-emitter2":"0.1.0",
     "babel-runtime": "6.6.1",
     "bluebird": "3.3.3",
