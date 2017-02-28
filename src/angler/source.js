@@ -1,22 +1,22 @@
 import MainBoard from './mainboard'
 
 class Source {
-  link({angler, protocol}) {
-    this.angler = angler;
+  link({container, protocol}) {
+    this.container = container;
     this.protocol = protocol;
   }
 
   arrive(params) {
-    this.angler.arrive(params);
+    this.container.arrive(params);
   }
 
   send(params) {
-    this.angler.out(params);
+    this.container.out(params);
   }
 
   close(equipment) {
     equipment.offline();
-    this.angler.arrive({
+    this.container.arrive({
       equipment,
       packet: this.protocol.packet(
         equipment, {

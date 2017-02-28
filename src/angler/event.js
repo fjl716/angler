@@ -3,9 +3,9 @@ const defaultMsg = {
   path : []
 };
 class Event {
-  constructor(angler) {
+  constructor(container) {
     this.event = new Emitter();
-    this.angler = angler;
+    this.container = container;
     this.index = 1;
   }
 
@@ -51,7 +51,7 @@ class Event {
     //   event.emit(msg.event, msg);
     // }
     this.event.emit(packet.getKey(), {
-      angler: this.angler,
+      container: this.container,
       equipment,
       packet
     });

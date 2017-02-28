@@ -3,9 +3,9 @@ import TaskTick from './tasktick'
 export default {
   event: 'task.tick',
   invoke: async function (params) {
-    const {angler,equipment} = params;
+    const {container,equipment} = params;
     equipment.work(new TaskTick(`${Math.random()}`.substr(2), (result) => {
-      angler.send(
+      container.send(
         params,
         {
           packet: {

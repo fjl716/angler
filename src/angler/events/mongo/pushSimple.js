@@ -3,7 +3,7 @@ import dbs from '../../dbs';
 export default {
   event: '{table}.push->{array}',
   invoke: async function (params, table, array) {
-    const {angler, packet} = params;
+    const {container, packet} = params;
     if (dbs.tables[table]) {
       const link = dbs.tables[table].linkTable[array];
       if (link) {
@@ -16,7 +16,7 @@ export default {
             '$push': push
           }
         );
-        angler.send(
+        container.send(
           params,
           {
             packet: {

@@ -4,7 +4,7 @@ export default {
   event: '{table}.push>{array}',
   invoke: async function (params, table, array) {
     console.log(`${table}.push>${array}`);
-    const {angler, packet} = params;
+    const {container, packet} = params;
     if (dbs.tables[table]) {
       let push = {};
       push[array] = packet.data.object;
@@ -16,7 +16,7 @@ export default {
         }
       );
 
-      angler.send(
+      container.send(
         params,
         {
           packet: {

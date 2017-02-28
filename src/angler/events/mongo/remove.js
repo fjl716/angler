@@ -3,7 +3,7 @@ import dbs from '../../dbs';
 export default {
   event: '{table}.remove',
   invoke: async function (params, table) {
-    const {angler, packet} = params;
+    const {container, packet} = params;
     if (!dbs.tables[table])
       return;
     const id = {
@@ -20,7 +20,7 @@ export default {
         queue,
         { $pop:  pop  }
       );
-      angler.send(
+      container.send(
         params,
         {
           packet: {

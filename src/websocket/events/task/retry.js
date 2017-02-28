@@ -3,10 +3,10 @@ import TestRetry from './taskretry'
 export default {
   event: 'task.retry',
   invoke: async function (params) {
-    const {angler,equipment} = params;
+    const {container,equipment} = params;
 
     equipment.work(new TestRetry(`${Math.random()}`.substr(2), (result) => {
-      angler.send(
+      container.send(
         params,
         {
           packet: {

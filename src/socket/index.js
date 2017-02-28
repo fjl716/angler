@@ -1,10 +1,10 @@
-import Angler from '../angler';
+import {Container} from '../angler';
 import Tcp from '../angler/sources/tcp'
 import Slang from '../angler/slang'
 
 export function init() {
 
-  const angler = new Angler({
+  const container = new Container({
     source: new Tcp(7000),
     protocol: new Slang({
 
@@ -33,8 +33,8 @@ export function init() {
     })
   });
 
-  angler.event(require('./events'));
+  container.event(require('./events'));
 
-  angler.start();
-  return angler;
+  container.start();
+  return container;
 }

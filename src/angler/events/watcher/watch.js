@@ -1,15 +1,15 @@
 export default {
   event: '{table}.watch',
-  invoke: async function (angler, equipment, msg, table) {
-    if (angler.tables[table]) {
-      let obj = await angler.tables[table].findOne(msg.data);
-      let watcher = await angler.dbs.watcher.findOne(
+  invoke: async function (container, equipment, msg, table) {
+    if (container.tables[table]) {
+      let obj = await container.tables[table].findOne(msg.data);
+      let watcher = await container.dbs.watcher.findOne(
         table, {
           _id: obj._id
         }
       );
       if (!watcher) {
-        angler.dbs.watcher.insert(
+        container.dbs.watcher.insert(
           table,
           Json2Bson({
             _id: obj._id,
@@ -20,7 +20,7 @@ export default {
           }))
       } else {
         if (-1 == watcher.consumer.findIndex(item => item._id == msg.link)) {
-          angler.dbs.watcher.update(table, {
+          container.dbs.watcher.update(table, {
               _id: obj._id
             },
             {
@@ -33,7 +33,7 @@ export default {
             });
         }
       }
-      angler.send(
+      container.send(
         equipment,
         msg,
         {

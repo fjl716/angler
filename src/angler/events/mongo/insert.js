@@ -3,10 +3,10 @@ import dbs from '../../dbs';
 export default {
   event: '{table}.insert',
   invoke: async function (params, table) {
-    const {angler, packet} = params;
+    const {container, packet} = params;
     if (dbs.tables[table]) {
       let obj = await dbs.tables[table].insert(packet.data);
-      angler.send(
+      container.send(
         params,
         {
           packet: {

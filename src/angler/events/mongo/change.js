@@ -3,7 +3,7 @@ import dbs from '../../dbs';
 export default {
   event: '{table}.change',
   invoke: async function (params, table) {
-    const {angler, packet} = params;
+    const {container, packet} = params;
     if (!dbs.tables[table])
       return;
     const obj = await dbs.tables[table].simple(packet.data);

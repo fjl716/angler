@@ -1,15 +1,15 @@
 export default {
   event: '{table}.change',
   invoke: async function (params, table) {
-    const {angler, packet} = params;
-    let watcher = await angler.dbs.watcher.findOne(
+    const {container, packet} = params;
+    let watcher = await container.dbs.watcher.findOne(
       table, {
         _id: packet.data._id
       }
     );
     watcher.consumer.map(item => {
 
-      angler.send(
+      container.send(
         params,
         {
           packet: {

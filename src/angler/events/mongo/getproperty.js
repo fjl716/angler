@@ -3,7 +3,7 @@ import dbs from '../../dbs';
 export default {
   event: '{table}.get>{property}',
   invoke: async function (params, table, property) {
-    const {angler, packet} = params;
+    const {container, packet} = params;
     if (dbs.tables[table]) {
       let obj = await dbs.tables[table].findOne(packet.data);
       let data = Object.assign({},packet.data);
@@ -11,7 +11,7 @@ export default {
       if (obj[property]){
         data[property] = obj[property]
       }
-      angler.send(
+      container.send(
         params,
         {
           packet: {

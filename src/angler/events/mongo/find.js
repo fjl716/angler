@@ -1,6 +1,6 @@
 
 export default {
   event: '{table}.find',
-  invoke: function (angler, equipment,msg) {
+  invoke: function (container, equipment,msg) {
   }
 };

@@ -1,13 +1,13 @@
 import Event from './event'
 import MainBoard from './mainboard'
 
-class Angler {
+class Container {
   constructor({source, protocol,port}) {
     this.events = new Event(this);
     this.source = source;
     this.protocol = protocol;
     source.link({
-      angler: this,
+      container: this,
       protocol
     });
   }
@@ -76,4 +76,4 @@ class Angler {
     }
   }
 }
-export default Angler;
+export default Container;

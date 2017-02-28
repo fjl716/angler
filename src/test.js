@@ -30,10 +30,8 @@ drive.work(new ReadTask({name:'task2'}));
 //   2
 // );
 //task.nextLabel();
-
-
-const test = new Angler();
-test.event(require('./websocket/events/meter'));
+//
+// test.event(require('./websocket/events/meter'));
 const slang = new Slang({
   port: 8888,
   host: 'localhost',

@@ -1,4 +1,4 @@
-import Angler,{proxys} from '../angler';
+import {Container,proxys} from '../angler';
 import WebSocket,{JsonProtocol} from '../angler/sources/websocket';
 import {TestServer} from './servers'
 
@@ -6,7 +6,7 @@ export function init() {
 
   let express = require('express')();
 
-  const angler = new Angler({
+  const container = new Container({
     source: new WebSocket(express),
     protocol: JsonProtocol
   });
@@ -20,18 +20,18 @@ export function init() {
   //angler.filter(require('../angler/filters/permissions/index'));
 
   //增加消息
-  angler.event(require('../angler/events/mongo/index'));
+  container.event(require('../angler/events/mongo/index'));
   // angler.event(require('../angler/events/watcher/index'));
-  angler.event(require('../angler/events/remoting/index'));
+  container.event(require('../angler/events/remoting/index'));
 
-  angler.event(require('./events/user/index'));
-  angler.event(require('./events/task/index'));
+  container.event(require('./events/user/index'));
+  container.event(require('./events/task/index'));
 
-  angler.start();
+  container.start();
 
   express.listen(8080);
 
-  return angler;
+  return container;
 }
 
 

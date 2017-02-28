@@ -3,13 +3,13 @@ import dbs from '../../dbs';
 export default {
   event: '{table}.update',
   invoke: async function (params, table) {
-    const {angler, packet} = params;
+    const {container, packet} = params;
     if (dbs.tables[table]) {
       let obj = await dbs.tables[table].update(
         packet.data.query,
         {'$set': packet.data.set}
       );
-      angler.send(
+      container.send(
         params,
         {
           packet: {
