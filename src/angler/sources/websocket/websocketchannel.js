@@ -4,14 +4,18 @@ class WebSocketChannel extends Channel{
   constructor(line){
     super();
     this.line = line;
-    line.on('text', function(str){
+    line.on('message', function(str) {
       this.arrive(str);
     }.bind(this));
-    line.on('close', (code, reason) => {
-      this.close();
-    });
-    line.on("error", (err) => {
-    })
+    //
+    // line.on('text', function(str){
+    //   this.arrive(str);
+    // }.bind(this));
+    // line.on('close', (code, reason) => {
+    //   this.close();
+    // });
+    // line.on("error", (err) => {
+    // })
   }
 
   out(str){

@@ -4,8 +4,9 @@ import {TestServer} from './servers'
 
 export function init() {
   const angler = new Angler({
-    source: new WebSocket(8080),
-    protocol: JsonProtocol
+    source: new WebSocket(),
+    protocol: JsonProtocol,
+    port:8080
   });
 
   const test1 = new TestServer('1',1);

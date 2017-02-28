@@ -12,16 +12,16 @@ const init = async ()=> {
   parser.parseString(xml,function (err,result) {
     console.log(result.xml.ToUserName);
   });
-    let builder = new xml2js.Builder({
-      rootName: 'xml',
-      cdata: true
-    });
-    let x = builder.buildObject({
-      a:{
-        d:'asdf<>'
-      }
-    });
-    console.log(x);
+    // let builder = new xml2js.Builder({
+    //   rootName: 'xml',
+    //   cdata: true
+    // });
+    // let x = builder.buildObject({
+    //   a:{
+    //     d:'asdf<>'
+    //   }
+    // });
+    // console.log(x);
   // xml2js.parseString(xml, { explicitArray : false, ignoreAttrs : true }, function (err,result) {
   //   console.log(result.xml.ToUserName);
   //

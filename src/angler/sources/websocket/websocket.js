@@ -1,22 +1,21 @@
-import ws from 'nodejs-websocket'
 import Source from '../../source'
 import MainBoard from '../../mainboard'
 import WebSocketChannel from './websocketchannel'
 
 class WebSocket extends Source {
-  constructor(port) {
+  constructor() {
     super();
-    this.port = port;
   }
 
   start() {
+    require('express-ws')(this.angler.express);
     const protocol = this.protocol;
-    ws.createServer((line) => {
+    this.angler.express.ws('/ws', function (line, req) {
       const channel = new WebSocketChannel(line);
       const equipment = protocol.equipment(this, channel);
       channel.link({equipment});
       MainBoard.add(equipment);
-    }).listen(this.port);
+    }.bind(this));
   }
 }
 

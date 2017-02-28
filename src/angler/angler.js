@@ -1,10 +1,14 @@
 import Event from './event'
 import MainBoard from './mainboard'
+
 class Angler {
-  constructor({source, protocol}) {
+  constructor({source, protocol,port}) {
     this.events = new Event(this);
     this.source = source;
     this.protocol = protocol;
+    this.express = require('express')();
+    this.server = require('http').createServer(this.app);
+    this.port = port;
     source.link({
       angler: this,
       protocol
@@ -17,6 +21,9 @@ class Angler {
 
   start() {
     this.source.start();
+    if (this.port){
+      this.express.listen(this.port);
+    }
   }
 
   event(model) {

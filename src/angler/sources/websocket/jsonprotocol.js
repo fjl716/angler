@@ -11,9 +11,16 @@ class JsonPacket extends Packet{
 }
 
 export default {
-  parse(data) {},
+  parse(data) {
+    return [new JsonPacket(JSON.parse(data))];
+  },
 
-  serialize() {},
+  serialize({packet}) {
+    return JSON.stringify({
+      event: packet.event,
+      data: packet.data
+    });
+  },
 
   packet(equipment, data){
     return new JsonPacket(data);
