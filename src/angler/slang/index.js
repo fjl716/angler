@@ -7,7 +7,8 @@ import PPackage from './type/package'
 import PConst from './type/const'
 import PCount from './type/count'
 import PArray from './type/array'
-import PCase from './type/case';
+import PCase from './type/case'
+import Packet from '../../packet'
 
 export {
   Task,
@@ -20,6 +21,10 @@ const default_types = {
   c: (name, count) => new PChar(name, count),
   char: (name, count) => new PChar(name, count),
 };
+
+class SlangPacket extends Packet{
+
+}
 
 export default class {
   constructor({types, parse}) {

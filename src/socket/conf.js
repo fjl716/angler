@@ -7,6 +7,7 @@ export function init() {
   const angler = new Angler({
     source: new Tcp(7000),
     protocol: new Slang({
+
       types: {
         address: 'c:6'                      //定义地址类型为6个字节,类型名为address
       },
