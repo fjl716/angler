@@ -3,14 +3,15 @@ import MainBoard from '../../mainboard'
 import WebSocketChannel from './websocketchannel'
 
 class WebSocket extends Source {
-  constructor() {
+  constructor(express) {
     super();
+    this.express = express;
   }
 
   start() {
-    require('express-ws')(this.angler.express);
+    require('express-ws')(this.express);
     const protocol = this.protocol;
-    this.angler.express.ws('/ws', function (line, req) {
+    this.express.ws('/ws', function (line, req) {
       const channel = new WebSocketChannel(line);
       const equipment = protocol.equipment(this, channel);
       channel.link({equipment});

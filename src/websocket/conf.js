@@ -3,10 +3,12 @@ import WebSocket,{JsonProtocol} from '../angler/sources/websocket';
 import {TestServer} from './servers'
 
 export function init() {
+
+  let express = require('express')();
+
   const angler = new Angler({
-    source: new WebSocket(),
-    protocol: JsonProtocol,
-    port:8080
+    source: new WebSocket(express),
+    protocol: JsonProtocol
   });
 
   const test1 = new TestServer('1',1);
@@ -26,6 +28,9 @@ export function init() {
   angler.event(require('./events/task/index'));
 
   angler.start();
+
+  express.listen(8080);
+
   return angler;
 }
 
