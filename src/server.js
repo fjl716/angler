@@ -1,18 +1,16 @@
+import Angler from './angler'
 
 const init = async ()=> {
-  const system = {};
-  const start = [];
 
-  start.push(require('./weixin').init(system));
-
+  //初始化微信
+  Angler.load(require('./weixin'));
   //初始化数据库
-  require('./dbconf').init(system);
-
+  Angler.load(require('./dbconf'));
   //初始化websocket
-  require('./websocket').init(system);
-
+  Angler.load(require('./websocket'));
   //初始化socket
-  require('./socket').init(system);
+  Angler.load(require('./socket'));
+
 };
 
 let result = init();

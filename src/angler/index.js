@@ -14,8 +14,6 @@ import Task from './task'
 import dbs from './dbs'
 import watcher from './watcher'
 
-const system = {};
-
 export {
   Close,
   Channel,
@@ -32,3 +30,17 @@ export {
   Container,
 }
 
+const system = {};
+const startList = [];
+
+export default {
+  load(model){
+    const func = model.init(system);
+    if (func) {
+      startList.push(func);
+    }
+  },
+  start(){
+    startList.map(func => func())
+  }
+}
