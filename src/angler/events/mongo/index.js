@@ -1,4 +1,4 @@
-export const events = [
+export default [
   require('./change'),
   require('./close'),
   require('./delete'),

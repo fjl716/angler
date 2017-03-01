@@ -25,7 +25,7 @@ class Event {
   }
 
   addModel = (model) => {
-    model.events.map(item=> {
+    model.default.map(item=> {
       if (!item.event){
         item = item.default;
       }

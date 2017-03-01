@@ -1,5 +1,3 @@
-import login from './user.logincomplete'
-
-export const events=[
+export default [
   require('./user.logincomplete'),
 ];

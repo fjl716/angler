@@ -1,5 +1,4 @@
-import login from './login'
 
-export const events=[
-  login,
-];
+export default [
+  require('./login'),
+]
