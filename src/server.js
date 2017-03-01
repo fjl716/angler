@@ -1,5 +1,7 @@
 import Angler from './angler'
 
+
+
 const init = async ()=> {
 
   //初始化express
@@ -10,8 +12,6 @@ const init = async ()=> {
   Angler.load(require('./dbconf'));
   //初始化websocket
   Angler.load(require('./websocket'));
-  //初始化socket
-  Angler.load(require('./socket'));
   //开始执行
   Angler.start();
 };

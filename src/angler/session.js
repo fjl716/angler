@@ -1,12 +1,12 @@
-import db from './db'
+import dbs from './dbs'
 
 export default {
   async get(msg){
-    let obj = await db.session.findOne('session', {
+    let obj = await dbs.session.findOne('session', {
       _id: msg.link
     });
     if (!obj) {
-      obj = await db.session.insert('session', {
+      obj = await dbs.session.insert('session', {
         host: msg.host
       })
     }
@@ -16,11 +16,11 @@ export default {
 
   },
   async set(msg, data){
-    let obj = await db.session.findOne('session', {
+    let obj = await dbs.session.findOne('session', {
       _id: msg.link
     });
     if (obj){
-      await db.session.update({
+      await dbs.session.update({
           _id: msg.link
         }, {
           '$set': {
@@ -29,7 +29,7 @@ export default {
         }
       );
     }else {
-      obj = await db.session.insert('session', {
+      obj = await dbs.session.insert('session', {
         host: msg.host,
         data:data
       })

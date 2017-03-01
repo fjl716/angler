@@ -13,6 +13,8 @@ import Task from './task'
 
 import dbs from './dbs'
 import watcher from './watcher'
+import session from './session'
+
 
 export {
   Close,
@@ -28,6 +30,7 @@ export {
   proxys,
   watcher,
   Container,
+  session,
 }
 
 const system = {};

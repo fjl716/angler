@@ -1,5 +1,5 @@
 import invoke from './invoke';
 
-export{
+export const events =[
   invoke
-}
+];

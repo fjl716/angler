@@ -1,5 +1,5 @@
 export default {
-  event: 'user.loginComplete',
+  event: 'user.logincomplete',
   invoke: async function (params) {
     const {container} = params;
     container.send(
@@ -10,7 +10,5 @@ export default {
         }
       }
     );
-
-
   }
 }

@@ -25,20 +25,12 @@ class Event {
   }
 
   addModel = (model) => {
-    for (let namespace in model) {
-      let item = model[namespace];
-      if (item.event) {
-        let eventName = item.event;
-        let code = this.index++;
-        this.addEvent(item, eventName, code);
-      } else {
-        for (let name in item) {
-          let eventName = item[name].event ? item[name].event : `${namespace}.${name}`;
-          let code = this.index++;
-          this.addEvent(item, eventName, code);
-        }
+    model.events.map(item=> {
+      if (!item.event){
+        item = item.default;
       }
-    }
+      this.addEvent(item, item.event, this.index++);
+    });
   };
 
   async arrive({equipment, packet}) {

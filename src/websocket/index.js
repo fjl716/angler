@@ -18,13 +18,10 @@ export function init(system) {
   //angler.filter(require('../angler/filters/permissions/index'));
 
   //增加消息
-  container.event(require('../angler/events/mongo/index'));
-  // angler.event(require('../angler/events/watcher/index'));
-  container.event(require('../angler/events/remoting/index'));
-
-  container.event(require('./events/user/index'));
-  container.event(require('./events/task/index'));
-
+  container.event(require('../angler/events/mongo'));
+  container.event(require('../angler/events/remoting'));
+  container.event(require('./events/user'));
+  container.event(require('./events/task'));
   return function () {
     container.start();
   };

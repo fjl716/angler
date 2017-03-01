@@ -1,7 +1,5 @@
 import login from './login'
-import loginComplete from './loginComplete'
 
-export {
+export const events=[
   login,
-  loginComplete,
-}
+];
