@@ -1,6 +1,7 @@
 
 export default {
   event: '{table}.find',
-  invoke: function (container, equipment,msg) {
+  invoke: function (params, table) {
+    console.log(table);
   }
 };

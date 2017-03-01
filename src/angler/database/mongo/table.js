@@ -65,8 +65,8 @@ class Table {
     return this.db.delete(this.name,query);
   }
 
-  find(){
-
+  find(query){
+    return this.db.find(this.name,query);
   }
 
   findSimple(){

@@ -3,6 +3,7 @@ import change from './change'
 import close from './close'
 import deleteZ from './delete'
 import find from './find'
+import findall from './findall'
 import findSimple from './findSimple'
 import get from './get'
 import getproperty from './getproperty'
@@ -20,6 +21,7 @@ export {
   close,
   deleteZ,
   find,
+  findall,
   findSimple,
   get,
   getproperty,

@@ -14,6 +14,12 @@ class MongoDataBase {
     return result.ops[0];
   }
 
+  async find(collection, query) {
+    let result = await this.database.collection(collection).find({}).toArray();
+
+    return result;
+  }
+
   async findOne(collection, query) {
     const result = await this.database.collection(collection).findOne(query);
     if (result){
