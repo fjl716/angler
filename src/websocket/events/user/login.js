@@ -5,8 +5,8 @@ export default {
     const {container, equipment,packet} = params;
     if (dbs.tables['user']) {
       let obj = await dbs.tables['user'].findOneSimple({
-        user: packet.data.user,
-        pass: packet.data.pass
+        userid: packet.data.userid,
+        password: packet.data.password
       });
       if (obj) {
         const newEquipment = container.change(equipment, obj._id);
