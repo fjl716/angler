@@ -20,6 +20,7 @@ export function init(system) {
   //增加消息
   container.event(require('../angler/events/mongo'));
   container.event(require('../angler/events/remoting'));
+  container.event(require('./events/sidebar'));
   container.event(require('./events/user'));
   container.event(require('./events/task'));
   return function () {
