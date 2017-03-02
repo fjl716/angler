@@ -1,6 +1,6 @@
 import {Table} from '../angler/database/mongo'
 export default {
-  table:'region',
+  name:'region',
   init: {
     _id: Table.newId,
     arr:[],

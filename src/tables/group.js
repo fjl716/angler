@@ -1,6 +1,6 @@
 import {Table} from '../angler/database/mongo'
 export default {
-  table:'group',
+  name:'group',
   init: {
     _id: Table.newId,
     users:[],

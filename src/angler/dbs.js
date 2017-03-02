@@ -12,8 +12,8 @@ Object.assign(dbs, {
     models.map(model=>{
       model.default.map(item=> {
         item = item.default;
-        this.tables[item.table] = Table.prototype == item.constructor.prototype ? item : new Table(item);
-        this.tables[item.table].link(dbs);
+        this.tables[item.name] = Table.prototype == item.constructor.prototype ? item : new Table(item);
+        this.tables[item.name].link(dbs);
       });
     });
     for (let name in dbs.tables) {
