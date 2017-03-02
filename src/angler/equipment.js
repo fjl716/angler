@@ -9,9 +9,10 @@ class Equipment {
     this.channel = channel;
   }
 
-  online({source,channel}){
+  online({source,channel}) {
     this.source = source;
     this.channel = channel;
+    channel.link({equipment:this});
     if (!this.current) {
       this.run();
     }
