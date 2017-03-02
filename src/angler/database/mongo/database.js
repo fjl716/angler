@@ -26,7 +26,6 @@ class MongoDataBase {
         skip: currentPage * pageSize
       }
     ).toArray();
-    console.log(result.length);
     return result;
   }
 
