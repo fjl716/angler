@@ -5,7 +5,7 @@ export default {
   invoke: async function (params, table) {
     const {container, packet} = params;
     if (dbs.tables[table]) {
-      let list = await dbs.tables[table].find();
+      let list = await dbs.tables[table].find({});
       container.send(
         params,
         {

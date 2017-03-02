@@ -3,7 +3,7 @@ import qs from 'qs';
 
 const URL_PAPERS='';
 
-export async function query(params) {
+export async function q(params) {
   return request(URL_PAPERS+'?'+`${qs.stringify(params)}`);
 }
 

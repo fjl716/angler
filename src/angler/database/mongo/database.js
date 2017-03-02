@@ -14,9 +14,19 @@ class MongoDataBase {
     return result.ops[0];
   }
 
-  async find(collection, query) {
-    let result = await this.database.collection(collection).find({}).toArray();
-
+  async find(collection, {query,pageSize,currentPage,orderBy}) {
+    query = query ? query : {};
+    pageSize = pageSize ? pageSize : 10;
+    currentPage = currentPage ? currentPage : 0;
+    let result = await this.database.collection(collection).find(
+      query,
+      undefined,
+      {
+        limit: pageSize,
+        skip: currentPage * pageSize
+      }
+    ).toArray();
+    console.log(result.length);
     return result;
   }
 
