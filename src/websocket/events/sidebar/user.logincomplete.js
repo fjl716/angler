@@ -12,7 +12,6 @@ export default {
       }
     );
     const data = await session.get(params);
-    console.log(data);
     if (data.openKeys) {
       container.send(
         params,
