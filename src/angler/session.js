@@ -1,13 +1,13 @@
 import dbs from './dbs'
 
 export default {
-  async get(msg){
+  async get({equipment}){
     let obj = await dbs.session.findOne('session', {
-      _id: msg.link
+      _id: equipment.__ID__
     });
     if (!obj) {
       obj = await dbs.session.insert('session', {
-        host: msg.host
+        _id: equipment.__ID__
       })
     }
     return obj;
@@ -15,28 +15,23 @@ export default {
   async bindUser(){
 
   },
-  async set(msg, data){
+  async set({equipment}, data){
     let obj = await dbs.session.findOne('session', {
-      _id: msg.link
+      _id: equipment.__ID__
     });
-    if (obj){
-      await dbs.session.update({
-          _id: msg.link
+    if (obj) {
+      await dbs.session.update('session', {
+          _id: equipment.__ID__
         }, {
-          '$set': {
-            data: data
-          }
+          '$set': data
         }
       );
-    }else {
+    } else {
       obj = await dbs.session.insert('session', {
-        host: msg.host,
-        data:data
+        _id: equipment.__ID__,
+        data
       })
     }
     return obj;
   },
-  find(msg){
-
-  }
 }
