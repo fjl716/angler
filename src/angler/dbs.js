@@ -10,12 +10,11 @@ Object.assign(dbs, {
       dbs[name] = new MongoDataBase(dbConf[name]);
     }
     models.map(model=>{
-      for (let name in model) {
-        let item = model[name];
-        item.name = name;
-        this.tables[name] = Table.prototype == item.constructor.prototype ? item : new Table(item);
-        this.tables[name].link(dbs);
-      }
+      model.default.map(item=> {
+        item = item.default;
+        this.tables[item.table] = Table.prototype == item.constructor.prototype ? item : new Table(item);
+        this.tables[item.table].link(dbs);
+      });
     });
     for (let name in dbs.tables) {
       //关联数据库
