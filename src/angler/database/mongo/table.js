@@ -69,6 +69,10 @@ class Table {
     return this.db.find(this.name,query);
   }
 
+  size(query){
+    return this.db.size(this.name,query);
+  }
+
   findSimple(){
 
   }

@@ -10,6 +10,7 @@ export default [
   require('./getsimple'),
   require('./insert'),
   require('./load'),
+  require('./paging'),
   require('./pop'),
   require('./push'),
   require('./pushSimple'),

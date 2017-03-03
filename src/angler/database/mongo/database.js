@@ -29,6 +29,13 @@ class MongoDataBase {
     return result;
   }
 
+  async size(collection,query) {
+    let result = await this.database.collection(collection).find(
+      query,
+    ).count();
+    return result;
+  }
+
   async findOne(collection, query) {
     const result = await this.database.collection(collection).findOne(Json2Bson(query));
     if (result){
