@@ -4,10 +4,23 @@ export default {
   event: '{table}.update',
   invoke: async function (params, table) {
     const {container, packet} = params;
+    let {query, set}=packet.data;
+    console.log(packet);
+    if (!query) {
+      query = {
+        _id: packet.data._id
+      };
+      set = packet.data
+      delete set._id;
+    }
+
+    console.log(query);
+    console.log(set);
+
     if (dbs.tables[table]) {
       let obj = await dbs.tables[table].update(
-        packet.data.query,
-        {'$set': packet.data.set}
+        query,
+        {'$set': set}
       );
       container.send(
         params,
