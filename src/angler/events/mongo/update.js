@@ -13,10 +13,6 @@ export default {
       set = packet.data
       delete set._id;
     }
-
-    console.log(query);
-    console.log(set);
-
     if (dbs.tables[table]) {
       let obj = await dbs.tables[table].update(
         query,
