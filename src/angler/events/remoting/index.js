@@ -1,4 +1,4 @@
-
+import invoke from './invoke'
 export default [
-  require('./invoke')
+  invoke
 ];

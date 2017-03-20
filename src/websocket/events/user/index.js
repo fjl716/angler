@@ -1,4 +1,4 @@
-
+import login from './login'
 export default [
-  require('./login'),
+  login,
 ]

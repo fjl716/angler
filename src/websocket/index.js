@@ -1,7 +1,28 @@
 import {Container,proxys} from '../angler';
 import WebSocket,{JsonProtocol} from '../angler/sources/websocket';
 import {TestServer} from './servers'
-import {createTableEvent,mongo} from '../angler/events'
+
+import {
+  createTableEvent,
+  change,
+  deleteZ,
+  find,
+  findall,
+  findSimple,
+  get,
+  getproperty,
+  getsimple,
+  insert,
+  load,
+  paging,
+  pop,
+  push,
+  pushSimple,
+  remove,
+  update
+} from '../angler/events/mongo'
+
+import {mongo} from '../angler/events'
 
 export function init(system) {
 
@@ -19,16 +40,34 @@ export function init(system) {
   //angler.filter(require('../angler/filters/permissions/index'));
 
   //增加消息
-  container.event(createTableEvent('group',...mongo));
-  // container.event(createTableEvent('region',...mongo));
-  // container.event(createTableEvent('role',...mongo));
-  // container.event(createTableEvent('sidebar',...mongo));
-  // container.event(createTableEvent('user',...mongo));
+  container.event(createTableEvent('group',
+    change,
+    deleteZ,
+    find,
+    findall,
+    findSimple,
+    get,
+    getproperty,
+    getsimple,
+    insert,
+    load,
+    paging,
+    pop,
+    push,
+    pushSimple,
+    remove,
+    update
+  ));
+  container.event(createTableEvent('region',...mongo));
+  container.event(createTableEvent('role',...mongo));
+  container.event(createTableEvent('sidebar',...mongo));
+  container.event(createTableEvent('user',...mongo));
 
-  // container.event(require('../angler/events/remoting'));
-  // container.event(require('./events/sidebar'));
-  // container.event(require('./events/user'));
-  // container.event(require('./events/task'));
+  container.event(require('../angler/events/remoting').default);
+
+  container.event(require('./events/sidebar').default);
+  container.event(require('./events/user').default);
+  container.event(require('./events/task').default);
 
   return function () {
     container.start();

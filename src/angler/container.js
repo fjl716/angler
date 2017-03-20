@@ -21,7 +21,6 @@ class Container {
   }
 
   event(events) {
-    console.log(events);
     this.events.addEvents(events);
   }
 

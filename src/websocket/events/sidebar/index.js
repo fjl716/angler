@@ -1,5 +1,10 @@
+
+import logincomplete from './user.logincomplete'
+import open from './sidebar.open'
+import select from './sidebar.select'
+
 export default [
-  require('./user.logincomplete'),
-  require('./sidebar.open'),
-  require('./sidebar.select'),
+  logincomplete,
+  open,
+  select,
 ];

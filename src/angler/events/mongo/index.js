@@ -15,6 +15,32 @@ import pushSimple from './pushSimple'
 import remove from './remove'
 import update from './update'
 
+function createTableEvent(table,...events) {
+  return events.map(event => {
+    return event(table)
+  })
+}
+
+export {
+  createTableEvent,
+  change,
+  deleteZ,
+  find,
+  findall,
+  findSimple,
+  get,
+  getproperty,
+  getsimple,
+  insert,
+  load,
+  paging,
+  pop,
+  push,
+  pushSimple,
+  remove,
+  update
+}
+
 export default [
   change,
   deleteZ,
