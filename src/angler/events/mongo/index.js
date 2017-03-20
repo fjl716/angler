@@ -1,19 +1,35 @@
+import change from './change'
+import deleteZ from './delete'
+import find from './find'
+import findall from './findall'
+import findSimple from './findSimple'
+import get from './get'
+import getproperty from './getproperty'
+import getsimple from './getsimple'
+import insert from './insert'
+import load from './load'
+import paging from './paging'
+import pop from './pop'
+import push from './push'
+import pushSimple from './pushSimple'
+import remove from './remove'
+import update from './update'
+
 export default [
-  require('./change'),
-  require('./close'),
-  require('./delete'),
-  require('./find'),
-  require('./findall'),
-  require('./findSimple'),
-  require('./get'),
-  require('./getproperty'),
-  require('./getsimple'),
-  require('./insert'),
-  require('./load'),
-  require('./paging'),
-  require('./pop'),
-  require('./push'),
-  require('./pushSimple'),
-  require('./remove'),
-  require('./update')
-];
+  change,
+  deleteZ,
+  find,
+  findall,
+  findSimple,
+  get,
+  getproperty,
+  getsimple,
+  insert,
+  load,
+  paging,
+  pop,
+  push,
+  pushSimple,
+  remove,
+  update
+]

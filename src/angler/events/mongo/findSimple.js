@@ -1,6 +1,8 @@
 
-export default {
-  event: '{table}.findSimple',
-  invoke: function (container, equipment,msg) {
+export default function(table) {
+  return {
+    event: `${table}.findSimple`,
+    invoke: function () {
+    }
   }
 };

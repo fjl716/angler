@@ -2,6 +2,7 @@ import Emitter from 'pattern-emitter2';
 const defaultMsg = {
   path : []
 };
+
 class Event {
   constructor(container) {
     this.event = new Emitter();
@@ -10,7 +11,6 @@ class Event {
   }
 
   addEvent(item, eventName, code) {
-    // console.log(eventName);
     this.event.on(eventName, (obj, ...params) => {
       const previous = obj.previous ? obj.previous : defaultMsg;
       const packet = obj.packet;
@@ -24,24 +24,13 @@ class Event {
     });
   }
 
-  addModel = (model) => {
-    model.default.map(item=> {
-      if (!item.event){
-        item = item.default;
-      }
-      this.addEvent(item, item.event, this.index++);
+  addEvents = (events) => {
+    events.map(event => {
+      this.addEvent(event, event.event, this.index++);
     });
   };
 
   async arrive({equipment, packet}) {
-    // const tmp = {
-    //   result: true,
-    //   code:1
-    // };
-    // await filter.parse(msg.event, [tmp,msg]);
-    // if (tmp.result) {
-    //   event.emit(msg.event, msg);
-    // }
     this.event.emit(packet.getKey(), {
       container: this.container,
       equipment,

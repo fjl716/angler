@@ -20,8 +20,9 @@ class Container {
     this.source.start();
   }
 
-  event(model) {
-    this.events.addModel(model);
+  event(events) {
+    console.log(events);
+    this.events.addEvents(events);
   }
 
   arrive(params) {

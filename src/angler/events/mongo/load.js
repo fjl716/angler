@@ -1,6 +1,8 @@
-export default {
-  event: '{table}.load',
-  invoke: async function (container, equipment,msg,table) {
-    //console.log(msg,table);
+export default function (table) {
+  return {
+    event: `${table}.load`,
+    invoke: async function (params) {
+      //console.log(msg,table);
+    }
   }
 };
