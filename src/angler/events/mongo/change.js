@@ -5,8 +5,6 @@ export default function(table) {
     event: `${table}.change`,
     invoke: async function (params) {
       const {packet} = params;
-      if (!dbs.tables[table])
-        return;
       const obj = await dbs.tables[table].simple(packet.data);
       dbs.tables[table].useTables.map(({name, field}) => {
         const set = {};

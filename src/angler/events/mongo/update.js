@@ -13,21 +13,19 @@ export default function(table) {
         set = packet.data;
         delete set._id;
       }
-      if (dbs.tables[table]) {
-        let obj = await dbs.tables[table].update(
-          query,
-          {'$set': set}
-        );
-        container.send(
-          params,
-          {
-            packet: {
-              event: `${table}.change`,
-              data: obj
-            }
-          }, true
-        );
-      }
+      let obj = await dbs.tables[table].update(
+        query,
+        {'$set': set}
+      );
+      container.send(
+        params,
+        {
+          packet: {
+            event: `${table}.change`,
+            data: obj
+          }
+        }, true
+      );
     }
   }
 };

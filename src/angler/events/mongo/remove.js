@@ -5,8 +5,6 @@ export default function(table) {
     event: `${table}.remove`,
     invoke: async function (params) {
       const {container, packet} = params;
-      if (!dbs.tables[table])
-        return;
       const id = {
         _id: packet.data._id
       };

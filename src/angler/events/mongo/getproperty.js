@@ -5,23 +5,21 @@ export default function(table) {
     event: `${table}.get>{property}`,
     invoke: async function (params, property) {
       const {container, packet} = params;
-      if (dbs.tables[table]) {
-        let obj = await dbs.tables[table].findOne(packet.data);
-        let data = Object.assign({}, packet.data);
-        data['_id'] = obj['_id'];
-        if (obj[property]) {
-          data[property] = obj[property]
-        }
-        container.send(
-          params,
-          {
-            packet: {
-              event: `${table}.loadproperty`,
-              data: data
-            }
-          }, true
-        );
+      let obj = await dbs.tables[table].findOne(packet.data);
+      let data = Object.assign({}, packet.data);
+      data['_id'] = obj['_id'];
+      if (obj[property]) {
+        data[property] = obj[property]
       }
+      container.send(
+        params,
+        {
+          packet: {
+            event: `${table}.loadproperty`,
+            data: data
+          }
+        }, true
+      );
     }
   }
 };

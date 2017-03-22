@@ -5,28 +5,26 @@ export default function(table) {
     event: `${table}.push->{array}`,
     invoke: async function (params, array) {
       const {container, packet} = params;
-      if (dbs.tables[table]) {
-        const link = dbs.tables[table].linkTable[array];
-        if (link) {
-          let push = {};
-          push[array] = await dbs.tables[link].findOneSimple(packet.query);
+      const link = dbs.tables[table].linkTable[array];
+      if (link) {
+        let push = {};
+        push[array] = await dbs.tables[link].findOneSimple(packet.query);
 
-          let obj = await dbs.tables[table].update(
-            packet.data.query,
-            {
-              '$push': push
+        let obj = await dbs.tables[table].update(
+          packet.data.query,
+          {
+            '$push': push
+          }
+        );
+        container.send(
+          params,
+          {
+            packet: {
+              event: `${table}.change`,
+              data: obj
             }
-          );
-          container.send(
-            params,
-            {
-              packet: {
-                event: `${table}.change`,
-                data: obj
-              }
-            }, true
-          );
-        }
+          }, true
+        );
       }
     }
   }

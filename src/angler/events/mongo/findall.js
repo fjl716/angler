@@ -5,18 +5,16 @@ export default function(table) {
     event: `${table}.findall`,
     invoke: async function (params) {
       const {container, packet} = params;
-      if (dbs.tables[table]) {
-        let list = await dbs.tables[table].find({});
-        container.send(
-          params,
-          {
-            packet: {
-              event: `${table}.set`,
-              data: list
-            }
-          }, true
-        );
-      }
+      let list = await dbs.tables[table].find({});
+      container.send(
+        params,
+        {
+          packet: {
+            event: `${table}.set`,
+            data: list
+          }
+        }, true
+      );
     }
   }
 };
