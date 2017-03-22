@@ -10,7 +10,7 @@ export default function(table) {
         params,
         {
           packet: {
-            event: `${table}.set`,
+            event: `${table}.list`,
             data: list
           }
         }, true

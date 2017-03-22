@@ -15,7 +15,7 @@ export default function(table) {
         params,
         {
           packet: {
-            event: `${table}.loadproperty`,
+            event: `${table}.setproperty`,
             data: data
           }
         }, true

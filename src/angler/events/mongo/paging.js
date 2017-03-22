@@ -11,7 +11,7 @@ export default function(table) {
         params,
         {
           packet: {
-            event: `${table}.set`,
+            event: `${table}.list`,
             data: {
               dataArray: list,
               total: size

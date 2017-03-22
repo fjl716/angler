@@ -10,7 +10,7 @@ export default function(table) {
         params,
         {
           packet: {
-            event: `${table}.loadsimple`,
+            event: `${table}.setsimple`,
             data: obj
           }
         }, true
