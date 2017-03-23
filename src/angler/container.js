@@ -63,7 +63,7 @@ class Container {
         equipment.send(packet);
       }
       if (type !== true) {
-        packet['__CALL_ID__'] = undefined;
+        delete packet['__CALL_ID__'];
       }
     }
     this.arrive({
