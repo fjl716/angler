@@ -6,7 +6,7 @@ export default {
 
     if (dbs.tables['user']) {
       let obj = await dbs.tables['user'].findOneSimple({
-        userid: packet.data.userid,
+        loginid: packet.data.loginid,
         password: packet.data.password
       });
       if (obj) {
