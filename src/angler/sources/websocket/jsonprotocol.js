@@ -16,9 +16,6 @@ export default {
   },
 
   serialize({packet}) {
-
-    console.log(packet);
-
     return JSON.stringify({
       event: packet.event,
       __CALL_ID__: packet.__CALL_ID__,
