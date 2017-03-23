@@ -45,8 +45,8 @@ class Container {
     return equipment;
   }
 
-  send(original,block,isOut) {
-    const equipment = block.equipment?block.equipment:original.equipment;
+  send(original,block,type) {
+    const equipment = block.equipment ? block.equipment : original.equipment;
     const previous = original.packet;
     const packet = block.packet;
 
@@ -57,10 +57,13 @@ class Container {
       )
         packet[name] = previous[name];
     }
-    if (isOut) {
+    if (type) {
       const equipment = MainBoard.get(packet.__ID__);
       if (equipment) {
         equipment.send(packet);
+      }
+      if (type !== true) {
+        packet['__CALL_ID__'] = undefined;
       }
     }
     this.arrive({
