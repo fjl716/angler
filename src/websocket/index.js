@@ -39,23 +39,7 @@ export function init(system) {
   //angler.filter(require('../angler/filters/permissions/index'));
 
   //增加消息
-  container.event(createTableEvent('group',
-    _delete,
-    _update,
-    deleteZ,
-    find,
-    findall,
-    findone,
-    findsimple,
-    insert,
-    paging,
-    update$A,
-    update$U,
-    updateA,
-    update,
-    updateU,
-    updateD,
-  ));
+  container.event(createTableEvent('group',...mongo));
   container.event(createTableEvent('region',...mongo));
   container.event(createTableEvent('role',...mongo));
   container.event(createTableEvent('sidebar',...mongo));

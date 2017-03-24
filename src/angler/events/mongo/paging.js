@@ -8,7 +8,6 @@ export default function(table) {
 
       let list = await dbs.tables[table].find(packet.data);
       let size = await dbs.tables[table].size(packet.data.query);
-
       container.send(
         params,
         {

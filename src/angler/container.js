@@ -57,11 +57,12 @@ class Container {
       )
         packet[name] = previous[name];
     }
-
     if (type) {
       const equipment = MainBoard.get(packet.__ID__);
       if (equipment) {
         equipment.send(packet);
+      }else {
+        console.log("equipment is null");
       }
       if (type !== true) {
         delete packet['__CALL_ID__'];
