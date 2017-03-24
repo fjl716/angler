@@ -18,9 +18,9 @@ class MongoDataBase {
     query = query ? query : {};
     pageSize = pageSize ? pageSize : 10;
     currentPage = currentPage ? currentPage : 0;
+
     let result = await this.database.collection(collection).find(
       query,
-      undefined,
       {
         limit: pageSize,
         skip: currentPage * pageSize

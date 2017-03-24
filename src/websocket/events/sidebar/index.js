@@ -1,10 +1,10 @@
 
-import logincomplete from './user.logincomplete'
+import _login from './user._login'
 import open from './sidebar.open'
 import select from './sidebar.select'
 
 export default [
-  logincomplete,
+  _login,
   open,
   select,
 ];

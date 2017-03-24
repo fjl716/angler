@@ -1,6 +1,6 @@
 import {session} from '../../../angler'
 export default {
-  event: 'user.logincomplete',
+  event: 'user._login',
   invoke: async function (params) {
     const {container} = params;
 

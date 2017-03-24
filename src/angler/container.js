@@ -57,6 +57,7 @@ class Container {
       )
         packet[name] = previous[name];
     }
+
     if (type) {
       const equipment = MainBoard.get(packet.__ID__);
       if (equipment) {
