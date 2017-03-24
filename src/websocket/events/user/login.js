@@ -20,7 +20,7 @@ export default {
               data: obj
             }
           },
-          1
+          true
         );
       } else {
 
