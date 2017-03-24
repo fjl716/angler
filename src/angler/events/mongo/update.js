@@ -3,7 +3,7 @@ import dbs from '../../dbs';
 export default function(table) {
   return {
     event: `${table}.update`,
-    invoke: async function (params, table) {
+    invoke: async function (params) {
       const {container, packet} = params;
       let {query, set}=packet.data;
       if (!query) {
