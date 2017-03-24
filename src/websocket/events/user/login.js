@@ -16,7 +16,7 @@ export default {
           Object.assign(params,{equipment:newEquipment}),
           {
             packet: {
-              event: `user.logincomplete`,
+              event: `user._login`,
               data: obj
             }
           },

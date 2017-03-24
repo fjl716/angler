@@ -4,22 +4,21 @@ import {TestServer} from './servers'
 
 import {
   createTableEvent,
-  change,
+  _delete,
+  _update,
   deleteZ,
   find,
   findall,
-  findSimple,
-  get,
-  getproperty,
-  getsimple,
+  findone,
+  findsimple,
   insert,
-  load,
   paging,
-  pop,
-  push,
-  pushSimple,
-  remove,
-  update
+  update$A,
+  update$U,
+  updateA,
+  update,
+  updateU,
+  updateD,
 } from '../angler/events/mongo'
 
 import {mongo} from '../angler/events'
@@ -41,22 +40,21 @@ export function init(system) {
 
   //增加消息
   container.event(createTableEvent('group',
-    change,
+    _delete,
+    _update,
     deleteZ,
     find,
     findall,
-    findSimple,
-    get,
-    getproperty,
-    getsimple,
+    findone,
+    findsimple,
     insert,
-    load,
     paging,
-    pop,
-    push,
-    pushSimple,
-    remove,
-    update
+    update$A,
+    update$U,
+    updateA,
+    update,
+    updateU,
+    updateD,
   ));
   container.event(createTableEvent('region',...mongo));
   container.event(createTableEvent('role',...mongo));

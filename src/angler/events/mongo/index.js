@@ -1,5 +1,4 @@
 import _delete from './_delete'
-import _remove from './_remove'
 import _update from './_update'
 import deleteZ from './delete'
 import find from './find'
@@ -24,7 +23,6 @@ function createTableEvent(table,...events) {
 export {
   createTableEvent,
   _delete,
-  _remove,
   _update,
   deleteZ,
   find,
@@ -37,24 +35,24 @@ export {
   update$U,
   updateA,
   update,
-
+  updateU,
+  updateD,
 }
 
 export default [
-  change,
+  _delete,
+  _update,
   deleteZ,
   find,
   findall,
-  findSimple,
-  get,
-  getproperty,
-  getsimple,
+  findone,
+  findsimple,
   insert,
-  load,
   paging,
-  pop,
-  push,
-  pushSimple,
-  remove,
-  update
+  update$A,
+  update$U,
+  updateA,
+  update,
+  updateU,
+  updateD,
 ]
