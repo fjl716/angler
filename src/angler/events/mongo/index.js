@@ -1,19 +1,19 @@
-import change from './change'
+import _delete from './_delete'
+import _remove from './_remove'
+import _update from './_update'
 import deleteZ from './delete'
 import find from './find'
 import findall from './findall'
-import findSimple from './findSimple'
-import get from './get'
-import getproperty from './getproperty'
-import getsimple from './getsimple'
+import findone from './findone'
+import findsimple from './findsimple'
 import insert from './insert'
-import load from './load'
 import paging from './paging'
-import pop from './pop'
-import push from './push'
-import pushSimple from './pushSimple'
-import remove from './remove'
+import update$A from './update$+'
+import update$U from './update$^'
+import updateA from './update+'
 import update from './update'
+import updateU from './update^'
+import updateD from './update-'
 
 function createTableEvent(table,...events) {
   return events.map(event => {
@@ -23,22 +23,21 @@ function createTableEvent(table,...events) {
 
 export {
   createTableEvent,
-  change,
+  _delete,
+  _remove,
+  _update,
   deleteZ,
   find,
   findall,
-  findSimple,
-  get,
-  getproperty,
-  getsimple,
+  findone,
+  findsimple,
   insert,
-  load,
   paging,
-  pop,
-  push,
-  pushSimple,
-  remove,
-  update
+  update$A,
+  update$U,
+  updateA,
+  update,
+
 }
 
 export default [

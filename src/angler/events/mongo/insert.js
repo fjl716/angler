@@ -10,7 +10,7 @@ export default function (table) {
         params,
         {
           packet: {
-            event: `${table}.add`,
+            event: `${table}._insert`,
             data: obj
           }
         }, true

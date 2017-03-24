@@ -1,7 +1,7 @@
 
 export default function(table) {
   return {
-    event: `${table}.findSimple`,
+    event: `${table}.findsimples`,
     invoke: function () {
     }
   }

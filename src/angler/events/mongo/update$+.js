@@ -2,7 +2,7 @@ import dbs from '../../dbs';
 
 export default function(table) {
   return {
-    event: `${table}.push->{array}`,
+    event: `${table}.update$+{array}`,
     invoke: async function (params, array) {
       const {container, packet} = params;
       const link = dbs.tables[table].linkTable[array];

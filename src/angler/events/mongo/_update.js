@@ -2,7 +2,7 @@ import dbs from '../../dbs';
 
 export default function(table) {
   return {
-    event: `${table}.change`,
+    event: `${table}._update`,
     invoke: async function (params) {
       const {packet} = params;
       const obj = await dbs.tables[table].simple(packet.data);

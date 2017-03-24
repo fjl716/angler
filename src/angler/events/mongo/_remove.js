@@ -2,7 +2,7 @@ import dbs from '../../dbs';
 
 export default function(table) {
   return {
-    event: `${table}.remove`,
+    event: `${table}._remove`,
     invoke: async function (params) {
       const {container, packet} = params;
       const id = {
@@ -23,7 +23,7 @@ export default function(table) {
           params,
           {
             packet: {
-              event: `${name}.change`,
+              event: `${name}._update`,
               data: obj
             }
           }, true

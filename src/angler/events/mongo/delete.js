@@ -10,7 +10,7 @@ export default function(table) {
         params,
         {
           packet: {
-            event: `${table}.remove`,
+            event: `${table}._delete`,
             data: obj
           }
         }, true

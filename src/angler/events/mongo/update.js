@@ -21,7 +21,7 @@ export default function(table) {
         params,
         {
           packet: {
-            event: `${table}.change`,
+            event: `${table}._update`,
             data: obj
           }
         }, true

@@ -2,7 +2,7 @@ import dbs from '../../dbs';
 
 export default function(table) {
   return {
-    event: `${table}.pop->{array}`,
+    event: `${table}.update-{array}`,
     invoke: async function (params, array) {
       const {container, packet} = params;
       let push = {};
