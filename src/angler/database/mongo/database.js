@@ -68,6 +68,7 @@ class MongoDataBase {
   }
 
   async 'delete'(collection, query) {
+    query = Json2Bson(query);
     const result = await this.database.collection(collection).findOne(query);
     if (result){
       await this.database.collection(collection).deleteOne(query);
