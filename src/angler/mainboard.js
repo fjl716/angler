@@ -8,6 +8,11 @@ export default {
     return equipments[id];
   },
   remove(equipment){
-    delete equipments[equipment.__ID__]
+    const id = equipment.__ID__;
+    console.log(id);
+    setTimeout(function () {
+      console.log('DELETE', id);
+      delete equipments[id]
+    }, 5000);
   }
 }
