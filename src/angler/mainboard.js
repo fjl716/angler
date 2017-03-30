@@ -9,9 +9,9 @@ export default {
   },
   remove(equipment){
     const id = equipment.__ID__;
-    console.log(id);
+    // console.log(id);
     setTimeout(function () {
-      console.log('DELETE', id);
+      // console.log('DELETE', id);
       delete equipments[id]
     }, 5000);
   }
