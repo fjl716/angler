@@ -1,8 +1,9 @@
 import dbs from './dbs'
-const {session} = dbs.mongoDB;
 
 export default {
   async get({equipment}){
+    const {session} = dbs.mongoDB;
+
     let obj = await session.findOne('session', {
       _id: equipment.__ID__
     });
@@ -17,6 +18,8 @@ export default {
 
   },
   async set({equipment}, data){
+    const {session} = dbs.mongoDB;
+
     let obj = await session.findOne('session', {
       _id: equipment.__ID__
     });
