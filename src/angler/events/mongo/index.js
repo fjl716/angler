@@ -14,14 +14,7 @@ import update from './update'
 import updateU from './update^'
 import updateD from './update-'
 
-function createTableEvent(table,...events) {
-  return events.map(event => {
-    return event(table)
-  })
-}
-
 export {
-  createTableEvent,
   _delete,
   _update,
   deleteZ,

@@ -2,26 +2,7 @@ import {Container,proxys} from '../angler';
 import WebSocket,{JsonProtocol} from '../angler/sources/websocket';
 import {TestServer} from './servers'
 
-import {
-  createTableEvent,
-  _delete,
-  _update,
-  deleteZ,
-  find,
-  findall,
-  findone,
-  findsimple,
-  insert,
-  paging,
-  update$A,
-  update$U,
-  updateA,
-  update,
-  updateU,
-  updateD,
-} from '../angler/events/mongo'
-
-import {mongo} from '../angler/events'
+import {mongo,solr,createTableEvent} from '../angler/events'
 
 export function init(system) {
 
@@ -46,6 +27,12 @@ export function init(system) {
   container.event(createTableEvent('sidebar',...mongo));
   container.event(createTableEvent('user',...mongo));
 
+  container.event(createTableEvent('calendar',...solr));
+  container.event(createTableEvent('group',...solr));
+  container.event(createTableEvent('region',...solr));
+  container.event(createTableEvent('role',...solr));
+  container.event(createTableEvent('sidebar',...solr));
+  container.event(createTableEvent('user',...solr));
 
   container.event(require('../angler/events/remoting').default);
 
