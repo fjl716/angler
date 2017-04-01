@@ -4,7 +4,7 @@ import {TestServer} from './servers'
 
 import {mongo,solr,createTableEvent} from '../angler/events'
 
-export function init(system) {
+export async function init(system) {
 
   const container = new Container({
     source: new WebSocket(system.express),

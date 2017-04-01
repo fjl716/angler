@@ -16,7 +16,6 @@ class Table {
   }
 
   link(dbs){
-    console.log(dbs);
     this.db = dbs[this.dbName];
   }
 

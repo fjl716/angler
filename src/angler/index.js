@@ -37,13 +37,13 @@ const system = {};
 const startList = [];
 
 export default {
-  load(model){
-    const func = model.init(system);
+  async load(model){
+    const func = await model.init(system);
     if (func) {
       startList.push(func);
     }
   },
-  start(){
+  async start(){
     for (let i = startList.length - 1; i >= 0; i--) {
       startList[i]();
     }

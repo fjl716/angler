@@ -1,7 +1,8 @@
-import dbs from './angler/dbs';
+import {confMongoDB} from './angler/dbs';
 
-function init(){
-  dbs.mongoDB({
+async function init() {
+  await confMongoDB(
+    {
       default: 'mongodb://localhost:27017/cloudroom',
       session: 'mongodb://localhost:27017/session',
       watcher: 'mongodb://localhost:27017/watcher',
@@ -9,6 +10,7 @@ function init(){
     require('./tables')
   );
 }
+
 export {
   init
 }

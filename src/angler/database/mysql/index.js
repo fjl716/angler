@@ -2,15 +2,19 @@ import mysql from 'mysql'
 
 class MySqlDataBase {
   constructor({host, user, password, database}) {
-    this.connection = mysql.createConnection({
-      host: host,
-      user: user,
-      password: password,
-      database: database
+    this.pool = mysql.createPool({
+      connectionLimit: 10,
+      host,
+      user,
+      password,
+      database
     });
-    this.connection.connect();
-
   }
+
+  query(sql, callback) {
+    this.pool.query(sql, callback);
+  }
+
 
 }
 
