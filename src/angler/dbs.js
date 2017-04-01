@@ -39,6 +39,7 @@ async function confMySql(dbConf) {
   for (let name in dbConf) {
     dbs.mysql[name] = new MySqlDataBase(dbConf[name]);
   }
+  dbs.mysql.query = (...params) => dbs.mysql.default.query(...params);
 }
 
 export {
