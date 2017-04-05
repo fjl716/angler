@@ -11,7 +11,7 @@ class MySqlDataBase {
     });
   }
 
-  async query(sql, values) {
+  query(sql, values) {
     return new Promise((resolve, reject) => {
       this.pool.query(sql, values, function (error, results, fields) {
         if (error) reject(error);
