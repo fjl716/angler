@@ -1,8 +1,11 @@
 import dbs from '../../dbs';
 
-export default function(table) {
+import {formatParams} from '../helper';
+
+export default function (data) {
+  const {event, table} = formatParams(data, 'update');
   return {
-    event: `${table}.update`,
+    event,
     invoke: async function (params) {
       const {container, packet} = params;
       let {query, set}=packet.data;

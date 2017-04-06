@@ -1,8 +1,10 @@
 import dbs from '../../dbs';
+import {formatParams} from '../helper';
 
-export default function(table) {
+export default function (data) {
+  const {event, table} = formatParams(data, 'findone');
   return {
-    event: `${table}.findone`,
+    event,
     invoke: async function (params) {
       const {container, packet} = params;
       let obj = await dbs.tables[table].findOne(packet.data);
@@ -10,7 +12,7 @@ export default function(table) {
         params,
         {
           packet: {
-            event: `${table}.findone`,
+            event: `${table}._findone`,
             data: obj
           }
         }, true

@@ -6,14 +6,10 @@ export default function (table) {
     event: `${table}._insert`,
     invoke: async function (params) {
       const {packet} = params;
-      let client = solr.createClient();
-      client.add(packet.data, function (err, obj) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('Solr response:', obj);
-        }
-      })
+      let result = await dbs.solrs.users.add({
+
+      });
+      console.log(result);
     }
   }
 }

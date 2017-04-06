@@ -1,11 +1,13 @@
 import dbs from '../../dbs';
+import {formatParams} from '../helper';
 
-export default function(table) {
+export default function (data) {
+  const {event, table} = formatParams(data, 'findall');
   return {
-    event: `${table}.findall`,
+    event,
     invoke: async function (params) {
       const {container, packet} = params;
-      let list = await dbs.tables[table].find({});
+      let list = await dbs.tables[table].find({pageSize:100});
       container.send(
         params,
         {

@@ -4,35 +4,35 @@ import {TestServer} from './servers'
 
 import {mongo,solr,createTableEvent} from '../angler/events'
 
-export async function init(system) {
 
+export async function init(system) {
   const container = new Container({
     source: new WebSocket(system.express),
     protocol: JsonProtocol
   });
 
-  const test1 = new TestServer('1',1);
-  const test2 = new TestServer('2',2);
+  const test1 = new TestServer('1', 1);
+  const test2 = new TestServer('2', 2);
 
-  proxys.addObject(test1,test2);
+  proxys.addObject(test1, test2);
 
   //增加过滤器
   //angler.filter(require('../angler/filters/permissions/index'));
 
   //增加消息
-  container.event(createTableEvent('calendar',...mongo));
-  container.event(createTableEvent('group',...mongo));
-  container.event(createTableEvent('region',...mongo));
-  container.event(createTableEvent('role',...mongo));
-  container.event(createTableEvent('sidebar',...mongo));
-  container.event(createTableEvent('user',...mongo));
+  container.event(createTableEvent('calendar', ...mongo));
+  container.event(createTableEvent('group', ...mongo));
+  container.event(createTableEvent('region', ...mongo));
+  container.event(createTableEvent('role', ...mongo));
+  container.event(createTableEvent('sidebar', ...mongo));
+  container.event(createTableEvent('user', ...mongo));
 
-  container.event(createTableEvent('calendar',...solr));
-  container.event(createTableEvent('group',...solr));
-  container.event(createTableEvent('region',...solr));
-  container.event(createTableEvent('role',...solr));
-  container.event(createTableEvent('sidebar',...solr));
-  container.event(createTableEvent('user',...solr));
+  container.event(createTableEvent('calendar', ...solr));
+  container.event(createTableEvent('group', ...solr));
+  container.event(createTableEvent('region', ...solr));
+  container.event(createTableEvent('role', ...solr));
+  container.event(createTableEvent('sidebar', ...solr));
+  container.event(createTableEvent('user', ...solr));
 
   container.event(require('../angler/events/remoting').default);
 

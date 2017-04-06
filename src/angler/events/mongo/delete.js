@@ -1,8 +1,10 @@
 import dbs from '../../dbs';
+import {formatParams} from '../helper';
 
-export default function(table) {
+export default function (data) {
+  const {event, table} = formatParams(data, 'delete');
   return {
-    event: `${table}.delete`,
+    event,
     invoke: async function (params) {
       const {container, packet} = params;
       let obj = await dbs.tables[table].delete(packet.data);

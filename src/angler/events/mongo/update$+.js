@@ -1,8 +1,10 @@
 import dbs from '../../dbs';
+import {formatParams} from '../helper';
 
-export default function(table) {
+export default function (data) {
+  const {event, table} = formatParams(data, 'update$+{array}');
   return {
-    event: `${table}.update$+{array}`,
+    event,
     invoke: async function (params, array) {
       const {container, packet} = params;
       const link = dbs.tables[table].linkTable[array];

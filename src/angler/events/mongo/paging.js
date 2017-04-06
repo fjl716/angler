@@ -1,8 +1,10 @@
 import dbs from '../../dbs';
+import {formatParams} from '../helper';
 
-export default function(table) {
+export default function (data) {
+  const {event, table} = formatParams(data, 'paging');
   return {
-    event: `${table}.paging`,
+    event,
     invoke: async function (params) {
       const {container, packet} = params;
 
