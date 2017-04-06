@@ -2,7 +2,7 @@ import {Container,proxys} from '../angler';
 import WebSocket,{JsonProtocol} from '../angler/sources/websocket';
 import {TestServer} from './servers'
 
-import {mongo,solr,createTableEvent} from '../angler/events'
+import {mongo,solr,createMongoEvent} from '../angler/events'
 
 
 export async function init(system) {
@@ -20,19 +20,19 @@ export async function init(system) {
   //angler.filter(require('../angler/filters/permissions/index'));
 
   //增加消息
-  container.event(createTableEvent('calendar', ...mongo));
-  container.event(createTableEvent('group', ...mongo));
-  container.event(createTableEvent('region', ...mongo));
-  container.event(createTableEvent('role', ...mongo));
-  container.event(createTableEvent('sidebar', ...mongo));
-  container.event(createTableEvent('user', ...mongo));
+  container.event(createMongoEvent('calendar', ...mongo));
+  container.event(createMongoEvent('group', ...mongo));
+  container.event(createMongoEvent('region', ...mongo));
+  container.event(createMongoEvent('role', ...mongo));
+  container.event(createMongoEvent('sidebar', ...mongo));
+  container.event(createMongoEvent('user', ...mongo));
 
-  container.event(createTableEvent('calendar', ...solr));
-  container.event(createTableEvent('group', ...solr));
-  container.event(createTableEvent('region', ...solr));
-  container.event(createTableEvent('role', ...solr));
-  container.event(createTableEvent('sidebar', ...solr));
-  container.event(createTableEvent('user', ...solr));
+  container.event(createMongoEvent('calendar', ...solr));
+  container.event(createMongoEvent('group', ...solr));
+  container.event(createMongoEvent('region', ...solr));
+  container.event(createMongoEvent('role', ...solr));
+  container.event(createMongoEvent('sidebar', ...solr));
+  container.event(createMongoEvent('user', ...solr));
 
   container.event(require('../angler/events/remoting').default);
 

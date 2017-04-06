@@ -7,7 +7,7 @@ export default function (data) {
     event,
     invoke: async function (params) {
       const {container, packet} = params;
-      let obj = await dbs.tables[table].delete(packet.data);
+      let obj = await dbs.collection[table].delete(packet.data);
       container.send(
         params,
         {

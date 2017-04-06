@@ -7,12 +7,12 @@ export default function (data) {
     event,
     invoke: async function (params, array) {
       const {container, packet} = params;
-      const link = dbs.tables[table].linkTable[array];
+      const link = dbs.collection[table].linkTable[array];
       if (link) {
         let push = {};
-        push[array] = await dbs.tables[link].findOneSimple(packet.query);
+        push[array] = await dbs.collection[link].findOneSimple(packet.query);
 
-        let obj = await dbs.tables[table].update(
+        let obj = await dbs.collection[table].update(
           packet.data.query,
           {
             '$push': push

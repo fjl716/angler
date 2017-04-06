@@ -7,7 +7,7 @@ export default function (data) {
     event,
     invoke: async function (params) {
       const {container, packet} = params;
-      let obj = await dbs.tables[table].findOne(packet.data);
+      let obj = await dbs.collection[table].findOne(packet.data);
       container.send(
         params,
         {

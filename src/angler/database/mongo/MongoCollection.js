@@ -2,7 +2,7 @@ import util from 'util';
 import mongodb from 'mongodb'
 const {ObjectID} = mongodb;
 import {Json2Bson} from './helper';
-class Table {
+class MongoCollection {
   static newId = () => new ObjectID();
 
   constructor(params) {
@@ -80,4 +80,4 @@ class Table {
 
 
 }
-export default Table
+export default MongoCollection

@@ -3,8 +3,8 @@ export default {
   event: 'user.login',
   invoke: async function (params) {
     const {container, equipment,packet} = params;
-    if (dbs.tables['user']) {
-      let obj = await dbs.tables['user'].findOneSimple({
+    if (dbs.collection['user']) {
+      let obj = await dbs.collection['user'].findOneSimple({
         loginid: packet.data.loginid,
         password: packet.data.password
       });

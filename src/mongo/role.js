@@ -1,8 +1,8 @@
-import {Table} from '../angler/database/mongo'
+import {MongoCollection} from '../angler/database/mongo'
 export default {
   name:'role',
   init: {
-    _id: Table.newId,
+    _id: MongoCollection.newId,
   },
   simple: [
     '_id', 'name'

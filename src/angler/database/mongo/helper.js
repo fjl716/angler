@@ -25,5 +25,6 @@ function Json2Bson(obj) {
 }
 
 export {
-   Json2Bson
+  Json2Bson,
+  ObjectID
 }

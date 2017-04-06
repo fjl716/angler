@@ -8,8 +8,8 @@ export default function (data) {
     invoke: async function (params) {
       const {container, packet} = params;
 
-      let list = await dbs.tables[table].find(packet.data);
-      let size = await dbs.tables[table].size(packet.data.query);
+      let list = await dbs.collection[table].find(packet.data);
+      let size = await dbs.collection[table].size(packet.data.query);
       container.send(
         params,
         {

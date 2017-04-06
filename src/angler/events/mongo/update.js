@@ -16,7 +16,7 @@ export default function (data) {
         set = packet.data;
         delete set._id;
       }
-      let obj = await dbs.tables[table].update(
+      let obj = await dbs.collection[table].update(
         query,
         {'$set': set}
       );

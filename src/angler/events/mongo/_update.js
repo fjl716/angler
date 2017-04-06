@@ -5,8 +5,8 @@ export default function(table) {
     event: `${table}._update`,
     invoke: async function (params) {
       const {packet} = params;
-      const obj = await dbs.tables[table].simple(packet.data);
-      dbs.tables[table].useTables.map(({name, field}) => {
+      const obj = await dbs.collection[table].simple(packet.data);
+      dbs.collection[table].useTables.map(({name, field}) => {
         const set = {};
         set[`${field}.$`] = obj;
         const queue = {};
@@ -15,7 +15,7 @@ export default function(table) {
             _id: obj._id
           }
         };
-        dbs.tables[name].update(
+        dbs.collection[name].update(
           queue,
           {$set: set}
         )

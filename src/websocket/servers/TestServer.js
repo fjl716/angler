@@ -12,7 +12,7 @@ class TestServer extends ProxyServer {
   }
 
   async find(){
-    return dbs.tables['group'].findOne({});
+    return dbs.collection['group'].findOne({});
   }
 }
 

@@ -7,7 +7,10 @@ export default function (data) {
     event,
     invoke: async function (params) {
       const {container, packet} = params;
-      let obj = await dbs.collection[table].insert(packet.data);
+      let obj = await dbs.mysql.transaction(async (query) => {
+        let result = await query('INSERT INTO tblUser () VALUES ("123456789012345678901235","test")');
+        console.log(result);
+      });
       container.send(
         params,
         {
@@ -20,3 +23,4 @@ export default function (data) {
     }
   }
 }
+
