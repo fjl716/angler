@@ -3,7 +3,6 @@ import util from 'util'
 class Table {
   constructor(db, table, key, fields) {
     this.db = db;
-    this.key = key;
     this.table = table;
     this.fields = fields.map(field => {
       const name = Object.keys(field)[0];
@@ -26,6 +25,7 @@ class Table {
         }
       }
     });
+    this.key = this.fields.find(field=>field.name === key);
   }
 
   insertSql(obj) {
@@ -50,7 +50,22 @@ class Table {
   }
 
   updateSql(obj) {
+    let fields = [];
+    let values = [];
+    this.fields.map(field => {
+      if (field.name !== this.key) {
+        fields.push(`\`${field.name}\` = ?`);
+        values.push(field.value(obj));
+      }
+    });
 
+    values.push(this.key.value(obj));
+
+    let sql = `UPDATE ${this.table} SET ${fields} WHERE \`${this.key.name}\` = ?`;
+    return {
+      sql,
+      values
+    };
   }
 
   deleteSql(obj) {
