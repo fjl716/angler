@@ -5,7 +5,7 @@ async function init() {
       session: 'mongodb://localhost:27017/session',
       watcher: 'mongodb://localhost:27017/watcher',
     },
-    require('./mongo')
+    require('./database/mongo')
   );
   await confMySql(dbs, {
     default: {

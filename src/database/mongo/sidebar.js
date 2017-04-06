@@ -1,6 +1,6 @@
-import {MongoCollection} from '../angler/database/mongo'
+import {MongoCollection} from '../../angler/database/mongo'
 export default {
-  name:'role',
+  name:'sidebar',
   init: {
     _id: MongoCollection.newId,
   },
