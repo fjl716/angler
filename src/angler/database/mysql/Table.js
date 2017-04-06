@@ -1,8 +1,9 @@
 import util from 'util'
 
 class Table {
-  constructor(db,table,fields) {
+  constructor(db, table, key, fields) {
     this.db = db;
+    this.key = key;
     this.table = table;
     this.fields = fields.map(field => {
       const name = Object.keys(field)[0];
@@ -43,7 +44,7 @@ class Table {
     };
   }
 
-  insert(obj){
+  insert(obj) {
     let query = this.insertSql(obj);
     this.db.query(query);
   }

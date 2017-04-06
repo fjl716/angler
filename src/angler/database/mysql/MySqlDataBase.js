@@ -5,8 +5,8 @@ class MySqlDataBase {
   constructor({host, user, password, database,tables}) {
     this.tables = {};
     tables.default.map(item => {
-      const {name, table, fields} = item.default;
-      this.tables[name] = new Table(this,table, fields);
+      const {name, table,key, fields} = item.default;
+      this.tables[name] = new Table(this,table,key, fields);
     });
 
     this.pool = mysql.createPool({
