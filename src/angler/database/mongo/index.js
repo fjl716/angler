@@ -3,29 +3,25 @@ import {Json2Bson,ObjectID} from './helper'
 import MongoDataBase from './MongoDataBase'
 import util from 'util'
 
-async function confMongoDB(dbs,dbConf, ...models) {
-  if (!dbs.mongoDB) dbs.mongoDB = {};
-  if (!dbs.collection) dbs.collection = {};
+async function confMongoDB(dbs,dbConf) {
+  if (!dbs.mongo) dbs.mongo = {
+    collections: {}
+  };
+  if (!dbs.mongo.collections) dbs.mongo.collections = {};
   for (let name in dbConf) {
-    dbs.mongoDB[name] = new MongoDataBase(dbConf[name]);
+    dbs.mongo[name] = new MongoDataBase(dbConf[name]);
+    Object.assign(
+      dbs.mongo.collections,
+      dbs.mongo[name].collections
+    )
   }
-  models.map(model => {
-    model.default.map(item => {
-      item = item.default;
-      dbs.collection[item.name] = MongoCollection.prototype == item.constructor.prototype ? item : new MongoCollection(item);
-      dbs.collection[item.name].link(dbs.mongoDB);
-    });
-  });
-  for (let name in dbs.collection) {
+  for (let name in dbs.mongo.collections) {
     //关联数据库
-    if (util.isObject(dbs.collection[name])) {
-      dbs.collection[name].link(dbs.mongoDB);
-      for (let field in dbs.collection[name].linkCollection) {
-        dbs.collection[this.tables[name].linkCollection[field]].useCollections.push({
-          name: name,
-          field: field
-        });
-      }
+    for (let field in dbs.mongo.collections[name].linkCollection) {
+      dbs.mongo.collections[this.tables[name].linkCollection[field]].useCollections.push({
+        name: name,
+        field: field
+      });
     }
   }
 }

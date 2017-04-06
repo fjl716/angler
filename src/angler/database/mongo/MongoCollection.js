@@ -5,18 +5,15 @@ import {Json2Bson} from './helper';
 class MongoCollection {
   static newId = () => new ObjectID();
 
-  constructor(params) {
+  constructor(db,params) {
     const {name, init, dbName, simple,link} = params;
+    this.db = db;
     this.name = name;
     this.dbName = dbName ? dbName : 'default';
     this.initData = init ? init : {};
     this.simpleFields = (simple instanceof Array) ? simple : ['_id'];
     this.linkCollection = link;
     this.useCollections = [];
-  }
-
-  link(dbs){
-    this.db = dbs[this.dbName];
   }
 
   init(obj) {

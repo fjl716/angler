@@ -7,7 +7,7 @@ export default function (data) {
     event,
     invoke: async function (params) {
       const {container, packet} = params;
-      let list = await dbs.collection[collection].find(packet.data);
+      let list = await dbs.mongo.collections[collection].find(packet.data);
       container.send(
         params,
         {

@@ -1,11 +1,18 @@
 import mongodb from 'mongodb'
 const {ObjectID} = mongodb;
 import {Json2Bson} from './helper';
+import MongoCollection from './MongoCollection';
 
 class MongoDataBase {
-  constructor(url) {
+  constructor({host,port=27017,database,collections={default:[]}}) {
+    const url = `mongodb://${host}:${port}/${database}`;
     mongodb.MongoClient.connect(url, (err, database) => {
       this.database = database
+    });
+    this.collections = {};
+    collections.default.map(item => {
+      item = item.default;
+      this.collections[item.name] = new MongoCollection(this,item);
     });
   }
 

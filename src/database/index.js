@@ -1,11 +1,17 @@
 import dbs,{confMongoDB,confMySql,confSolrCore} from '../angler/dbs';
 async function init() {
+  // 'mongodb://localhost:27017/cloudroom',
   await confMongoDB(dbs, {
-      default: 'mongodb://localhost:27017/cloudroom',
-      session: 'mongodb://localhost:27017/session',
-      watcher: 'mongodb://localhost:27017/watcher',
+      default: {
+        host:'localhost',
+        database:'cloudroom',
+        collections:require('./mongo')
+      },
+      session: {
+        host:'localhost',
+        database:'cloudroom',
+      },
     },
-    require('./mongo')
   );
   await confMySql(dbs,
     {
