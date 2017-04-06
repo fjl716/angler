@@ -2,17 +2,17 @@ import dbs from '../../dbs';
 import {formatParams} from '../helper';
 
 export default function (data) {
-  const {event, table} = formatParams(data, 'update$+{array}');
+  const {event, collection} = formatParams(data, 'update$+{array}');
   return {
     event,
     invoke: async function (params, array) {
       const {container, packet} = params;
-      const link = dbs.collection[table].linkTable[array];
+      const link = dbs.collection[collection].linkCollection[array];
       if (link) {
         let push = {};
         push[array] = await dbs.collection[link].findOneSimple(packet.query);
 
-        let obj = await dbs.collection[table].update(
+        let obj = await dbs.collection[collection].update(
           packet.data.query,
           {
             '$push': push
@@ -22,7 +22,7 @@ export default function (data) {
           params,
           {
             packet: {
-              event: `${table}.change`,
+              event: `${collection}.change`,
               data: obj
             }
           }, true

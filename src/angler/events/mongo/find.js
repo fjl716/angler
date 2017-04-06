@@ -2,17 +2,17 @@ import dbs from '../../dbs';
 import {formatParams} from '../helper';
 
 export default function (data) {
-  const {event, table} = formatParams(data, 'find');
+  const {event, collection} = formatParams(data, 'find');
   return {
     event,
     invoke: async function (params) {
       const {container, packet} = params;
-      let list = await dbs.collection[table].find(packet.data);
+      let list = await dbs.collection[collection].find(packet.data);
       container.send(
         params,
         {
           packet: {
-            event: `${table}._find`,
+            event: `${collection}._find`,
             data: list
           }
         }, true

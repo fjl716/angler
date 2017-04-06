@@ -11,8 +11,8 @@ class MongoCollection {
     this.dbName = dbName ? dbName : 'default';
     this.initData = init ? init : {};
     this.simpleFields = (simple instanceof Array) ? simple : ['_id'];
-    this.linkTable = link;
-    this.useTables = [];
+    this.linkCollection = link;
+    this.useCollections = [];
   }
 
   link(dbs){

@@ -3,7 +3,7 @@ import dbs from '../../dbs';
 import {formatParams} from '../helper';
 
 export default function (data) {
-  const {event, table} = formatParams(data, 'update');
+  const {event, collection} = formatParams(data, 'update');
   return {
     event,
     invoke: async function (params) {
@@ -16,7 +16,7 @@ export default function (data) {
         set = packet.data;
         delete set._id;
       }
-      let obj = await dbs.collection[table].update(
+      let obj = await dbs.collection[collection].update(
         query,
         {'$set': set}
       );
@@ -24,7 +24,7 @@ export default function (data) {
         params,
         {
           packet: {
-            event: `${table}._update`,
+            event: `${collection}._update`,
             data: obj
           }
         }, true

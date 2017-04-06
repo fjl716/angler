@@ -20,8 +20,8 @@ async function confMongoDB(dbs,dbConf, ...models) {
     //关联数据库
     if (util.isObject(dbs.collection[name])) {
       dbs.collection[name].link(dbs.mongoDB);
-      for (let field in dbs.collection[name].linkTable) {
-        dbs.collection[this.tables[name].linkTable[field]].useTables.push({
+      for (let field in dbs.collection[name].linkCollection) {
+        dbs.collection[this.tables[name].linkCollection[field]].useCollections.push({
           name: name,
           field: field
         });

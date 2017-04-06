@@ -1,12 +1,12 @@
 import dbs from '../../dbs';
 
-export default function(table) {
+export default function(collection) {
   return {
-    event: `${table}._update`,
+    event: `${collection}._update`,
     invoke: async function (params) {
       const {packet} = params;
-      const obj = await dbs.collection[table].simple(packet.data);
-      dbs.collection[table].useTables.map(({name, field}) => {
+      const obj = await dbs.collection[collection].simple(packet.data);
+      dbs.collection[collection].useCollections.map(({name, field}) => {
         const set = {};
         set[`${field}.$`] = obj;
         const queue = {};

@@ -1,14 +1,14 @@
 import dbs from '../../dbs';
 
-export default function(table) {
+export default function(collection) {
   return {
-    event: `${table}._delete`,
+    event: `${collection}._delete`,
     invoke: async function (params) {
       const {container, packet} = params;
       const id = {
         _id: packet.data._id
       };
-      dbs.collection[table].useTables.map(async({name, field}) => {
+      dbs.collection[collection].useCollections.map(async({name, field}) => {
         const queue = {};
         queue[field] = {
           $elemMatch: id

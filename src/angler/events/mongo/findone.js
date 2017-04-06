@@ -2,17 +2,17 @@ import dbs from '../../dbs';
 import {formatParams} from '../helper';
 
 export default function (data) {
-  const {event, table} = formatParams(data, 'findone');
+  const {event, collection} = formatParams(data, 'findone');
   return {
     event,
     invoke: async function (params) {
       const {container, packet} = params;
-      let obj = await dbs.collection[table].findOne(packet.data);
+      let obj = await dbs.collection[collection].findOne(packet.data);
       container.send(
         params,
         {
           packet: {
-            event: `${table}._findone`,
+            event: `${collection}._findone`,
             data: obj
           }
         }, true

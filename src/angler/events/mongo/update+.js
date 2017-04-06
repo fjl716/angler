@@ -2,14 +2,14 @@ import dbs from '../../dbs';
 import {formatParams} from '../helper';
 
 export default function (data) {
-  const {event, table} = formatParams(data, 'update+{array}');
+  const {event, collection} = formatParams(data, 'update+{array}');
   return {
     event,
     invoke: async function (params, array) {
       const {container, packet} = params;
       let push = {};
       push[array] = packet.data.object;
-      let obj = await dbs.collection[table].update(
+      let obj = await dbs.collection[collection].update(
         packet.data.query,
         {
           '$push': push
@@ -19,7 +19,7 @@ export default function (data) {
         params,
         {
           packet: {
-            event: `${table}._update`,
+            event: `${collection}._update`,
             data: obj
           }
         }, true
