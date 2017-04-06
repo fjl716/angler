@@ -1,7 +1,14 @@
 import mysql from 'mysql'
+import Table from './Table'
 
 class MySqlDataBase {
-  constructor({host, user, password, database}) {
+  constructor({host, user, password, database,tables}) {
+    this.tables = {};
+    tables.default.map(item => {
+      const {name, table, fields} = item.default;
+      this.tables[name] = new Table(this,table, fields);
+    });
+
     this.pool = mysql.createPool({
       connectionLimit: 10,
       user,
@@ -11,9 +18,9 @@ class MySqlDataBase {
     });
   }
 
-  query(sql, values) {
+  query(query) {
     return new Promise((resolve, reject) => {
-      this.pool.query(sql, values, function (error, results, fields) {
+      this.pool.query(query, function (error, results, fields) {
         if (error) reject(error);
         resolve(results);
       });
