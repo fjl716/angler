@@ -1,10 +1,16 @@
 export default {
   name: 'user',
-  table: 'tblUser',
-  key: 'id',
+  core: 'users',
+  key: 'docid',
   fields: [
-    {id: 'string'},
+    {
+      docid: (doc) => {
+        return doc._id
+      }
+    },
     {name: 'string'},
+    {loginid: 'string'},
     {email: 'string'},
+    {sex: 'int'},
   ]
 }

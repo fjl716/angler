@@ -9,6 +9,7 @@ class SolrCore {
       port,
       core
     });
+    this.client.autoCommit = true;
     this.name = name;
     this.fields = fields.map(field => {
       const name = Object.keys(field)[0];
@@ -27,26 +28,46 @@ class SolrCore {
               value: function (obj) {
                 return obj[name] + '';
               }
-            }
+            };
+          case 'int':
+            return {
+              name,
+              value: function (obj) {
+                return parseInt(obj[name]);
+              }
+            };
         }
       }
     });
     this.key = this.fields.find(field => field.name === key);
   }
 
-  add(doc) {
+  add(obj) {
     return new Promise((resolve, reject) => {
       const client = this.client;
+      const doc = {};
+      this.fields.map(field => {
+        doc[field.name] = field.value(obj);
+      });
       client.add(doc, function (err, obj) {
         if (err)
           reject(err);
         else
-          client.commit(function (err, res) {
-            if (err)
-              reject(err);
-            resolve(obj);
-          })
+          resolve(obj);
       });
+    });
+  }
+
+  'delete'(obj) {
+    return new Promise((resolve, reject) => {
+      const client = this.client;
+      client.delete(this.key.name, this.key.value(obj), function (err, obj) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(obj);
+        }
+      })
     });
   }
 

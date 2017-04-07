@@ -1,7 +1,7 @@
 import SolrCore from './SolrCore'
 
 async function confSolrCore(dbs,dbConf) {
-  if (!dbs.solrs) dbs.solrs = {};
+  if (!dbs.solr) dbs.solr = {};
 
   for(let name in dbConf) {
     const {host, port = 8983, cores} = dbConf[name];
@@ -11,7 +11,7 @@ async function confSolrCore(dbs,dbConf) {
         port,
         conf
       });
-      dbs.solrs[c.name] = c;
+      dbs.solr[c.name] = c;
     });
   }
 }

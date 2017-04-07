@@ -1,6 +1,6 @@
 export default {
   name: 'role',
-  table: 'roles',
+  core: 'roles',
   key: 'id',
   fields: [
     {id: 'string'},

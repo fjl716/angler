@@ -30,18 +30,19 @@ async function init() {
       }
     }
   );
-
-  // await dbs.mysql.tables.user.insert({
-  //   id: '123456789012345678901234',
-  //   name: 'admin',
-  //   email: 'fjl716@163.com'
+  // dbs.solr.user.client.delete('name','admin',function (err, obj) {
+  //   console.log(obj);
   // });
-
-  // dbs.mysql.tables.user.delete({
-  //   id: '123456789012345678901234',
-  //   name: 'admin1',
-  //   email: 'fjl716@163.com'
-  // });
+  // dbs.solr.user.client.commit();
+ // const data = await dbs.solr.user.add({
+  const data = await dbs.solr.user.add({
+    _id: 'a23456789012345678901234',
+    name: 'admin',
+    loginid: 'admin',
+    email: 'fjl716@163.com',
+    sex: 1,
+  });
+  console.log(data);
 }
 
 export {
