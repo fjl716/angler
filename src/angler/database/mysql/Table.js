@@ -25,7 +25,7 @@ class Table {
         }
       }
     });
-    this.key = this.fields.find(field=>field.name === key);
+    this.key = this.fields.find(field => field.name === key);
   }
 
   insertSql(obj) {
@@ -68,8 +68,23 @@ class Table {
     };
   }
 
-  deleteSql(obj) {
+  update(obj) {
+    let query = this.updateSql(obj);
+    this.db.query(query);
+  }
 
+  deleteSql(obj) {
+    let sql = `DELETE FROM ${this.table} WHERE \`${this.key.name}\` = ?`;
+    let values = [this.key.value(obj)];
+    return {
+      sql,
+      values
+    }
+  }
+
+  'delete'(obj) {
+    let query = this.deleteSql(obj);
+    this.db.query(query);
   }
 }
 

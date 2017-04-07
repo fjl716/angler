@@ -38,11 +38,11 @@ async function init() {
   //   email: 'fjl716@163.com'
   // });
 
-  console.log(dbs.mysql.tables.user.updateSql({
+  dbs.mysql.tables.user.delete({
     id: '123456789012345678901234',
-    name: 'admin',
+    name: 'admin1',
     email: 'fjl716@163.com'
-  }));
+  });
 }
 
 export {
