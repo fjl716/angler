@@ -1,5 +1,5 @@
-import _delete from './_delete'
-import _update from './_update'
+import linkdelete from './linkdelete'
+import linkupdate from './linkupdate'
 import deleteZ from './delete'
 import find from './find'
 import findall from './findall'
@@ -14,9 +14,9 @@ import update from './update'
 import updateU from './update^'
 import updateD from './update-'
 
-export {
-  _delete,
-  _update,
+export default {
+  linkdelete,
+  linkupdate,
   deleteZ,
   find,
   findall,
@@ -31,21 +31,3 @@ export {
   updateU,
   updateD,
 }
-
-export default [
-  _delete,
-  _update,
-  deleteZ,
-  find,
-  findall,
-  findone,
-  findsimple,
-  insert,
-  paging,
-  update$A,
-  update$U,
-  updateA,
-  update,
-  updateU,
-  updateD,
-]

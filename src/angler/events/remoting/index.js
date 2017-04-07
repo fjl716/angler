@@ -1,4 +1,4 @@
 import invoke from './invoke'
-export default [
+export default {
   invoke
-];
+};

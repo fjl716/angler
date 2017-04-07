@@ -1,12 +1,7 @@
-import _insert from './_insert'
-import _update from './_update'
+import insert from './insert'
+import update from './update'
 
-export {
-  _insert,
-  _update,
+export default {
+  insert,
+  update
 }
-
-export default [
-  _insert,
-  _update,
-];

@@ -5,14 +5,21 @@ import MongoCollection from './MongoCollection';
 
 class MongoDataBase {
   constructor({host,port=27017,database,collections={default:[]}}) {
-    const url = `mongodb://${host}:${port}/${database}`;
-    mongodb.MongoClient.connect(url, (err, database) => {
-      this.database = database
-    });
+    this.url = `mongodb://${host}:${port}/${database}`;
     this.collections = {};
     collections.default.map(item => {
       item = item.default;
       this.collections[item.name] = new MongoCollection(this,item);
+    });
+  }
+
+  init() {
+    return new Promise((resolve, reject) => {
+      mongodb.MongoClient.connect(this.url, (err, database) => {
+        if (err) reject(err);
+        this.database = database;
+        resolve(database);
+      });
     });
   }
 
@@ -21,11 +28,7 @@ class MongoDataBase {
     return result.ops[0];
   }
 
-  async find(collection, {query,pageSize,currentPage,orderBy}) {
-    query = query ? query : {};
-    pageSize = pageSize ? pageSize : 10;
-    currentPage = currentPage ? currentPage : 0;
-
+  async find(collection, {query={},pageSize=10,currentPage=0,orderBy}) {
     let result = await this.database.collection(collection).find(
       query,
       {

@@ -3,7 +3,6 @@ export default {
   event: 'user._login',
   invoke: async function (params) {
     const {container} = params;
-
     container.send(
       params,
       {

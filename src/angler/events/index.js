@@ -1,14 +1,30 @@
 import mongo from './mongo'
+import mysql from './mysql'
+import remoting from './remoting'
 import solr from './solr'
 
-function createMongoEvent(table, ...events) {
-  return events.map(event => {
-    return event(table)
-  })
-}
+const events = {
+  mongo,
+  solr,
+  mysql,
+  remoting,
+};
 
 export {
-  createMongoEvent,
   mongo,
-  solr
+  solr,
+  mysql,
+  remoting,
+}
+
+
+
+
+export default function (path,event,params) {
+  let sp = path.split('.');
+  let func = events;
+  sp.map(name => {
+    func = func[name];
+  });
+  return func(event, params)
 }

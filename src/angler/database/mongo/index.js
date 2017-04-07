@@ -6,12 +6,14 @@ import util from 'util'
 async function confMongoDB(dbs,dbConf) {
   if (!dbs.mongo) {
     dbs.mongo = new MongoDataBase(dbConf.default);
+    await dbs.mongo.init();
   }
 
   for (let name in dbConf) {
     if (name === 'default')
       continue;
     dbs.mongo[name] = new MongoDataBase(dbConf[name]);
+    await dbs.mongo[name].init();
     Object.assign(
       dbs.mongo.collections,
       dbs.mongo[name].collections

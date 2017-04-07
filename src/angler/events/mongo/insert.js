@@ -1,8 +1,6 @@
 import dbs from '../../dbs';
-import {formatParams} from '../helper';
 
-export default function (data) {
-  const {event, collection} = formatParams(data, 'insert');
+export default function (event,collection) {
   return {
     event,
     invoke: async function (params) {
