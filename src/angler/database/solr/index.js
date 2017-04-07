@@ -1,15 +1,17 @@
-import SolrCore from './core'
-
+import SolrCore from './SolrCore'
 
 async function confSolrCore(dbs,dbConf) {
   if (!dbs.solrs) dbs.solrs = {};
-  const {host, port, cores} = dbConf;
 
-  for (let name in cores) {
-    dbs.solrs[name] = new SolrCore({
-      host,
-      port,
-      core: name
+  for(let name in dbConf) {
+    const {host, port = 8983, cores} = dbConf[name];
+    cores.default.map(conf => {
+      const c = new SolrCore({
+        host,
+        port,
+        conf
+      });
+      dbs.solrs[c.name] = c;
     });
   }
 }

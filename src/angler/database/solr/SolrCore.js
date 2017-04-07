@@ -1,12 +1,37 @@
+import util from 'util';
 const solr = require('solr-client');
 
 class SolrCore {
-  constructor({host,port,core}) {
+  constructor({host,port,conf}) {
+    const {name, core, key, fields} = conf;
     this.client = solr.createClient({
       host,
       port,
       core
     });
+    this.name = name;
+    this.fields = fields.map(field => {
+      const name = Object.keys(field)[0];
+      const value = Object.values(field)[0];
+      if (util.isFunction(value)) {
+        return {
+          name,
+          value
+        }
+      }
+      if (util.isString(value)) {
+        switch (value) {
+          case 'string':
+            return {
+              name,
+              value: function (obj) {
+                return obj[name] + '';
+              }
+            }
+        }
+      }
+    });
+    this.key = this.fields.find(field => field.name === key);
   }
 
   add(doc) {

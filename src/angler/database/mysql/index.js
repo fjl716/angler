@@ -1,17 +1,12 @@
 import MySqlDataBase from './MySqlDataBase'
 
 async function confMySql(dbs,dbConf) {
-  if (!dbs.mysql)
-    dbs.mysql = {
-      tables: {},
-      query: function (...params) {
-        dbs.mysql.default.query(...params)
-      },
-      transaction: function (...params) {
-        dbs.mysql.default.transaction(...params);
-      }
-    };
+  if (!dbs.mysql) {
+    dbs.mysql = new MySqlDataBase(dbConf.default);
+  }
   for (let name in dbConf) {
+    if (name === 'default')
+      continue;
     dbs.mysql[name] = new MySqlDataBase(dbConf[name]);
     Object.assign(
       dbs.mysql.tables,

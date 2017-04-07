@@ -1,5 +1,10 @@
-export default function (item){
-  return {
-
-  }
+export default {
+  name: 'user',
+  core: 'users',
+  key: 'id',
+  fields: [
+    {id: 'string'},
+    {name: 'string'},
+    {email: 'string'},
+  ]
 }

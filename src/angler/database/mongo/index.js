@@ -4,11 +4,13 @@ import MongoDataBase from './MongoDataBase'
 import util from 'util'
 
 async function confMongoDB(dbs,dbConf) {
-  if (!dbs.mongo) dbs.mongo = {
-    collections: {}
-  };
-  if (!dbs.mongo.collections) dbs.mongo.collections = {};
+  if (!dbs.mongo) {
+    dbs.mongo = new MongoDataBase(dbConf.default);
+  }
+
   for (let name in dbConf) {
+    if (name === 'default')
+      continue;
     dbs.mongo[name] = new MongoDataBase(dbConf[name]);
     Object.assign(
       dbs.mongo.collections,

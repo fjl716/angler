@@ -1,6 +1,6 @@
 import dbs,{confMongoDB,confMySql,confSolrCore} from '../angler/dbs';
 async function init() {
-  // 'mongodb://localhost:27017/cloudroom',
+
   await confMongoDB(dbs, {
       default: {
         host: 'localhost',
@@ -13,8 +13,7 @@ async function init() {
       },
     },
   );
-  await confMySql(dbs,
-    {
+  await confMySql(dbs, {
       default: {
         host: 'localhost',
         user: 'root',
@@ -25,12 +24,12 @@ async function init() {
     },
   );
   await confSolrCore(dbs, {
-    host: 'localhost',
-    port: 8983,
-    cores: {
-      users: {},
+      default: {
+        host: 'localhost',
+        cores: require('./solr')
+      }
     }
-  });
+  );
 
   // await dbs.mysql.tables.user.insert({
   //   id: '123456789012345678901234',
@@ -38,11 +37,11 @@ async function init() {
   //   email: 'fjl716@163.com'
   // });
 
-  dbs.mysql.tables.user.delete({
-    id: '123456789012345678901234',
-    name: 'admin1',
-    email: 'fjl716@163.com'
-  });
+  // dbs.mysql.tables.user.delete({
+  //   id: '123456789012345678901234',
+  //   name: 'admin1',
+  //   email: 'fjl716@163.com'
+  // });
 }
 
 export {
