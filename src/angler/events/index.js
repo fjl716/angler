@@ -17,9 +17,6 @@ export {
   remoting,
 }
 
-
-
-
 export default function (path,event,params) {
   let sp = path.split('.');
   let func = events;
