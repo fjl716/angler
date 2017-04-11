@@ -1,9 +1,8 @@
-import {dbs} from '../../../angler';
 export default {
   event: 'user.login',
   invoke: async function (params) {
     const {container, equipment, packet} = params;
-    let obj = await dbs.mongo.collections['user'].findOneSimple({
+    let obj = await container.dbs.mongo.collections['user'].findOneSimple({
       loginid: packet.data.loginid,
       password: packet.data.password
     });
