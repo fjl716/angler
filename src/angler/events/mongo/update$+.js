@@ -1,18 +1,14 @@
-import dbs from '../../dbs';
-import {formatParams} from '../helper';
-
-export default function (data) {
-  const {event, collection} = formatParams(data, 'update$+{array}');
+export default function (event,collection) {
   return {
     event,
     invoke: async function (params, array) {
       const {container, packet} = params;
-      const link = dbs.mongo.collections[collection].linkCollection[array];
+      const link = container.dbs.mongo.collections[collection].linkCollection[array];
       if (link) {
         let push = {};
-        push[array] = await dbs.mongo.collections[link].findOneSimple(packet.query);
+        push[array] = await container.dbs.mongo.collections[link].findOneSimple(packet.query);
 
-        let obj = await dbs.mongo.collections[collection].update(
+        let obj = await container.dbs.mongo.collections[collection].update(
           packet.data.query,
           {
             '$push': push

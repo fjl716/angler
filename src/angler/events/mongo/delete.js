@@ -1,13 +1,9 @@
-import dbs from '../../dbs';
-import {formatParams} from '../helper';
-
-export default function (data) {
-  const {event, collection} = formatParams(data, 'delete');
+export default function (event, collection) {
   return {
     event,
     invoke: async function (params) {
       const {container, packet} = params;
-      let obj = await dbs.mongo.collections[collection].delete(packet.data);
+      let obj = await container.dbs.mongo.collections[collection].delete(packet.data);
       container.send(
         params,
         {

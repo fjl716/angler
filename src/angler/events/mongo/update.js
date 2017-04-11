@@ -1,9 +1,4 @@
-import dbs from '../../dbs';
-
-import {formatParams} from '../helper';
-
-export default function (data) {
-  const {event, collection} = formatParams(data, 'update');
+export default function (event,collection) {
   return {
     event,
     invoke: async function (params) {
@@ -16,7 +11,7 @@ export default function (data) {
         set = packet.data;
         delete set._id;
       }
-      let obj = await dbs.mongo.collections[collection].update(
+      let obj = await container.dbs.mongo.collections[collection].update(
         query,
         {'$set': set}
       );

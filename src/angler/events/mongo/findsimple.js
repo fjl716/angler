@@ -1,7 +1,7 @@
 
-export default function(table) {
+export default function(event,collection) {
   return {
-    event: `${table}.findsimples`,
+    event,
     invoke: function () {
     }
   }

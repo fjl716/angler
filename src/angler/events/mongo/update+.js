@@ -1,15 +1,11 @@
-import dbs from '../../dbs';
-import {formatParams} from '../helper';
-
-export default function (data) {
-  const {event, collection} = formatParams(data, 'update+{array}');
+export default function (event,collection) {
   return {
     event,
     invoke: async function (params, array) {
       const {container, packet} = params;
       let push = {};
       push[array] = packet.data.object;
-      let obj = await dbs.mongo.collections[collection].update(
+      let obj = await container.dbs.mongo.collections[collection].update(
         packet.data.query,
         {
           '$push': push

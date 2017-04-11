@@ -8,8 +8,7 @@ export async function init(system) {
     source: new WebSocket(system.express),
     protocol: JsonProtocol
   });
-
-  await initEvent(container);
+  initEvent(container);
   //增加过滤器
   //angler.filter(require('../angler/filters/permissions/index'));
 

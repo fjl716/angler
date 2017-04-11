@@ -13,10 +13,10 @@ export default async function (container) {
       return events(path, event, params)
     })
   );
-  // let requireFromString = require('require-from-string');
-  //
-  // let d = requireFromString('import dbs from "../../angler/dbs";module.exports = function(){return 1}');
-  // console.log(d(1));
+  let requireFromString = require('require-from-string');
+
+  let d = requireFromString('let a = 0;module.exports = function(){return a}');
+  console.log(d(1));
 
   // require('./sidebar');
   container.event(sidebar);
