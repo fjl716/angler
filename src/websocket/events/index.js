@@ -6,7 +6,6 @@ import user from './user'
 export default async function (container) {
 
   const list = await dbs.mongo.find('events', {pageSize: 1000});
-
   container.event(
     list.map(conf => {
       return events(conf);
@@ -15,5 +14,4 @@ export default async function (container) {
   // require('./sidebar');
   // container.event(sidebar);
   // container.event(user);
-
 }

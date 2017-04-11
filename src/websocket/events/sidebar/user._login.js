@@ -1,4 +1,3 @@
-import {session} from '../../../angler'
 export default {
   event: 'user._login',
   invoke: async function (params) {
@@ -11,7 +10,7 @@ export default {
         }
       }
     );
-    const data = await session.get(params);
+    const data = await container.session.get(params);
     if (data.openKeys) {
       container.send(
         params,
