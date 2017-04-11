@@ -11,7 +11,7 @@ export default function (event,collection) {
         set = packet.data;
         delete set._id;
       }
-      let obj = await container.dbs.mongo.collections[collection].update(
+      let obj = await container.mongo.collections[collection].update(
         query,
         {'$set': set}
       );

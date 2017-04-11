@@ -1,35 +1,7 @@
-import dbs,{confMongoDB,confMySql,confSolrCore} from '../angler/dbs';
+import {confMongoDB,confMySql,confSolrCore} from '../angler/dbs';
 async function init() {
 
-  await confMongoDB(dbs, {
-      default: {
-        host: 'localhost',
-        database: 'cloudroom',
-        collections: require('./mongo')
-      },
-      session: {
-        host: 'localhost',
-        database: 'cloudroom',
-      },
-    },
-  );
-  await confMySql(dbs, {
-      default: {
-        host: 'localhost',
-        user: 'root',
-        password: '123456',
-        database: 'cloudroom',
-        tables: require('./mysql')
-      }
-    },
-  );
-  await confSolrCore(dbs, {
-      default: {
-        host: 'localhost',
-        cores: require('./solr')
-      }
-    }
-  );
+
   // dbs.solr.user.client.delete('name','admin',function (err, obj) {
   //   console.log(obj);
   // });

@@ -6,8 +6,8 @@ const init = async ()=> {
   await Angler.load(require('./express'));
   //初始化微信
   await Angler.load(require('./weixin'));
-  //初始化数据库
-  await Angler.load(require('./database'));
+  // //初始化数据库
+  // await Angler.load(require('./database'));
   //初始化websocket
   await Angler.load(require('./websocket'));
   //开始执行
@@ -15,3 +15,4 @@ const init = async ()=> {
 };
 
 let result = init();
+

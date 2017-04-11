@@ -3,12 +3,12 @@ export default function (event,collection) {
     event,
     invoke: async function (params, array) {
       const {container, packet} = params;
-      const link = container.dbs.mongo.collections[collection].linkCollection[array];
+      const link = container.mongo.collections[collection].linkCollection[array];
       if (link) {
         let push = {};
-        push[array] = await container.dbs.mongo.collections[link].findOneSimple(packet.query);
+        push[array] = await container.mongo.collections[link].findOneSimple(packet.query);
 
-        let obj = await container.dbs.mongo.collections[collection].update(
+        let obj = await container.mongo.collections[collection].update(
           packet.data.query,
           {
             '$push': push

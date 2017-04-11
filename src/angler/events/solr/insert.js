@@ -5,8 +5,8 @@ export default function (table) {
   return {
     event: `${table}.insert`,
     invoke: async function (params) {
-      const {packet} = params;
-      let result = await dbs.solrs.users.add({
+      const {container,packet} = params;
+      let result = await container.solrs.users.add({
 
       });
       console.log(result);

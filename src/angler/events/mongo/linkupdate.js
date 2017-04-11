@@ -3,8 +3,8 @@ export default function(event,collection) {
     event: `${collection}._update`,
     invoke: async function (params) {
       const {container, packet} = params;
-      const obj = await container.dbs.mongo.collections[collection].simple(packet.data);
-      container.dbs.mongo.collections[collection].useCollections.map(({name, field}) => {
+      const obj = await container.mongo.collections[collection].simple(packet.data);
+      container.mongo.collections[collection].useCollections.map(({name, field}) => {
         const set = {};
         set[`${field}.$`] = obj;
         const queue = {};
@@ -13,7 +13,7 @@ export default function(event,collection) {
             _id: obj._id
           }
         };
-        container.dbs.mongo.collections[name].update(
+        container.mongo.collections[name].update(
           queue,
           {$set: set}
         )

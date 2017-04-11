@@ -1,8 +1,10 @@
-import dbs from './dbs'
+export default class {
+  constructor(container){
+    this.container = container
+  }
 
-export default {
   async get({equipment}){
-    const {session} = dbs.mongo;
+    const {session} = this.container.mongo;
     let obj = await session.findOne('session', {
       _id: equipment.__ID__
     });
@@ -12,12 +14,13 @@ export default {
       })
     }
     return obj;
-  },
+  }
+
   async bindUser(){
 
-  },
+  }
   async set({equipment}, data){
-    const {session} = dbs.mongo;
+    const {session} = this.container.mongo;
 
     let obj = await session.findOne('session', {
       _id: equipment.__ID__
@@ -36,5 +39,5 @@ export default {
       })
     }
     return obj;
-  },
+  }
 }

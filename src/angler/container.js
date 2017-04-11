@@ -1,15 +1,13 @@
 import Event from './event'
 import MainBoard from './mainboard'
-import dbs from '../angler/dbs'
-import session from '../angler/session'
+import Session from '../angler/session'
 
 class Container {
   constructor({source, protocol,port}) {
     this.events = new Event(this);
     this.source = source;
     this.protocol = protocol;
-    this.session = session;
-    this.dbs = dbs;
+    this.session = new Session(this);
     source.link({
       container: this,
       protocol

@@ -3,7 +3,7 @@ export default function (event, table) {
     event,
     invoke: async function (params) {
       const {container, packet} = params;
-      await container.dbs.mysql.tables[table].update(
+      await container.mysql.tables[table].update(
         packet.data
       );
     }

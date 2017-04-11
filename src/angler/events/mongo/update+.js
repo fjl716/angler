@@ -5,7 +5,7 @@ export default function (event,collection) {
       const {container, packet} = params;
       let push = {};
       push[array] = packet.data.object;
-      let obj = await container.dbs.mongo.collections[collection].update(
+      let obj = await container.mongo.collections[collection].update(
         packet.data.query,
         {
           '$push': push

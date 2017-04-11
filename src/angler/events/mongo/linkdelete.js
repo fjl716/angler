@@ -6,14 +6,14 @@ export default function(event,collection) {
       const id = {
         _id: packet.data._id
       };
-      container.dbs.mongo.collections[collection].useCollections.map(async({name, field}) => {
+      container.mongo.collections[collection].useCollections.map(async({name, field}) => {
         const queue = {};
         queue[field] = {
           $elemMatch: id
         };
         const pop = {};
         pop[field] = id;
-        const obj = await dbs.mongo.collections[name].update(
+        const obj = await container.mongo.collections[name].update(
           queue,
           {$pop: pop}
         );
