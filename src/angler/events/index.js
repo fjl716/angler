@@ -20,19 +20,20 @@ async function initEvent(list) {
       const container = angler.containers[id];
       let module;
       if (invoke) {
-        module = requireFromString(`module.exports = {
-    event: '${event}',
-    invoke: async function (params) {
-       ${invoke}
-    }
-  };`);
+        module = requireFromString(
+          `module.exports = {
+            event: '${event}',
+            invoke: async function (params) {
+              ${invoke}
+            }
+         };`);
       } else if (path) {
         let sp = path.split('.');
         let func = events;
         sp.map(name => {
           func = func[name];
         });
-        return func(event, params)
+        module = func(event, params)
       }
       container.event(module);
     } else {
