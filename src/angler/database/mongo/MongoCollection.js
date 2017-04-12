@@ -10,23 +10,32 @@ class MongoCollection {
     this.db = db;
     this.name = name;
     this.dbName = dbName ? dbName : 'default';
-    this.initData = init ? init : {};
+
+    this.initData=[];
+    for (let name in init) {
+      let type = init[name].substr(0,1);
+      let data = init[name].substr(2);
+      switch (type){
+        case 't':
+          switch (data){
+            case 'newid':
+              this.initData.push((obj)=>{
+                obj[name] = new ObjectID();
+              });
+              break;
+          }
+          break;
+      }
+    }
     this.simpleFields = (simple instanceof Array) ? simple : ['_id'];
     this.linkCollection = link;
     this.useCollections = [];
   }
 
   init(obj) {
-    for (let name in this.initData) {
-      let value = this.initData[name];
-      if (util.isFunction(value)) {
-        obj[name] = value(obj);
-      } else if (util.isArray(value)) {
-        obj[name] = value.slice();
-      } else if (util.isObject(value)) {
-        obj[name] = Object.assign({}, value);
-      }
-    }
+    this.initData.map(func=>{
+      func(obj);
+    });
     return Json2Bson(obj);
   }
 
