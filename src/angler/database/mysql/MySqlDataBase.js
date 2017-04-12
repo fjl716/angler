@@ -4,8 +4,8 @@ import Table from './Table'
 class MySqlDataBase {
   constructor({host, user, password, database,tables}) {
     this.tables = {};
-    tables.default.map(item => {
-      const {name, table,key, fields} = item.default;
+    tables.map(item => {
+      const {name, table,key, fields} = item;
       this.tables[name] = new Table(this,table,key, fields);
     });
 

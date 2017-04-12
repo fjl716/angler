@@ -1,6 +1,3 @@
-import dbs from '../../dbs';
-import solr from 'solr-client';
-
 export default function (table) {
   return {
     event: `${table}.insert`,

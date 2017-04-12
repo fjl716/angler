@@ -2,43 +2,42 @@ import {Container,proxys} from '../angler';
 import WebSocket,{JsonProtocol} from '../angler/sources/websocket';
 // import {TestServer} from './servers'
 import initEvent from './events'
-import {confMongoDB,confMySql,confSolrCore} from '../angler/dbs';
 
 export async function init(system) {
   const container = new Container({
     source: new WebSocket(system.express),
     protocol: JsonProtocol
   });
-  await confMongoDB(container, {
-      default: {
-        host: 'localhost',
-        database: 'cloudroom',
-        collections: require('./mongo')
-      },
-      session: {
-        host: 'localhost',
-        database: 'cloudroom',
-      },
-    },
-  );
-  await confMySql(container, {
-      default: {
-        host: 'localhost',
-        user: 'root',
-        password: '123456',
-        database: 'cloudroom',
-        tables: require('./mysql')
-      }
-    },
-  );
-  await confSolrCore(container, {
-      default: {
-        host: 'localhost',
-        cores: require('./solr')
-      }
-    }
-  );
-  initEvent(container);
+  // await confMongoDB(container, {
+  //     default: {
+  //       host: 'localhost',
+  //       database: 'cloudroom',
+  //       collections: require('./mongo')
+  //     },
+  //     session: {
+  //       host: 'localhost',
+  //       database: 'cloudroom',
+  //     },
+  //   },
+  // );
+  // await confMySql(container, {
+  //     default: {
+  //       host: 'localhost',
+  //       user: 'root',
+  //       password: '123456',
+  //       database: 'cloudroom',
+  //       tables: require('./mysql')
+  //     }
+  //   },
+  // );
+  // await confSolrCore(container, {
+  //     default: {
+  //       host: 'localhost',
+  //       cores: require('./solr')
+  //     }
+  //   }
+  // );
+  // initEvent(container);
 
 
   //增加过滤器

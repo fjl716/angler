@@ -1,9 +1,12 @@
 import Event from './event'
 import MainBoard from './mainboard'
 import Session from '../angler/session'
+import angler from '../angler/angler'
+import WebSocket,{JsonProtocol} from './sources/websocket';
+const express = require('express');
 
 class Container {
-  constructor({source, protocol,port}) {
+  constructor({source, protocol}) {
     this.events = new Event(this);
     this.source = source;
     this.protocol = protocol;
@@ -14,6 +17,7 @@ class Container {
     });
   }
 
+
   filter(model) {
 
   }
@@ -22,8 +26,8 @@ class Container {
     this.source.start();
   }
 
-  event(events) {
-    this.events.addEvents(events);
+  event(event) {
+    this.events.add(event);
   }
 
   arrive(params) {
@@ -83,4 +87,40 @@ class Container {
     }
   }
 }
+
+
+async function initContainers (list) {
+  list.map(container => {
+    let source;
+    switch (container.source.type) {
+      case 'websocket':
+        const port = container.source.port;
+        const name = `P${port}`;
+        if (!angler.express[name]) {
+          angler.express[name] = express();
+          angler.addStart(() => {
+            angler.express[name].listen(port);
+          });
+        }
+        source = new WebSocket(angler.express[name]);
+        break;
+      case 'tcp':
+
+        break;
+    }
+    let protocol;
+    switch (container.protocol) {
+      case 'json':
+        protocol = JsonProtocol;
+        break;
+    }
+    angler.containers[`C${container._id}`] = new Container({source, protocol});
+    angler.containers[`C${container._id}`].start();
+  });
+}
+
+export {
+  initContainers
+}
+
 export default Container;

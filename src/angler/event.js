@@ -10,8 +10,9 @@ class Event {
     this.index = 1;
   }
 
-  addEvent(item, eventName, code) {
-    this.event.on(eventName, (obj, ...params) => {
+  add(event) {
+    const code = this.index++;
+    this.event.on(event.event, (obj, ...params) => {
       const previous = obj.previous ? obj.previous : defaultMsg;
       const packet = obj.packet;
 
@@ -19,16 +20,29 @@ class Event {
 
       if (packet.path.indexOf(code) == -1) {
         packet.path.push(code);
-        item.invoke(obj, ...params);
+        event.invoke(obj, ...params);
       }
     });
   }
-
-  addEvents = (events) => {
-    events.map(event => {
-      this.addEvent(event, event.event, this.index++);
-    });
-  };
+  // addEvent(item, eventName, code) {
+  //   this.event.on(eventName, (obj, ...params) => {
+  //     const previous = obj.previous ? obj.previous : defaultMsg;
+  //     const packet = obj.packet;
+  //
+  //     packet.path = previous.path.slice();
+  //
+  //     if (packet.path.indexOf(code) == -1) {
+  //       packet.path.push(code);
+  //       item.invoke(obj, ...params);
+  //     }
+  //   });
+  // }
+  //
+  // addEvents = (events) => {
+  //   events.map(event => {
+  //     this.addEvent(event, event.event, this.index++);
+  //   });
+  // };
 
   async arrive({equipment, packet}) {
     this.event.emit(packet.getKey(), {

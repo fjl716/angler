@@ -1,21 +1,32 @@
 import MySqlDataBase from './MySqlDataBase'
+import angler from '../../angler'
 
-async function confMySql(dbs,dbConf) {
-  if (!dbs.mysql) {
-    dbs.mysql = new MySqlDataBase(dbConf.default);
-  }
-  for (let name in dbConf) {
-    if (name === 'default')
-      continue;
-    dbs.mysql[name] = new MySqlDataBase(dbConf[name]);
-    Object.assign(
-      dbs.mysql.tables,
-      dbs.mysql[name].tables
-    )
-  }
+async function initMySql(list) {
+  list.filter(item => item.name === 'default').map(mysql => {
+    const id = `C${mysql.container}`;
+    if (angler.containers[id]) {
+      const container = angler.containers[id];
+      container.mysql = new MySqlDataBase(mysql);
+    } else {
+      console.warn(`not found ${mysql.container}`)
+    }
+  });
+
+  list.filter(item => item.name !== 'default').map(mysql => {
+    if (angler.containers[id]) {
+      const container = angler.containers[id];
+      container.mysql[mysql.name] = new MySqlDataBase(mysql);
+      Object.assign(
+        container.mysql.tables,
+        container.mysql[name].tables
+      )
+    } else {
+      console.warn(`not found ${mysql.container}`)
+    }
+  });
 }
 
 export {
-  confMySql
+  initMySql
 }
 

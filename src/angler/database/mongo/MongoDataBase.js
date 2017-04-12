@@ -4,11 +4,10 @@ import {Json2Bson} from './helper';
 import MongoCollection from './MongoCollection';
 
 class MongoDataBase {
-  constructor({host,port=27017,database,collections={default:[]}}) {
+  constructor({host,port=27017,database,collections=[]}) {
     this.url = `mongodb://${host}:${port}/${database}`;
     this.collections = {};
-    collections.default.map(item => {
-      item = item.default;
+    collections.map(item => {
       this.collections[item.name] = new MongoCollection(this,item);
     });
   }
@@ -48,6 +47,7 @@ class MongoDataBase {
 
   async findOne(collection, query) {
     const result = await this.database.collection(collection).findOne(Json2Bson(query));
+
     if (result){
       for(let name in result){
         if (result[name].constructor){

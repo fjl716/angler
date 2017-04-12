@@ -1,6 +1,6 @@
 import SolrCore from './SolrCore'
 
-async function confSolrCore(dbs,dbConf) {
+async function initSolr(dbs,dbConf) {
   if (!dbs.solr) dbs.solr = {};
 
   for(let name in dbConf) {
@@ -17,7 +17,7 @@ async function confSolrCore(dbs,dbConf) {
 }
 
 export {
-  confSolrCore
+  initSolr
 }
 
 export default SolrCore
