@@ -1,11 +1,11 @@
 export default function (table) {
   return {
     event: `${table}.insert`,
-    invoke: async function (params) {
-      const {container,packet} = params;
-      let result = await container.solrs.users.add({
-
-      });
+    result: [{event: `${table}.delete`}],
+    invoke: async function (probe) {
+      let result = await probe.database.solrs[table].add(
+        probe.packet.data
+      );
       console.log(result);
     }
   }
