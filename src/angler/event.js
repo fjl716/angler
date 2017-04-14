@@ -1,5 +1,4 @@
 import Emitter from 'pattern-emitter2';
-import util from 'util';
 
 class Probe {
   constructor({container, equipment, packet}, event) {
@@ -44,9 +43,6 @@ class Event {
     const code = this.index++;
     this.event.on(event.event, async (obj, ...params) => {
       const {equipment} = obj;
-      if (!util.isArray(event.result)) {
-        event.result = [event.result];
-      }
       const probe = new Probe(obj, event);
       await event.invoke(probe, ...params);
       if (probe.changeId){

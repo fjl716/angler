@@ -1,6 +1,16 @@
 import {MongoDataBase} from './database/mongo';
 import angler,{initContainers,initMongo,initMySql,initSolr,initEvent} from './index'
 import log4js from 'log4js'
+log4js.configure({
+  appenders: [{
+    type: 'console',
+    layout: {
+      type: 'pattern',
+      pattern: '[%[%5.5p%]]-%m'
+    }
+  }]
+});
+
 
 const logger = log4js.getLogger('angler');
 
@@ -8,10 +18,10 @@ async function init(step,func) {
   try {
     await func();
   }catch (ex){
-    logger.fatal(`initialize ${step} failed`);
+    logger.fatal(`Initialize ${step} Failed`);
     return true;
   }
-  logger.trace(`initialize ${step} finish`);
+  logger.trace(`Initialize ${step} Finish`);
   return false;
 }
 

@@ -4,6 +4,9 @@ import remoting from './remoting'
 import solr from './solr'
 import angler from '../angler'
 import util from 'util'
+import log4js from 'log4js'
+
+const logger = log4js.getLogger('angler');
 
 let requireFromString = require('require-from-string');
 
@@ -16,10 +19,12 @@ const events = {
 
 async function initEvent(list) {
   list.map(conf => {
-    const {path, container, event, result, invoke, params} = conf;
-    const id = `C${container}`;
-    if (angler.containers[id]) {
-      const container = angler.containers[id];
+    const {path, event, result, invoke, params} = conf;
+    const id = `C${conf.container}`;
+    const container = angler.containers[id];
+    if (!container) {
+      logger.warn(`add event ${conf} \r\n not found ${container}`);
+    } else {
       let module;
       if (invoke) {
         module = requireFromString(
@@ -42,9 +47,11 @@ async function initEvent(list) {
           module = func(event, params);
         }
       }
+      if (!util.isArray(module.result)) {
+        module.result = [module.result];
+      }
       container.event(module);
-    } else {
-      console.warn(`not found ${container}`);
+      logger.trace(`${conf.container}.Event <- [${event} -> ${module.result.map(result=>result.event)}]`);
     }
   });
 }
