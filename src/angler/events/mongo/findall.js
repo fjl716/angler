@@ -1,5 +1,4 @@
 export default function (event,result,collection) {
-  console.log(event,result,collection);
   return {
     event,
     result: [{event: result}],
