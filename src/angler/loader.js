@@ -18,8 +18,8 @@ async function mongoLoader(confDB) {
   const solr = await conf.find('solr',{pageSize: 1000});
   await initSolr(solr);
 
-  // const event = await conf.find('event',{pageSize: 1000});
-  // await initEvent(event);
+  const event = await conf.find('event',{pageSize: 1000});
+  await initEvent(event);
   return angler;
 }
 

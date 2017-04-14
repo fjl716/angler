@@ -14,7 +14,7 @@ const events = {
 
 async function initEvent(list) {
   list.map(conf => {
-    const {path, container, event, invoke, params} = conf;
+    const {path, container, event, result, invoke, params} = conf;
     const id = `C${container}`;
     if (angler.containers[id]) {
       const container = angler.containers[id];
@@ -22,18 +22,19 @@ async function initEvent(list) {
       if (invoke) {
         module = requireFromString(
           `module.exports = {
-            event: '${event}',
-            invoke: async function (params) {
+            invoke: async function (probe) {
               ${invoke}
             }
          };`);
+        module.event = event;
+        module.result = result;
       } else if (path) {
         let sp = path.split('.');
         let func = events;
         sp.map(name => {
           func = func[name];
         });
-        module = func(event, params)
+        module = func(event, result, params)
       }
       container.event(module);
     } else {
