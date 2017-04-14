@@ -1,18 +1,12 @@
-export default function (event, collection) {
+export default function (event,collection) {
   return {
     event,
-    invoke: async function (params) {
-      const {container, packet} = params;
-      let obj = await container.mongo.collections[collection].delete(packet.data);
-      container.send(
-        params,
-        {
-          packet: {
-            event: `${collection}._delete`,
-            data: obj
-          }
-        }, true
-      );
+    result: [{event: `${collection}.delete`}],
+    invoke: async function (probe) {
+      let list = await probe.database.mongo.collections[collection].delete(probe.packet.data);
+      probe.send({
+        data: list
+      }, true);
     }
   }
 };

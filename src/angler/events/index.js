@@ -34,9 +34,10 @@ async function initEvent(list) {
         sp.map(name => {
           func = func[name];
         });
-        module = func(event, result, params)
+        module = func(event, params)
       }
       container.event(module);
+
     } else {
       console.warn(`not found ${container}`);
     }

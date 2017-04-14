@@ -1,18 +1,12 @@
 export default function (event,collection) {
   return {
     event,
-    invoke: async function (params) {
-      const {container, packet} = params;
-      let obj = await container.mongo.collections[collection].findOne(packet.data);
-      container.send(
-        params,
-        {
-          packet: {
-            event: `${collection}._findone`,
-            data: obj
-          }
-        }, true
-      );
+    result: [{event: `${collection}._findone`}],
+    invoke: async function (probe) {
+      let obj = await probe.database.mongo.collections[collection].findOne(probe.packet.data);
+      probe.send({
+        data: obj
+      }, true);
     }
   }
 };
