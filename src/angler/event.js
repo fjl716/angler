@@ -1,10 +1,6 @@
 import Emitter from 'pattern-emitter2';
 import util from 'util';
-import MainBoard from './mainboard'
 
-const defaultMsg = {
-  path : []
-};
 class Probe {
   constructor({container, equipment, packet}, event) {
     this.packet = packet;
@@ -59,38 +55,8 @@ class Event {
       probe.results.map(result=>{
         this.container.send(event,result);
       });
-      //
-      // const previous = obj.previous ? obj.previous : defaultMsg;
-      // const packet = obj.packet;
-      //
-      // packet.path = previous.path.slice();
-      //
-      // if (packet.path.indexOf(code) == -1) {
-      //   packet.path.push(code);
-      //   await event.invoke(obj, ...params);
-      // }
     });
   }
-
-  // addEvent(item, eventName, code) {
-  //   this.event.on(eventName, (obj, ...params) => {
-  //     const previous = obj.previous ? obj.previous : defaultMsg;
-  //     const packet = obj.packet;
-  //
-  //     packet.path = previous.path.slice();
-  //
-  //     if (packet.path.indexOf(code) == -1) {
-  //       packet.path.push(code);
-  //       item.invoke(obj, ...params);
-  //     }
-  //   });
-  // }
-  //
-  // addEvents = (events) => {
-  //   events.map(event => {
-  //     this.addEvent(event, event.event, this.index++);
-  //   });
-  // };
 
   async arrive({equipment, packet}) {
     this.event.emit(packet.getKey(), {
