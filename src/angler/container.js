@@ -10,13 +10,13 @@ class Container {
     this.events = new Event(this);
     this.source = source;
     this.protocol = protocol;
-    this.session = new Session(this);
+    this.database = {};
+    this.session = new Session(this.database);
     source.link({
       container: this,
       protocol
     });
   }
-
 
   filter(model) {
 
@@ -35,7 +35,7 @@ class Container {
   }
 
   change(equipment, newId) {
-    if (equipment.__ID__ == newId)
+    if (equipment.__ID__ === newId)
       return equipment;
     MainBoard.remove(equipment);
     const find = MainBoard.get(newId);
@@ -51,32 +51,29 @@ class Container {
     return equipment;
   }
 
-  send(original,block,type) {
-    const equipment = block.equipment ? block.equipment : original.equipment;
-    const previous = original.packet;
-    const packet = block.packet;
-
-    for (let name in previous) {
-      if (name != 'event' &&
-        name != 'data' &&
-        name != 'path'
-      )
-        packet[name] = previous[name];
+  send(event,result) {
+    const equipment = MainBoard.get(result.equipment);
+    if (!equipment) {
+      console.warn(`equipment ${result.equipment} is null`);
+      return false;
     }
-    if (type) {
-      const equipment = MainBoard.get(packet.__ID__);
-      if (equipment) {
-        equipment.send(packet);
-      }else {
-        console.log("equipment is null");
-      }
-      if (type !== true) {
-        delete packet['__CALL_ID__'];
+    for (let name in event) {
+      if (name !== 'event' &&
+        name !== 'data' &&
+        name !== 'path' &&
+        name !== 'equipment' && name !== 'isOut'
+      )
+        result[name] = event[name];
+    }
+    if (result.isOut) {
+      equipment.send(result);
+      if (result.isOut !== true) {
+        delete event['__CALL_ID__'];
       }
     }
     this.arrive({
       equipment,
-      packet: this.protocol.packet(equipment, packet)
+      packet: this.protocol.packet(equipment, result)
     });
   }
 

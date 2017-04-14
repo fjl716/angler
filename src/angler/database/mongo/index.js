@@ -8,8 +8,8 @@ async function initMongo(list) {
     const id = `C${mongo.container}`;
     if (angler.containers[id]) {
       const container = angler.containers[id];
-      container.mongo = new MongoDataBase(mongo);
-      await container.mongo.init();
+      container.database.mongo = new MongoDataBase(mongo);
+      await container.database.mongo.init();
     } else {
       console.warn(`not found ${mongo.container}`)
     }
@@ -19,22 +19,22 @@ async function initMongo(list) {
     const id = `C${mongo.container}`;
     if (angler.containers[id]) {
       const container = angler.containers[id];
-      container.mongo[mongo.name] = new MongoDataBase(mongo);
-      container.mongo[mongo.name].init();
+      container.database.mongo[mongo.name] = new MongoDataBase(mongo);
+      container.database.mongo[mongo.name].init();
       Object.assign(
-        container.mongo.collections,
-        container.mongo.collections
+        container.database.mongo.collections,
+        container.database.mongo.collections
       )
     } else {
       console.warn(`not found ${mongo.container}`)
     }
   });
   Object.values(angler.containers).map(container=>{
-    if (container.mongo){
-      for (let name in container.mongo.collections) {
+    if (container.database.mongo){
+      for (let name in container.database.mongo.collections) {
         //关联数据库
-        for (let field in container.mongo.collections[name].linkCollection) {
-          container.mongo.collections[this.tables[name].linkCollection[field]].useCollections.push({
+        for (let field in container.database.mongo.collections[name].linkCollection) {
+          container.database.mongo.collections[this.tables[name].linkCollection[field]].useCollections.push({
             name: name,
             field: field
           });

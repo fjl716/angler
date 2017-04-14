@@ -1,7 +1,41 @@
 import Emitter from 'pattern-emitter2';
+import util from 'util';
+import MainBoard from './mainboard'
+
 const defaultMsg = {
   path : []
 };
+class Probe {
+  constructor({container, equipment, packet}, event) {
+    this.packet = packet;
+    this.results = [];
+    this.database = container.database;
+    this.session = container.session;
+    this.event = event;
+    this.equipment = equipment.__ID__;
+  }
+
+  send({event, equipment=this.equipment, data},isOut=false) {
+    if (event){
+      const result = this.event.result.find(result => result.event === event);
+      if (result) {
+        this.results.push(Object.assign({},
+          {equipment},
+          result,
+          {data,isOut},
+        ))
+      }
+    }else{
+      this.event.result.map(result => {
+        this.results.push(Object.assign({},
+          {equipment},
+          result,
+          {data,isOut},
+        ))
+      });
+    }
+  }
+}
 
 class Event {
   constructor(container) {
@@ -12,18 +46,29 @@ class Event {
 
   add(event) {
     const code = this.index++;
-    this.event.on(event.event, (obj, ...params) => {
-      const previous = obj.previous ? obj.previous : defaultMsg;
-      const packet = obj.packet;
-
-      packet.path = previous.path.slice();
-
-      if (packet.path.indexOf(code) == -1) {
-        packet.path.push(code);
-        event.invoke(obj, ...params);
+    this.event.on(event.event, async (obj, ...params) => {
+      const {equipment} = obj;
+      const probe = new Probe(obj, event);
+      await event.invoke(probe, ...params);
+      if (probe.changeId){
+        this.container.change(equipment, probe.changeId);
       }
+      probe.results.map(result=>{
+        this.container.send(event,result);
+      });
+      //
+      // const previous = obj.previous ? obj.previous : defaultMsg;
+      // const packet = obj.packet;
+      //
+      // packet.path = previous.path.slice();
+      //
+      // if (packet.path.indexOf(code) == -1) {
+      //   packet.path.push(code);
+      //   await event.invoke(obj, ...params);
+      // }
     });
   }
+
   // addEvent(item, eventName, code) {
   //   this.event.on(eventName, (obj, ...params) => {
   //     const previous = obj.previous ? obj.previous : defaultMsg;

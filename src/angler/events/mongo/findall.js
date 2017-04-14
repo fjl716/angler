@@ -1,18 +1,13 @@
-export default function (event,collection) {
+export default function (event,result,collection) {
   return {
     event,
-    invoke: async function (params) {
-      const {container, packet} = params;
-      let list = await container.mongo.collections[collection].find({pageSize:100});
-      container.send(
-        params,
-        {
-          packet: {
-            event: `${collection}._findall`,
-            data: list
-          }
-        }, true
-      );
+    result: [{event: result}],
+    invoke: async function (probe) {
+      let list = await probe.database.mongo.collections[collection].find({pageSize: 100});
+      probe.send({
+        event: `${collection}._findall`,
+        data: list
+      }, true);
     }
   }
 };

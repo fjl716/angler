@@ -1,6 +1,7 @@
 const equipments={};
 
 export default {
+  result:equipments,
   add(equipment) {
     equipments[equipment.__ID__] = equipment;
   },
@@ -11,7 +12,7 @@ export default {
     const id = equipment.__ID__;
     // console.log(id);
     setTimeout(function () {
-      // console.log('DELETE', id);
+      console.log('DELETE', id);
       delete equipments[id]
     }, 5000);
   }
