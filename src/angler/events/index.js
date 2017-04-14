@@ -3,6 +3,8 @@ import mysql from './mysql'
 import remoting from './remoting'
 import solr from './solr'
 import angler from '../angler'
+import util from 'util'
+
 let requireFromString = require('require-from-string');
 
 const events = {
@@ -34,10 +36,13 @@ async function initEvent(list) {
         sp.map(name => {
           func = func[name];
         });
-        module = func(event, params)
+        if (util.isArray(params)) {
+          module = func(event, ...params);
+        } else {
+          module = func(event, params);
+        }
       }
       container.event(module);
-
     } else {
       console.warn(`not found ${container}`);
     }
