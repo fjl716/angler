@@ -27,6 +27,7 @@
     "isomorphic-style-loader": "0.0.10",
     "jade": "1.11.0",
     "jsonwebtoken": "5.7.0",
+    "log4js": "^1.1.1",
     "markdown-it": "6.0.0",
     "mongodb": "2.2.19",
     "mysql": "^2.13.0",
