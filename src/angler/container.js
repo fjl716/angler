@@ -51,29 +51,24 @@ class Container {
     return equipment;
   }
 
-  send(event,result) {
+  send(packet,result) {
     const equipment = MainBoard.get(result.equipment);
     if (!equipment) {
       console.warn(`equipment ${result.equipment} is null`);
       return false;
     }
-
-    console.log(event);
-
-    for (let name in event) {
+    for (let name in packet) {
       if (name !== 'event' &&
         name !== 'data' &&
         name !== 'path' &&
         name !== 'equipment' && name !== 'isOut'
       )
-        result[name] = event[name];
+        result[name] = packet[name];
     }
     if (result.isOut) {
       equipment.send(result);
-      if (result.isOut !== true) {
-        delete event['__CALL_ID__'];
-      }
     }
+    delete result.__CALL_ID__;
     this.arrive({
       equipment,
       packet: this.protocol.packet(equipment, result)

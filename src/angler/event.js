@@ -48,7 +48,6 @@ class Event {
       if (probe.changeId){
         this.container.change(equipment, probe.changeId);
       }
-
       probe.results.map(result=>{
         this.container.send(packet,result);
       });
