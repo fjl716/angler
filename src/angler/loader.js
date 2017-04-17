@@ -1,4 +1,5 @@
 import {MongoDataBase} from './database/mongo';
+import Event from './event'
 import angler,{initContainers,initMongo,initMySql,initSolr,initEvent} from './index'
 import log4js from 'log4js'
 log4js.configure({
@@ -10,7 +11,6 @@ log4js.configure({
     }
   }]
 });
-
 
 const logger = log4js.getLogger('angler');
 
@@ -62,6 +62,22 @@ async function mongoLoader(confDB) {
   return angler;
 }
 
+async function mongoInitEvent(confDB) {
+  const conf = new MongoDataBase(confDB);
+  await conf.init();
+  logger.trace('link confDB');
+  Object.values(angler.containers).map(container => {
+    container.events = new Event(container);
+  });
+  if (await init('Event', async () => {
+      const event = await conf.find('event', {pageSize: 1000});
+      await initEvent(event);
+    }))
+    return;
+  return angler;
+}
+
 export {
-  mongoLoader
+  mongoLoader,
+  mongoInitEvent
 }
