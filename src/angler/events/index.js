@@ -48,7 +48,9 @@ async function initEvent(list) {
             module = func(event, params);
           }
         }
-        if (!util.isArray(module.result)) {
+        if (!module.result){
+          module.result = [];
+        } else if (!util.isArray(module.result)) {
           module.result = [module.result];
         }
         container.event(module);
