@@ -3,9 +3,9 @@ export default function (event,collection) {
     event,
     result: {event: `${collection}.delete`},
     invoke: async function (probe) {
-      let list = await probe.database.mongo.collections[collection].delete(probe.packet.data);
+      let obj = await probe.database.mongo.collections[collection].delete(probe.packet.data);
       probe.send({
-        data: list
+        data: obj
       }, true);
     }
   }

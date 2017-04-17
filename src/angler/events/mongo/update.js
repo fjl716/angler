@@ -1,11 +1,11 @@
 
-
 export default function (event,collection) {
   return {
     event,
-    invoke: async function (params) {
-      const {container, packet} = params;
-      let {query, set}=packet.data;
+    result: {event: `${collection}._update`},
+    invoke: async function (probe) {
+      const {packet} = probe;
+      let {query, set} = packet.data;
       if (!query) {
         query = {
           _id: packet.data._id
@@ -13,17 +13,12 @@ export default function (event,collection) {
         set = packet.data;
         delete set._id;
       }
-      let obj = await container.mongo.collections[collection].update(
+      let obj = await probe.database.mongo.collections[collection].update(
         query,
         {'$set': set}
       );
-      container.send(
-        params,
-        {
-          packet: {
-            event: `${collection}._update`,
-            data: obj
-          }
+      probe.send({
+          data: obj
         }, true
       );
     }

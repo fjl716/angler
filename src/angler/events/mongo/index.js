@@ -17,7 +17,7 @@ import updateD from './update-'
 export default {
   linkdelete,
   linkupdate,
-  deleteZ,
+  delete:deleteZ,
   find,
   findall,
   findone,
