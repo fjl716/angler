@@ -42,14 +42,15 @@ class Event {
   add(event) {
     const code = this.index++;
     this.event.on(event.event, async (obj, ...params) => {
-      const {equipment} = obj;
+      const {equipment,packet} = obj;
       const probe = new Probe(obj, event);
       await event.invoke(probe, ...params);
       if (probe.changeId){
         this.container.change(equipment, probe.changeId);
       }
+
       probe.results.map(result=>{
-        this.container.send(event,result);
+        this.container.send(packet,result);
       });
     });
   }

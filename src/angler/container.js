@@ -57,6 +57,9 @@ class Container {
       console.warn(`equipment ${result.equipment} is null`);
       return false;
     }
+
+    console.log(event);
+
     for (let name in event) {
       if (name !== 'event' &&
         name !== 'data' &&
