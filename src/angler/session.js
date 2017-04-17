@@ -20,7 +20,7 @@ export default class {
 
   }
   async set(equipment, data){
-    const {session} = this.container.mongo;
+    const {session} = this.database.mongo;
 
     let obj = await session.findOne('session', {
       _id: equipment
