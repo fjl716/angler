@@ -5,6 +5,7 @@ import find from './find'
 import findall from './findall'
 import findone from './findone'
 import findsimple from './findsimple'
+import findsimples from './findsimples'
 import insert from './insert'
 import paging from './paging'
 import update$A from './update$+'
@@ -22,6 +23,7 @@ export default {
   findall,
   findone,
   findsimple,
+  findsimples,
   insert,
   paging,
   update$A,
