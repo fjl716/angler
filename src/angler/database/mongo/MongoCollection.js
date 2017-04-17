@@ -67,6 +67,11 @@ class MongoCollection {
     return this.simple(obj);
   }
 
+  async findSimples(query) {
+    let list = await this.db.find(this.name, query);
+    return list.map(obj => this.simple(obj));
+  }
+
   'delete'(query){
     return this.db.delete(this.name,query);
   }
