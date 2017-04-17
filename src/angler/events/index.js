@@ -42,6 +42,9 @@ async function initEvent(list) {
           sp.map(name => {
             func = func[name];
           });
+          if (!func){
+            logger.fatal(`initialize ${conf.path} event`);
+          }
           if (util.isArray(params)) {
             module = func(event, ...params);
           } else {
