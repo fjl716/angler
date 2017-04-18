@@ -2,9 +2,13 @@ import MongoCollection from './MongoCollection'
 import {Json2Bson,ObjectID} from './helper'
 import MongoDataBase from './MongoDataBase'
 import angler from '../../angler'
+import log4js from 'log4js'
+const logger = log4js.getLogger('angler');
 
 async function initMongo(list) {
+
   list.filter(item => item.name === 'default').map(async mongo => {
+    logger.trace(`initialize mongo default ${mongo.container}`);
     const id = `C${mongo.container}`;
     if (angler.containers[id]) {
       const container = angler.containers[id];
