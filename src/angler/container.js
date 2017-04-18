@@ -68,7 +68,6 @@ class Container {
     if (result.isOut) {
       equipment.send(result);
     }
-    delete result.__CALL_ID__;
     this.arrive({
       equipment,
       packet: this.protocol.packet(equipment, result)
