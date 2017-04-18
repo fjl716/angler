@@ -27,12 +27,12 @@ class MongoDataBase {
     return result.ops[0];
   }
 
-  async find(collection, {query={},pageSize=10,currentPage=0,orderBy}) {
+  async find(collection, {query={},pageSize=10,currentPage=1,orderBy}) {
     let result = await this.database.collection(collection).find(
       query,
       {
         limit: pageSize,
-        skip: currentPage * pageSize
+        skip: (currentPage - 1) * pageSize
       }
     ).toArray();
     return result;
