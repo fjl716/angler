@@ -67,7 +67,7 @@ async function mongoInitEvent(confDB) {
   await conf.init();
   logger.trace('link confDB');
   Object.values(angler.containers).map(container => {
-    container.events = new Event(container);
+    container.events.clear();
   });
   if (await init('Event', async () => {
       const event = await conf.find('event', {pageSize: 1000});
