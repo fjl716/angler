@@ -39,6 +39,10 @@ class Event {
     this.index = 1;
   }
 
+  clear(){
+    this.event.removeAllListeners();
+  }
+
   add(event) {
     const code = this.index++;
     this.event.on(event.event, async (obj, ...params) => {
