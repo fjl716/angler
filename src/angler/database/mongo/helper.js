@@ -12,10 +12,13 @@ function Json2Bson(obj) {
         obj[name] = new Date(parseInt(/^D:([0-9]*)$/.exec(value)[1]));
       }
     } else if (util.isArray(value)) {
-      value.map(item => {
+      obj[name] = value.map(item => {
         if (util.isObject(item)) {
-          Json2Bson(item);
+          return Json2Bson(item);
+        } else if (/^[0-9 a-f]{24}$/.test(item)) {
+          return new ObjectID(item);
         }
+        return item;
       })
     } else if (util.isObject(value)) {
       Json2Bson(value)
