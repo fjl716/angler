@@ -29,7 +29,7 @@ class MongoDataBase {
 
   async find(collection, {query={},pageSize=10,currentPage=1,orderBy}) {
     let result = await this.database.collection(collection).find(
-      query,
+      Json2Bson(query),
       {
         limit: pageSize,
         skip: (currentPage - 1) * pageSize
@@ -39,15 +39,12 @@ class MongoDataBase {
   }
 
   async size(collection,query) {
-    let result = await this.database.collection(collection).find(
-      query,
-    ).count();
+    let result = await this.database.collection(collection).find(Json2Bson(query)).count();
     return result;
   }
 
   async findOne(collection, query) {
     const result = await this.database.collection(collection).findOne(Json2Bson(query));
-
     if (result){
       for(let name in result){
         if (result[name].constructor){
@@ -65,7 +62,6 @@ class MongoDataBase {
   async update(collection, query, options) {
     query = Json2Bson(query);
     options = Json2Bson(options);
-
     const data = await this.database.collection(collection).findOne(query);
     if (data) {
       await this.database.collection(collection).updateOne(

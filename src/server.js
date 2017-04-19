@@ -15,7 +15,7 @@ const project = 'angler';
 const logger = log4js.getLogger('angler');
 
 mongoLoader({
-  host: 'localhost',
+  host: '192.168.1.34',
   database: project
 }).then((angler)=> {
   if (!angler){
