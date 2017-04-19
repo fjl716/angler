@@ -6,27 +6,28 @@ class MongoCollection {
   static newId = () => new ObjectID();
 
   constructor(db,params) {
-    const {name, init, dbName, simple,link} = params;
+    const {name, init, dbName, simple, link} = params;
     this.db = db;
     this.name = name;
     this.dbName = dbName ? dbName : 'default';
 
-    this.initData=[];
-    for (let name in init) {
-      let type = init[name].substr(0,1);
-      let data = init[name].substr(2);
-      switch (type){
-        case 't':
-          switch (data){
-            case 'newid':
-              this.initData.push((obj)=>{
-                obj[name] = new ObjectID();
-              });
-              break;
-          }
-          break;
+    this.initData = [];
+    init.map(({key, value}) => {
+        let type = value.substr(0, 1);
+        let data = value.substr(2);
+        switch (type) {
+          case 't':
+            switch (data) {
+              case 'newid':
+                this.initData.push((obj) => {
+                  obj[key] = new ObjectID();
+                });
+                break;
+            }
+            break;
+        }
       }
-    }
+    );
     this.simpleFields = (simple instanceof Array) ? simple : ['_id'];
     this.linkCollection = link;
     this.useCollections = [];
