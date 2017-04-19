@@ -4,13 +4,14 @@ export default function (event,collection) {
     result: {event: `${collection}._paging`},
     invoke: async function (probe) {
       const {packet} = probe;
-      console.log(probe.packet.data);
       let list = await probe.database.mongo.collections[collection].find(packet.data);
       let size = await probe.database.mongo.collections[collection].size(packet.data.query);
       probe.send({
         data: {
           items: list,
-          total: size
+          total: size,
+          pageSize: probe.packet.data.pageSize,
+          currentPage: probe.packet.data.currentPage,
         }
       }, true);
     }
