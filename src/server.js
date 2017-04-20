@@ -14,19 +14,18 @@ const project = 'angler';
 
 const logger = log4js.getLogger('angler');
 
-mongoLoader({
+const dbconf = {
   host: '192.168.1.34',
   database: project
-}).then((angler)=> {
+};
+
+mongoLoader(dbconf).then((angler)=> {
   if (!angler){
     logger.fatal('initialize angler failed');
     return;
   }
-  angler.express['P8080'].get('/', async function (req, res) {
-    await mongoInitEvent({
-      host: 'localhost',
-      database: project
-    });
+  Object.values(angler.express)[0].get('/', async function (req, res) {
+    await mongoInitEvent(dbconf);
     res.send('Fuck World');
   });
   angler.start();

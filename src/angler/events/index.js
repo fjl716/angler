@@ -20,7 +20,7 @@ const events = {
 async function initEvent(list) {
   list.map(conf => {
     try {
-      const {path, event, result, invoke, params} = conf;
+      const {path, eventname, result, invoke, params} = conf;
       const id = `C${conf.container}`;
       const container = angler.containers[id];
       if (!container) {
@@ -34,7 +34,7 @@ async function initEvent(list) {
               ${invoke}
             }
          };`);
-          module.event = event;
+          module.event = eventname;
           module.result = result;
         } else if (path) {
           let sp = path.split('.');
@@ -46,9 +46,12 @@ async function initEvent(list) {
             logger.fatal(`initialize ${conf.path} event`);
           }
           if (util.isArray(params)) {
-            module = func(event, ...params);
+            module = func(eventname, ...params);
           } else {
-            module = func(event, params);
+            module = func(eventname, params);
+          }
+          if (result){
+            module.result = result;
           }
         }
         if (!module.result){
@@ -57,7 +60,7 @@ async function initEvent(list) {
           module.result = [module.result];
         }
         container.event(module);
-        logger.trace(`${conf.container}.Event <- [${event} -> ${module.result.map(result=>result.event)}]`);
+        logger.trace(`${conf.container}.Event <- [${eventname} -> ${module.result.map(result=>result.event)}]`);
       }
     }catch(ex) {
       logger.fatal(`initialize event failed, ${conf.path},${ex}`);
