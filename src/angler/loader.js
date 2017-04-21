@@ -25,6 +25,14 @@ async function init(step,func) {
   return false;
 }
 
+async function fileLoader(model) {
+  await initContainers(model.container);
+  await initMongo(model.mongo);
+  await initMySql(model.mysql);
+  await initSolr(model.solr);
+  await initEvent(model.event);
+}
+
 async function mongoLoader(confDB) {
   const conf = new MongoDataBase(confDB);
   await conf.init();
