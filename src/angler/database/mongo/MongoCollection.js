@@ -65,7 +65,8 @@ class MongoCollection {
 
   async findOneSimple(query) {
     let obj = await this.db.findOne(this.name, query);
-    return this.simple(obj);
+    if(obj)
+      return this.simple(obj);
   }
 
   async findSimples(query) {
