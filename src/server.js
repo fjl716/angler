@@ -20,7 +20,7 @@ const logger = log4js.getLogger('angler');
 const project = 'angler';
 // const project = 'manager';
 const dbconf = {
-  host: 'localhost',
+  host: '192.168.1.13',
   database: project
 };
 
