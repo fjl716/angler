@@ -3,15 +3,16 @@ export default [
     "_id" : "58ec70f3097808014511046e",
     "container" : "58ec76b30978080145110474",
     "name" : "default",
-    "host" : "localhost",
+    "host" : "192.168.1.13",
     "port" : 27017,
     "database" : "cloudroom",
     "collections" : [
       {
         "name" : "calendar",
-        "init" : {
-          "_id" : "t:newid"
-        },
+        "init" : [
+          {key:"_id" ,
+            value:"t:newid"}
+],
         "simple" : [
           "_id",
           "name"
@@ -19,9 +20,10 @@ export default [
       },
       {
         "name" : "user",
-        "init" : {
-          "_id" : "t:newid"
-        },
+        "init" : [
+          {key:"_id" ,
+            value:"t:newid"}
+        ],
         "simple" : [
           "_id",
           "name",
@@ -30,9 +32,10 @@ export default [
       },
       {
         "name" : "sidebar",
-        "init" : {
-          "_id" : "t:newid"
-        },
+        "init" : [
+          {key:"_id" ,
+            value:"t:newid"}
+        ],
         "simple" : [
           "_id",
           "name"
@@ -43,9 +46,10 @@ export default [
       },
       {
         "name" : "role",
-        "init" : {
-          "_id" : "t:newid"
-        },
+        "init" : [
+          {key:"_id" ,
+            value:"t:newid"}
+        ],
         "simple" : [
           "_id",
           "name"
