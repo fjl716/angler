@@ -9,29 +9,29 @@ log4js.configure({
     }
   }]
 });
-// const project = 'angler';
-const project = 'manager';
 
 const logger = log4js.getLogger('angler');
+// import config from './config/config'
+//
+// fileLoader(config).then((angler)=>{
+//   angler.start();
+// });
 
+const project = 'angler';
+// const project = 'manager';
 const dbconf = {
   host: 'localhost',
   database: project
 };
-import config from './config/config'
 
-fileLoader(config).then((angler)=>{
+mongoLoader(dbconf).then((angler)=> {
+  if (!angler){
+    logger.fatal('initialize angler failed');
+    return;
+  }
+  Object.values(angler.express)[0].get('/', async function (req, res) {
+    await mongoInitEvent(dbconf);
+    res.send('Fuck World');
+  });
   angler.start();
 });
-
-// mongoLoader(dbconf).then((angler)=> {
-//   if (!angler){
-//     logger.fatal('initialize angler failed');
-//     return;
-//   }
-//   Object.values(angler.express)[0].get('/', async function (req, res) {
-//     await mongoInitEvent(dbconf);
-//     res.send('Fuck World');
-//   });
-//   angler.start();
-// });
