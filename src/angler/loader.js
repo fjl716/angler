@@ -31,6 +31,7 @@ async function fileLoader(model) {
   await initMySql(model.mysql);
   await initSolr(model.solr);
   await initEvent(model.event);
+  return angler;
 }
 
 async function mongoLoader(confDB) {
@@ -87,5 +88,6 @@ async function mongoInitEvent(confDB) {
 
 export {
   mongoLoader,
-  mongoInitEvent
+  mongoInitEvent,
+  fileLoader
 }
