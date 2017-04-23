@@ -27,10 +27,30 @@ async function init(step,func) {
 
 async function fileLoader(model) {
   await initContainers(model.container);
-  await initMongo(model.mongo);
-  await initMySql(model.mysql);
-  await initSolr(model.solr);
-  await initEvent(model.event);
+  if (await init('Containers', async () => {
+      await initContainers(model.container);
+    }))
+    return;
+
+  if (await init('MongoDB', async () => {
+      await initMongo(model.mongo);
+    }))
+    return;
+
+  if (await init('MySql', async () => {
+      await initMySql(model.mysql);
+    }))
+    return;
+
+  if (await init('Solr', async () => {
+      await initSolr(model.solr);
+    }))
+    return;
+
+  if (await init('Event', async () => {
+      await initEvent(model.event);
+    }))
+    return;
   return angler;
 }
 

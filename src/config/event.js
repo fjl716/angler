@@ -1,30 +1,27 @@
 export default [
   {
     "_id": "58ec3ed1097808014511045e",
+    "container" : "58ec76b30978080145110474",
     "event": "user.login",
     "result": [
       {event: 'user._login'}
     ],
     "invoke": `
-      const {container, equipment, packet} = params;
+      const {container, equipment, packet} = probe;
       let obj = await container.mongo.collections['user'].findOneSimple({
         loginid: packet.data.loginid,
         password: packet.data.password
       });
       if (obj) {
-        const newEquipment = container.change(equipment, obj._id);
-        packet.__ID__ = obj._id;
-        container.send(
-          Object.assign(params, {equipment: newEquipment}),
+        probe.changeId = obj._id;
+        probe.send(
           {
-            packet: {
               event: 'user._login',
               data: obj
-            }
-          },
+          } 
         );
       } else {
       }
-    }`
+    `
   }
 ]

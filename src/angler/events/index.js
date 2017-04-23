@@ -34,6 +34,7 @@ async function initEvent(list) {
               ${invoke}
             }
          };`);
+          console.log(1);
           module.event = event;
           module.result = result;
         } else if (path) {
