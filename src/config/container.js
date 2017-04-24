@@ -4,7 +4,7 @@ export default [
       "name" : "websocket",
       "source" : {
         "type" : "websocket",
-        "port" : 8090,
+        "port" : 8080,
       },
       "protocol" : "json"
     }

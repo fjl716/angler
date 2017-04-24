@@ -3,7 +3,7 @@ export default [
     "_id" : "58ec70f3097808014511046e",
     "container" : "58ec76b30978080145110474",
     "name" : "default",
-    "host" : "192.168.1.13",
+    "host" : "192.168.1.34",
     "port" : 27017,
     "database" : "cloudroom",
     "collections" : [

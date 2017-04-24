@@ -7,8 +7,8 @@ export default [
       {event: 'user._login'}
     ],
     "invoke": `
-      const {container, equipment, packet} = probe;
-      let obj = await container.mongo.collections['user'].findOneSimple({
+      const {equipment, packet,database} = probe;
+      let obj = await database.mongo.collections['user'].findOneSimple({
         loginid: packet.data.loginid,
         password: packet.data.password
       });
@@ -18,9 +18,10 @@ export default [
           {
               event: 'user._login',
               data: obj
-          } 
+          },true 
         );
       } else {
+        
       }
     `
   }

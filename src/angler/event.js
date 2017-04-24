@@ -46,6 +46,7 @@ class Event {
   add(event) {
     const code = this.index++;
     this.event.on(event.event, async (obj, ...params) => {
+      console.log(1);
       const {equipment,packet} = obj;
       const probe = new Probe(obj, event);
       await event.invoke(probe, ...params);

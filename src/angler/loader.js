@@ -26,7 +26,6 @@ async function init(step,func) {
 }
 
 async function fileLoader(model) {
-  await initContainers(model.container);
   if (await init('Containers', async () => {
       await initContainers(model.container);
     }))
