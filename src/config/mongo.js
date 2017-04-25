@@ -1,3 +1,4 @@
+//'sidebar','user','role','calendar','course','paper','clazz','action','result'
 export default [
   {
     "_id" : "58ec70f3097808014511046e",
@@ -8,7 +9,7 @@ export default [
     "database" : "cloudroom",
     "collections" : [
       {
-        "name" : "calendar",
+        "name" : "sidebar",
         "init" : [
           {key:"_id" ,
             value:"t:newid"}
@@ -26,23 +27,8 @@ export default [
         ],
         "simple" : [
           "_id",
-          "name",
-          "age"
-        ]
-      },
-      {
-        "name" : "sidebar",
-        "init" : [
-          {key:"_id" ,
-            value:"t:newid"}
-        ],
-        "simple" : [
-          "_id",
           "name"
-        ],
-        "link" : {
-
-        }
+        ]
       },
       {
         "name" : "role",
@@ -53,11 +39,74 @@ export default [
         "simple" : [
           "_id",
           "name"
+        ]
+      },
+      {
+        "name" : "calendar",
+        "init" : [
+          {key:"_id" ,
+            value:"t:newid"}
         ],
-        "link" : {
-
-        }
-      }
+        "simple" : [
+          "_id",
+          "name"
+        ]
+      },
+      {
+        "name" : "course",
+        "init" : [
+          {key:"_id" ,
+            value:"t:newid"}
+        ],
+        "simple" : [
+          "_id",
+          "name"
+        ]
+      },
+      {
+        "name" : "paper",
+        "init" : [
+          {key:"_id" ,
+            value:"t:newid"}
+        ],
+        "simple" : [
+          "_id",
+          "name"
+        ]
+      },
+      {
+        "name" : "clazz",
+        "init" : [
+          {key:"_id" ,
+            value:"t:newid"}
+        ],
+        "simple" : [
+          "_id",
+          "name"
+        ]
+      },
+      {
+        "name" : "action",
+        "init" : [
+          {key:"_id" ,
+            value:"t:newid"}
+        ],
+        "simple" : [
+          "_id",
+          "name"
+        ]
+      },
+      {
+        "name" : "result",
+        "init" : [
+          {key:"_id" ,
+            value:"t:newid"}
+        ],
+        "simple" : [
+          "_id",
+          "name"
+        ]
+      },
     ]
   }
 ]
