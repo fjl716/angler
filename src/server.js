@@ -14,6 +14,7 @@ const logger = log4js.getLogger('angler');
 import config from './config/config'
 
 fileLoader(config).then((angler)=>{
+
   angler.start();
 });
 
