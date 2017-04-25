@@ -13,8 +13,6 @@ log4js.configure({
 const logger = log4js.getLogger('angler');
 import config from './config/config'
 
-console.log(process.argv);
-
 fileLoader(config).then((angler)=>{
 
   angler.start();

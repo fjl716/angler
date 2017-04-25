@@ -1,4 +1,6 @@
 import Emitter from 'pattern-emitter2';
+import log4js from 'log4js'
+const logger = log4js.getLogger('angler');
 
 class Probe {
   constructor({container, equipment, packet}, event) {
@@ -46,7 +48,7 @@ class Event {
   add(event) {
     const code = this.index++;
     this.event.on(event.event, async (obj, ...params) => {
-      console.log(1);
+      logger.trace(`event on ${event.event}`);
       const {equipment,packet} = obj;
       const probe = new Probe(obj, event);
       await event.invoke(probe, ...params);

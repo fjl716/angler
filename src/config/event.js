@@ -25,8 +25,31 @@ const events = [
     `
   },
   {
-    // "_id": "58ec3ed1097808014511045e",
-    "container" : "58ec76b30978080145110474",
+    "container": "58ec76b30978080145110474",
+    "event": "sidebar.select",
+    "result": [
+    ],
+    "invoke": `
+      const {equipment, session,packet} = probe;
+      session.set(equipment,{
+        selectedKey:packet.data
+      });
+    `
+  },
+  {
+    "container": "58ec76b30978080145110474",
+    "event": "sidebar.open",
+    "result": [
+    ],
+    "invoke": `
+      const {equipment, session,packet} = probe;
+      session.set(equipment,{
+        openKey:packet.data
+      });
+    `
+  },
+  {
+    "container": "58ec76b30978080145110474",
     "event": "user._login",
     "result": [
       {event: 'sidebar.findall'},
@@ -34,18 +57,33 @@ const events = [
       {event: 'sidebar.open'},
     ],
     "invoke": `
-        probe.send(
-          {
-              event:'sidebar.findall'
-          });
+      const {equipment, session} = probe;
+      const obj = await session.get(equipment);
+      probe.send(
+        {
+          event:'sidebar.findall'
+        }
+      );
+      if (obj){
+        const {selectedKey,openKey} = obj;
+        if (selectedKey){
+          probe.send(
+            {
+              event:'sidebar.select',
+              data:selectedKey
+            },true);
+        }
+        if(openKey){
+          probe.send(
+            {
+              event:'sidebar.open',
+              data:openKey
+            },
+            true);
+        }
+      }
     `
   },
-  // {
-  //   "container": "58ec76b30978080145110474",
-  //   "event": "sidebar.findall",
-  //   "path": "mongo.findall",
-  //   "params": "sidebar"
-  // },
 ];
 
 ['sidebar','user','role','calendar','course','paper','clazz','action','result'].map(name=>{
