@@ -7,13 +7,32 @@ const events = [
       {event: 'user._login'}
     ],
     "invoke": `
-      const {equipment, packet,database} = probe;
-      let obj = await database.mongo.collections['user'].findOneSimple({
-        loginid: packet.data.loginid,
-        password: packet.data.password
-      });
+      const {equipment, packet, database} = probe;
+      const {loginid, password, token} = packet.data;
+      let obj = null;
+      if (token){
+        obj = await database.mongo.collections['user'].findOneSimple({
+          token
+        });
+      }else{
+        obj = await database.mongo.collections['user'].findOneSimple({
+          loginid,
+          password
+        });
+      }
       if (obj) {
         probe.changeId = obj._id;
+        obj.token = (Math.random() + '').substring(2);
+        await database.mongo.collections['user'].update(
+          {
+            '_id':obj._id
+          },
+          {
+            '$set':{
+              token:obj.token
+            }
+          }
+        );
         probe.send(
           {
               data: obj
