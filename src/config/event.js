@@ -16,7 +16,6 @@ export default [
         probe.changeId = obj._id;
         probe.send(
           {
-              event: 'user._login',
               data: obj
           },true 
         );
