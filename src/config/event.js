@@ -1,3 +1,4 @@
+const collections = ['sidebar','user','role','calendar','course','paper','clazz','action','result'];
 const events = [
   {
     // "_id": "58ec3ed1097808014511045e",
