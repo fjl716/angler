@@ -1,4 +1,3 @@
-const collections = ['sidebar','user','role','calendar','course','paper','clazz','action','result'];
 const events = [
   {
     // "_id": "58ec3ed1097808014511045e",
@@ -49,11 +48,41 @@ const events = [
   // },
 ];
 
-['sidebar'].map(name=>{
+['sidebar','user','role','calendar','course','paper','clazz','action','result'].map(name=>{
+  events.push({
+    "container": "58ec76b30978080145110474",
+    "event": `${name}.delete`,
+    "path": "mongo.delete",
+    "params": name
+  });
+  events.push({
+    "container": "58ec76b30978080145110474",
+    "event": `${name}.find`,
+    "path": "mongo.find",
+    "params": name
+  });
   events.push({
     "container": "58ec76b30978080145110474",
     "event": `${name}.findall`,
     "path": "mongo.findall",
+    "params": name
+  });
+  events.push({
+    "container": "58ec76b30978080145110474",
+    "event": `${name}.findone`,
+    "path": "mongo.findone",
+    "params": name
+  });
+  events.push({
+    "container": "58ec76b30978080145110474",
+    "event": `${name}.findsimple`,
+    "path": "mongo.findsimple",
+    "params": name
+  });
+  events.push({
+    "container": "58ec76b30978080145110474",
+    "event": `${name}.findsimples`,
+    "path": "mongo.findsimples",
     "params": name
   });
   events.push({
@@ -64,14 +93,14 @@ const events = [
   });
   events.push({
     "container": "58ec76b30978080145110474",
-    "event": `${name}.update`,
-    "path": "mongo.update",
+    "event": `${name}.paging`,
+    "path": "mongo.paging",
     "params": name
   });
   events.push({
     "container": "58ec76b30978080145110474",
-    "event": `${name}.delete`,
-    "path": "mongo.delete",
+    "event": `${name}.update`,
+    "path": "mongo.update",
     "params": name
   });
 
